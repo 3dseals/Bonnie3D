@@ -24,7 +24,13 @@ class Application {
         console.log("_mainLoop");
 
         if (!this._paused) {
+
             //do main loop
+            if(SceneManager.currentScene) {
+                let scene = SceneManager.currentScene;
+                scene.update();
+                scene.render();
+            }
 
             if(this._intervalId)
                 window.cancelAnimationFrame(this._intervalId);
@@ -53,7 +59,7 @@ class Application {
     }
 
     get _isPlaying() {
-        return this._paused
+        return this._paused;
     }
 
     static get isPlaying() {
