@@ -1,1 +1,7 @@
 .idea/
+Bonnie3D.iml
+
+build/dependencies.txt
+build/node_modules
+build/output
+build/package.json
