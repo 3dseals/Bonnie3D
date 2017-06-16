@@ -17,7 +17,7 @@ class StringFormat extends String{
                 if (key.length) {
                     if (_implicit) {
                         let __hasProp = {}.hasOwnProperty;
-                        let __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+                        let __extends = function(child, parent) { for (let key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
                         let ValueError = (function(_super) {
                             __extends(ValueError, _super);
@@ -37,8 +37,10 @@ class StringFormat extends String{
                     _explicit = true;
 
                     let _resolve = function(object, key) {
-                        var value;
-                        value = object[key];
+                        let value;
+                        if(object && Object.prototype.hasOwnProperty.call(object, key)){
+                            value = object[key];
+                        }
                         if (typeof value === 'function') {
                             return value.call(object);
                         } else {
@@ -47,7 +49,7 @@ class StringFormat extends String{
                     };
 
                     let _lookup = function(object, key) {
-                        var match;
+                        let match;
                         if (!/^(\d+)([.]|$)/.test(key)) {
                             key = '0.' + key;
                         }
@@ -62,7 +64,7 @@ class StringFormat extends String{
                 } else {
                     if (_explicit) {
                         let __hasProp = {}.hasOwnProperty;
-                        let __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+                        let __extends = function(child, parent) { for (let key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
                         let ValueError = (function(_super) {
                             __extends(ValueError, _super);
