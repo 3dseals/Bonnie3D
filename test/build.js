@@ -43,6 +43,13 @@ var DEFAULT_TEST_DEPEND = [
 }',
 ];
 
+var DEPENDENCIES = [
+    "../src/Engine/core/Boot.js",
+    "../src/Engine/core/Log.js",
+    "../src/Engine/base/Object.js",
+    "../src/Engine/base/Component.js",
+];
+
 var getDirFiles = function (dirname) {
     var fileList = [];
     var listFile = function(file_path) {
@@ -65,9 +72,17 @@ var getDirFiles = function (dirname) {
 
 var generateDependencies = function () {
     var fileList = getDirFiles(path.join(SRC_DIR_RELATIVE, SRC_DIR));
+    fileList = DEPENDENCIES.concat(fileList);
     var fileListString = "";
+    var fileList2 = [];
     var srcList = [];
     fileList.forEach(function (filepath) {
+        if(fileList2.indexOf(filepath.replace(new RegExp('[\\\\]', 'g'), "/")) == -1) {
+            fileList2.push(filepath);
+            console.log(filepath.replace(new RegExp('[\\\\]', 'g'), "/"));
+        }
+    });
+    fileList2.forEach(function (filepath) {
         fileListString += filepath + "\n";
         srcList.push(filepath.replace(new RegExp('[\\\\]', 'g'), "/"));
     });

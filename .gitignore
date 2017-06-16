@@ -5,3 +5,4 @@ build/dependencies.txt
 build/node_modules
 build/output
 build/package.json
+build/_tmp
