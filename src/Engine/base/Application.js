@@ -22,7 +22,7 @@ class Application {
 
     _mainLoop() {
         let callback = function () {
-            console.log("callback : " + Application.getInstance()._intervalId);
+            Log.debug("callback : " + Application.getInstance()._intervalId);
             if (!Application.isPlaying) {
 
                 //do main loop
