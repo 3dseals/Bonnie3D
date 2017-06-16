@@ -38,7 +38,7 @@ class StringFormat extends String{
 
                     let _resolve = function(object, key) {
                         let value;
-                        if(object && Object.prototype.hasOwnProperty.call(object, key)){
+                        if(object){
                             value = object[key];
                         }
                         if (typeof value === 'function') {

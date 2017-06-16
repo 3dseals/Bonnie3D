@@ -20,23 +20,25 @@ var SRC_DIR_RELATIVE = "../";
 var SRC_DIR = "src";
 
 var DEFAULT_TEST_DEPEND = [
-'setTimeout(function () { \n\
-    let g_resources = ',
-';\n    let require = function (path, requirePath) {\n\
-        var files = typeof path == "string" ? [path] : path;\n\
-        for (var i = 0; i < files.length; i++) {\n\
-            var name = files[i].replace(new RegExp("[\\\\\\\\]", "g"), "/");\n\
-            var tag = "script";\n\
-            var attr = "text/javascript";\n\
-            var link = (requirePath?requirePath:"") + name;\n\
-            var element=document.createElement(tag);\n\
-            element.setAttribute("type",attr);\n\
-            element.setAttribute("src", link);\n\
-            document.getElementsByTagName("body")[0].appendChild(element);\n\
-        }\n\
-    };\n\
-    require(g_resources);\n\
-}, 0);',
+'let _loadBonnie3D = function (requirePath) {\n\
+    setTimeout(function () { \n\
+        let g_resources = ',
+';\n        let require = function (path) {\n\
+            var files = typeof path == "string" ? [path] : path;\n\
+            for (var i = 0; i < files.length; i++) {\n\
+                var name = files[i].replace(new RegExp("[\\\\\\\\]", "g"), "/");\n\
+                var tag = "script";\n\
+                var attr = "text/javascript";\n\
+                var link = (requirePath?requirePath:"") + name;\n\
+                var element=document.createElement(tag);\n\
+                element.setAttribute("type",attr);\n\
+                element.setAttribute("src", link);\n\
+                document.getElementsByTagName("body")[0].appendChild(element);\n\
+            }\n\
+        };\n\
+        require(g_resources);\n\
+    }, 0);\n\
+}',
 ];
 
 var getDirFiles = function (dirname) {

@@ -1,2 +1,2 @@
-class Material {
+class Material extends Object{
 }

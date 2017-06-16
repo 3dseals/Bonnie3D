@@ -1,2 +1,2 @@
-class Node {
+class Node extends Object{
 }

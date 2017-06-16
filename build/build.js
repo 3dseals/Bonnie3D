@@ -56,26 +56,6 @@ var COMPILER_LEVEL = [
     'ADVANCED'
 ];
 
-var DEFAULT_TEST_DEPEND = [
-'setTimeout(function () { \n\
-    let g_resources = ',
-';\n    let require = function (path, requirePath) {\n\
-        var files = typeof path == "string" ? [path] : path;\n\
-        for (var i = 0; i < files.length; i++) {\n\
-            var name = files[i].replace(new RegExp("[\\\\\\\\]", "g"), "/");\n\
-            var tag = "script";\n\
-            var attr = "text/javascript";\n\
-            var link = (requirePath?requirePath:"") + name;\n\
-            var element=document.createElement(tag);\n\
-            element.setAttribute("type",attr);\n\
-            element.setAttribute("src", link);\n\
-            document.getElementsByTagName("body")[0].appendChild(element);\n\
-        }\n\
-    };\n\
-    require(g_resources);\n\
-}, 0);',
-];
-
 var debug = false;
 var outputPath = DEFAULT_OUTPUT;
 var tempPath = DEFAULT_TEMP;

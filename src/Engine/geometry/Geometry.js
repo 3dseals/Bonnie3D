@@ -1,2 +1,2 @@
-class Geometry {
+class Geometry extends Object{
 }
