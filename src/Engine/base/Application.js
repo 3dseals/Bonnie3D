@@ -21,21 +21,25 @@ class Application {
     }
 
     _mainLoop() {
-        console.log("_mainLoop");
+        let callback = function () {
+            console.log("callback : " + Application.getInstance()._intervalId);
+            if (!Application.isPlaying) {
 
-        if (!this._paused) {
+                //do main loop
+                if(SceneManager.currentScene) {
+                    let scene = SceneManager.currentScene;
+                    scene.update();
+                    scene.render();
+                }
 
-            //do main loop
-            if(SceneManager.currentScene) {
-                let scene = SceneManager.currentScene;
-                scene.update();
-                scene.render();
+                let app = Application.getInstance();
+                if(app._intervalId)
+                    window.cancelAnimationFrame(app._intervalId);
+                app._intervalId = window.requestAnimationFrame(callback);
             }
+        };
 
-            if(this._intervalId)
-                window.cancelAnimationFrame(this._intervalId);
-            this._intervalId = window.requestAnimFrame(this._mainLoop());
-        }
+        this._intervalId = window.requestAnimationFrame(callback);
     }
 
     _stopLoop() {
@@ -47,7 +51,7 @@ class Application {
     static run() {
         if(Application.isPlaying) {
             Application.getInstance().onStart();
-            window.requestAnimFrame(Application.getInstance()._mainLoop());
+            Application.getInstance()._mainLoop();
         }
     }
 

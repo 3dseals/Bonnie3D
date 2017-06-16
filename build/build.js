@@ -153,7 +153,7 @@ var generateDependencies = function (fullpath) {
     });
     fs.writeFileSync(fullpath, src);
 
-    fs.writeFileSync(path.join(SRC_DIR_RELATIVE + "test/dependencies.js"), DEFAULT_TEST_DEPEND[0] + JSON.stringify(srcList) + DEFAULT_TEST_DEPEND[1]);
+    //fs.writeFileSync(path.join(SRC_DIR_RELATIVE + "test/dependencies.js"), DEFAULT_TEST_DEPEND[0] + JSON.stringify(srcList) + DEFAULT_TEST_DEPEND[1]);
 };
 
 // load dependencies.txt

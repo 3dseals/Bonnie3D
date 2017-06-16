@@ -1,0 +1,2 @@
+class WebGL2Renderer {
+}

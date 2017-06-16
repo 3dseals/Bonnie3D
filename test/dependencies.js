@@ -1,5 +1,5 @@
 setTimeout(function () { 
-    let g_resources = ["../src/Engine/Application.js","../src/Engine/GameObject.js","../src/Engine/Scene.js","../src/Engine/SceneManager.js"];
+    let g_resources = ["../src/Engine/base/Application.js","../src/Engine/base/Component .js","../src/Engine/base/Node.js","../src/Engine/base/Object.js","../src/Engine/core/Format.js","../src/Engine/core/Log.js","../src/Engine/geometry/Geometry.js","../src/Engine/material/Material.js","../src/Engine/object/Mesh.js","../src/Engine/renderer/WebGL2Renderer.js","../src/Engine/scene/Scene.js","../src/Engine/scene/SceneManager.js"];
     let require = function (path, requirePath) {
         var files = typeof path == "string" ? [path] : path;
         for (var i = 0; i < files.length; i++) {

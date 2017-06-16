@@ -11,6 +11,11 @@ Then, to execute a build of the engine to the build/output folder, do:
     cd build
     node build.js
 
+Then, test the engine to the test folder, do:
+
+    cd test
+    node build.js
+
 See the built in help for more build instructions
 
     node build.js -h
