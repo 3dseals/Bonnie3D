@@ -20,24 +20,26 @@ var SRC_DIR_RELATIVE = "../";
 var SRC_DIR = "src";
 
 var DEFAULT_TEST_DEPEND = [
-'let _loadBonnie3D = function (requirePath) {\n\
-    setTimeout(function () { \n\
-        let g_resources = ',
-';\n        let require = function (path) {\n\
-            var files = typeof path == "string" ? [path] : path;\n\
-            for (var i = 0; i < files.length; i++) {\n\
-                var name = files[i].replace(new RegExp("[\\\\\\\\]", "g"), "/");\n\
-                var tag = "script";\n\
-                var attr = "text/javascript";\n\
-                var link = (requirePath?requirePath:"") + name;\n\
-                var element=document.createElement(tag);\n\
-                element.setAttribute("type",attr);\n\
-                element.setAttribute("src", link);\n\
-                document.getElementsByTagName("body")[0].appendChild(element);\n\
-            }\n\
-        };\n\
-        require(g_resources);\n\
-    }, 0);\n\
+'let _loadBonnie3D = function (requirePath, callbackName) {\n\
+    let g_resources = ',
+';\n    let require = function (path) {\n\
+        var files = typeof path == "string" ? [path] : path;\n\
+        for (var i = 0; i < files.length; i++) {\n\
+            var name = files[i].replace(new RegExp("[\\\\\\\\]", "g"), "/");\n\
+            var tag = "script";\n\
+            var attr = "text/javascript";\n\
+            var link = (requirePath?requirePath:"") + name;\n\
+            var element=document.createElement(tag);\n\
+            element.setAttribute("type",attr);\n\
+            element.setAttribute("src", link);\n\
+            document.getElementsByTagName("body")[0].appendChild(element);\n\
+        }\n\
+        var element=document.createElement(tag);\n\
+        element.setAttribute("type",attr);\n\
+        element.appendChild(document.createTextNode("setTimeout(function(){if(" + callbackName + "&& typeof " + callbackName + " === \\\"function\\\")" + callbackName + "();}, 100);"));\n\
+        document.body.appendChild(element);\n\
+    };\n\
+    require(g_resources);\n\
 }',
 ];
 
