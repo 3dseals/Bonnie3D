@@ -1,6 +1,6 @@
 (function ($) {
 
-    class Object {
+    class Object{
     }
 
     Bonnie3D.Object = Object;

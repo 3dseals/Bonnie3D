@@ -2,20 +2,12 @@
 
 The first time you build you will be asked to install dependencies using `npm`. e.g.
 
-    npm install fs-extra
-    npm install google-closure-compiler
-    npm install preprocessor
+    npm install 
 
-Then, to execute a build of the engine to the build/output folder, do:
+Then, to execute a build of the engine to the dist folder, do:
 
-    cd build
-    node build.js
+    npm build && npm start
 
 Then, test the engine to the test folder, do:
 
-    cd test
-    node build.js
-
-See the built in help for more build instructions
-
-    node build.js -h
+    npm test

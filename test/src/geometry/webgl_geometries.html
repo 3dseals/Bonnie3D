@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>three.js webgl - geometries</title>
+    <title>Bonnie3D webgl - geometries</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <style>
@@ -13,17 +13,13 @@
         }
     </style>
 </head>
-<body onload="_loadBonnie3D('../../', '_onload')">
+<body>
 
-<script src="../../dependencies.js"></script>
+<script src="../../../dist/bonnie3d.js"></script>
 <script>
-    function _onload() {
-
-        //Bonnie3D.Log.level = Bonnie3D.Log.DEBUG;
-        Bonnie3D.Application.run();
-        Bonnie3D.SceneManager.loadScene("test");
-
-    }
+    Bonnie3D.Log.level = Bonnie3D.Log.DEBUG;
+    Bonnie3D.Application.run();
+    Bonnie3D.SceneManager.loadScene("test");
 </script>
 </body>
 </html>
