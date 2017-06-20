@@ -72,6 +72,14 @@
 
 	__webpack_require__(13);
 
+	__webpack_require__(14);
+
+	__webpack_require__(15);
+
+	__webpack_require__(16);
+
+	__webpack_require__(17);
+
 /***/ }),
 /* 1 */
 /***/ (function(module, exports) {
@@ -82,6 +90,117 @@
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	    var Log = function () {
+	        function Log() {
+	            _classCallCheck(this, Log);
+	        }
+
+	        _createClass(Log, null, [{
+	            key: "info",
+	            value: function info() {
+	                for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	                    args[_key] = arguments[_key];
+	                }
+
+	                console.info("INFO: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
+	            }
+	        }, {
+	            key: "debug",
+	            value: function debug() {
+	                for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+	                    args[_key2] = arguments[_key2];
+	                }
+
+	                if (Log.level) console.log("DEBUG: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
+	            }
+	        }, {
+	            key: "warning",
+	            value: function warning() {
+	                for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+	                    args[_key3] = arguments[_key3];
+	                }
+
+	                console.warn("WARNING: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
+	            }
+	        }, {
+	            key: "error",
+	            value: function error() {
+	                for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+	                    args[_key4] = arguments[_key4];
+	                }
+
+	                console.error("ERROR: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
+	            }
+	        }, {
+	            key: "alert",
+	            value: function (_alert) {
+	                function alert() {
+	                    return _alert.apply(this, arguments);
+	                }
+
+	                alert.toString = function () {
+	                    return _alert.toString();
+	                };
+
+	                return alert;
+	            }(function () {
+	                for (var _len5 = arguments.length, args = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+	                    args[_key5] = arguments[_key5];
+	                }
+
+	                console.log("ALERT: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
+	                alert("ALERT: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
+	            })
+	        }, {
+	            key: "trace",
+	            value: function trace() {
+	                for (var _len6 = arguments.length, args = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+	                    args[_key6] = arguments[_key6];
+	                }
+
+	                console.trace("TRACE: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
+	            }
+	        }, {
+	            key: "assert",
+	            value: function assert(condition) {
+	                if (condition === false) {
+	                    for (var _len7 = arguments.length, args = Array(_len7 > 1 ? _len7 - 1 : 0), _key7 = 1; _key7 < _len7; _key7++) {
+	                        args[_key7 - 1] = arguments[_key7];
+	                    }
+
+	                    console.trace("ASSERT: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
+	                }
+	            }
+	        }, {
+	            key: "level",
+	            get: function get() {
+	                return Log._level ? Log._level : Log.INFO;
+	            },
+	            set: function set(l) {
+	                Log._level = l;
+	            }
+	        }]);
+
+	        return Log;
+	    }();
+
+	    Log.INFO = 0;
+	    Log.DEBUG = 1;
+
+	    Bonnie3D.Log = Log;
+	})(undefined);
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -213,7 +332,23 @@
 	})(undefined);
 
 /***/ }),
-/* 3 */
+/* 4 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	    var Color = function Color(r, g, b) {
+	        _classCallCheck(this, Color);
+	    };
+
+	    Bonnie3D.Color = Color;
+	})(undefined);
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -223,108 +358,37 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	(function ($) {
-	    var Log = function () {
-	        function Log() {
-	            _classCallCheck(this, Log);
-	        }
+	        var Vector4 = function () {
+	                function Vector4(x, y, z, w) {
+	                        _classCallCheck(this, Vector4);
 
-	        _createClass(Log, null, [{
-	            key: "info",
-	            value: function info() {
-	                for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	                    args[_key] = arguments[_key];
+	                        this.x = x || 0;
+	                        this.y = y || 0;
+	                        this.z = z || 0;
+	                        this.w = w !== undefined ? w : 1;
 	                }
 
-	                console.info("INFO: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
-	            }
-	        }, {
-	            key: "debug",
-	            value: function debug() {
-	                for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-	                    args[_key2] = arguments[_key2];
-	                }
+	                _createClass(Vector4, [{
+	                        key: "set",
+	                        value: function set(x, y, z, w) {
 
-	                if (Log.level) console.log("DEBUG: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
-	            }
-	        }, {
-	            key: "warning",
-	            value: function warning() {
-	                for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-	                    args[_key3] = arguments[_key3];
-	                }
+	                                this.x = x;
+	                                this.y = y;
+	                                this.z = z;
+	                                this.w = w;
 
-	                console.warn("WARNING: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
-	            }
-	        }, {
-	            key: "error",
-	            value: function error() {
-	                for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-	                    args[_key4] = arguments[_key4];
-	                }
+	                                return this;
+	                        }
+	                }]);
 
-	                console.error("ERROR: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
-	            }
-	        }, {
-	            key: "alert",
-	            value: function (_alert) {
-	                function alert() {
-	                    return _alert.apply(this, arguments);
-	                }
+	                return Vector4;
+	        }();
 
-	                alert.toString = function () {
-	                    return _alert.toString();
-	                };
-
-	                return alert;
-	            }(function () {
-	                for (var _len5 = arguments.length, args = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
-	                    args[_key5] = arguments[_key5];
-	                }
-
-	                console.log("ALERT: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
-	                alert("ALERT: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
-	            })
-	        }, {
-	            key: "trace",
-	            value: function trace() {
-	                for (var _len6 = arguments.length, args = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-	                    args[_key6] = arguments[_key6];
-	                }
-
-	                console.trace("TRACE: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
-	            }
-	        }, {
-	            key: "assert",
-	            value: function assert(condition) {
-	                if (condition === false) {
-	                    for (var _len7 = arguments.length, args = Array(_len7 > 1 ? _len7 - 1 : 0), _key7 = 1; _key7 < _len7; _key7++) {
-	                        args[_key7 - 1] = arguments[_key7];
-	                    }
-
-	                    console.trace("ASSERT: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
-	                }
-	            }
-	        }, {
-	            key: "level",
-	            get: function get() {
-	                return Log._level ? Log._level : Log.INFO;
-	            },
-	            set: function set(l) {
-	                Log._level = l;
-	            }
-	        }]);
-
-	        return Log;
-	    }();
-
-	    Log.INFO = 0;
-	    Log.DEBUG = 1;
-
-	    Bonnie3D.Log = Log;
+	        Bonnie3D.Vector4 = Vector4;
 	})(undefined);
 
 /***/ }),
-/* 4 */
+/* 6 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -340,7 +404,7 @@
 	})(undefined);
 
 /***/ }),
-/* 5 */
+/* 7 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -443,7 +507,7 @@
 	})(undefined);
 
 /***/ }),
-/* 6 */
+/* 8 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -471,7 +535,7 @@
 	})(undefined);
 
 /***/ }),
-/* 7 */
+/* 9 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -499,7 +563,7 @@
 	})(undefined);
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -527,7 +591,7 @@
 	})(undefined);
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -555,7 +619,7 @@
 	})(undefined);
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -583,7 +647,7 @@
 	})(undefined);
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -591,15 +655,256 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	(function ($) {
-	    var WebGL2Renderer = function WebGL2Renderer() {
-	        _classCallCheck(this, WebGL2Renderer);
+	    var WebGLExtensions = function WebGLExtensions(gl) {
+	        _classCallCheck(this, WebGLExtensions);
 	    };
 
-	    Bonnie3D.WebGL2Renderer = WebGL2Renderer;
+	    Bonnie3D.WebGLExtensions = WebGLExtensions;
 	})(undefined);
 
 /***/ }),
-/* 12 */
+/* 14 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	    var ColorBuffer = function () {
+	        function ColorBuffer() {
+	            _classCallCheck(this, ColorBuffer);
+	        }
+
+	        _createClass(ColorBuffer, [{
+	            key: "setClear",
+	            value: function setClear(r, g, b, a, premultipliedAlpha) {}
+	        }]);
+
+	        return ColorBuffer;
+	    }();
+
+	    var DepthBuffer = function () {
+	        function DepthBuffer() {
+	            _classCallCheck(this, DepthBuffer);
+	        }
+
+	        _createClass(DepthBuffer, [{
+	            key: "setClear",
+	            value: function setClear(depth) {}
+	        }]);
+
+	        return DepthBuffer;
+	    }();
+
+	    var StencilBuffer = function () {
+	        function StencilBuffer() {
+	            _classCallCheck(this, StencilBuffer);
+	        }
+
+	        _createClass(StencilBuffer, [{
+	            key: "setClear",
+	            value: function setClear(stencil) {}
+	        }]);
+
+	        return StencilBuffer;
+	    }();
+
+	    var WebGLState = function () {
+	        function WebGLState(gl, extensions, paramToGL) {
+	            _classCallCheck(this, WebGLState);
+
+	            this.buffers = {
+	                color: new ColorBuffer(),
+	                depth: new DepthBuffer(),
+	                stencil: new StencilBuffer()
+	            };
+	        }
+
+	        _createClass(WebGLState, [{
+	            key: "viewport",
+	            value: function viewport(_viewport) {}
+	        }]);
+
+	        return WebGLState;
+	    }();
+
+	    Bonnie3D.WebGLState = WebGLState;
+	    Bonnie3D.WebGLState.ColorBuffer = ColorBuffer;
+	    Bonnie3D.WebGLState.DepthBuffer = DepthBuffer;
+	    Bonnie3D.WebGLState.StencilBuffer = StencilBuffer;
+	})(undefined);
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+
+	            var Log = Bonnie3D.Log;
+
+	            var WebGL2Renderer = function () {
+	                        function WebGL2Renderer(params) {
+	                                    _classCallCheck(this, WebGL2Renderer);
+
+	                                    var parameters = params || {};
+	                                    this._canvas = parameters.canvas !== undefined ? parameters.canvas : document.createElementNS('http://www.w3.org/1999/xhtml', 'canvas');
+	                                    this._context = parameters.context !== undefined ? parameters.context : null;
+
+	                                    this._alpha = parameters.alpha !== undefined ? parameters.alpha : false;
+	                                    this._depth = parameters.depth !== undefined ? parameters.depth : true;
+	                                    this._stencil = parameters.stencil !== undefined ? parameters.stencil : true;
+	                                    this._antialias = parameters.antialias !== undefined ? parameters.antialias : false;
+	                                    this._premultipliedAlpha = parameters.premultipliedAlpha !== undefined ? parameters.premultipliedAlpha : true;
+	                                    this._preserveDrawingBuffer = parameters.preserveDrawingBuffer !== undefined ? parameters.preserveDrawingBuffer : false;
+
+	                                    // initialize gl
+
+	                                    try {
+
+	                                                var attributes = {
+	                                                            alpha: this._alpha,
+	                                                            depth: this._depth,
+	                                                            stencil: this._stencil,
+	                                                            antialias: this._antialias,
+	                                                            premultipliedAlpha: this._premultipliedAlpha,
+	                                                            preserveDrawingBuffer: this._preserveDrawingBuffer
+	                                                };
+
+	                                                this._gl = this._context || this._canvas.getContext('webgl2', attributes);
+
+	                                                if (this._gl === null) {
+
+	                                                            if (this._canvas.getContext('webgl2') !== null) {
+
+	                                                                        throw 'Error creating WebGL2 context with your selected attributes.';
+	                                                            } else {
+
+	                                                                        throw 'Error creating WebGL2 context.';
+	                                                            }
+	                                                }
+
+	                                                this._canvas.addEventListener('webglcontextlost', this.onContextLost, false);
+	                                    } catch (error) {
+
+	                                                Log.error('WebGL2Renderer: ' + error);
+	                                    }
+
+	                                    //
+
+	                                    this._autoClear = true;
+	                                    this._autoClearColor = true;
+	                                    this._autoClearDepth = true;
+	                                    this._autoClearStencil = true;
+
+	                                    this._clearColor = new Bonnie3D.Color(0x000000);
+	                                    this._clearAlpha = 0;
+
+	                                    this._width = this._canvas.width;
+	                                    this._height = this._canvas.height;
+
+	                                    this._pixelRatio = 1;
+
+	                                    this._viewport = new Bonnie3D.Vector4(0, 0, this._width, this._height);
+
+	                                    var extensions = new Bonnie3D.WebGLExtensions(this._gl);
+	                                    this._state = new Bonnie3D.WebGLState(this._gl, extensions, function () {});
+	                        }
+
+	                        _createClass(WebGL2Renderer, [{
+	                                    key: 'clear',
+	                                    value: function clear(color, depth, stencil) {
+
+	                                                var bits = 0;
+
+	                                                if (color === undefined || color) bits |= this._gl.COLOR_BUFFER_BIT;
+	                                                if (depth === undefined || depth) bits |= this._gl.DEPTH_BUFFER_BIT;
+	                                                if (stencil === undefined || stencil) bits |= this._gl.STENCIL_BUFFER_BIT;
+
+	                                                this._gl.clear(bits);
+	                                    }
+	                        }, {
+	                                    key: 'setPixelRatio',
+	                                    value: function setPixelRatio(value) {
+
+	                                                if (value === undefined) return;
+
+	                                                this._pixelRatio = value;
+
+	                                                this.setSize(this._viewport.z, this._viewport.w, false);
+	                                    }
+	                        }, {
+	                                    key: 'setSize',
+	                                    value: function setSize(width, height, updateStyle) {
+
+	                                                this._width = width;
+	                                                this._height = height;
+
+	                                                this._canvas.width = width * this._pixelRatio;
+	                                                this._canvas.height = height * this._pixelRatio;
+
+	                                                if (updateStyle !== false) {
+
+	                                                            this._canvas.style.width = width + 'px';
+	                                                            this._canvas.style.height = height + 'px';
+	                                                }
+
+	                                                this.setViewport(0, 0, width, height);
+	                                    }
+	                        }, {
+	                                    key: 'setViewport',
+	                                    value: function setViewport(x, y, width, height) {
+
+	                                                this._state.viewport(this._viewport.set(x, y, width, height));
+	                                    }
+	                        }, {
+	                                    key: 'render',
+	                                    value: function render() {
+
+	                                                var scene = Bonnie3D.SceneManager.currentScene;
+	                                                if (scene) {
+	                                                            var background = scene.background;
+	                                                            var forceClear = false;
+
+	                                                            if (background instanceof Bonnie3D.Color) {
+
+	                                                                        this._state.buffers.color.setClear(background.r, background.g, background.b, 1, this._premultipliedAlpha);
+	                                                                        forceClear = true;
+	                                                            } else {
+
+	                                                                        this._state.buffers.color.setClear(this._clearColor.r, this._clearColor.g, this._clearColor.b, this._clearAlpha, this._premultipliedAlpha);
+	                                                            }
+
+	                                                            if (this._autoClear || forceClear) {
+
+	                                                                        this.clear(this._autoClearColor, this._autoClearDepth, this._autoClearStencil);
+	                                                            }
+	                                                }
+	                                    }
+	                        }, {
+	                                    key: 'onContextLost',
+	                                    value: function onContextLost(event) {
+
+	                                                event.preventDefault();
+	                                    }
+	                        }]);
+
+	                        return WebGL2Renderer;
+	            }();
+
+	            Bonnie3D.WebGL2Renderer = WebGL2Renderer;
+	})(undefined);
+
+/***/ }),
+/* 16 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -666,7 +971,7 @@
 	})(undefined);
 
 /***/ }),
-/* 13 */
+/* 17 */
 /***/ (function(module, exports) {
 
 	"use strict";

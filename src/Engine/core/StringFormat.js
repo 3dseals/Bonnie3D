@@ -1,6 +1,6 @@
 (function ($) {
 
-    class StringFormat{
+    class StringFormat {
 
         constructor(string, ...args) {
             let _args = args;
