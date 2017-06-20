@@ -4,9 +4,14 @@ var webpack = require('webpack');
 module.exports = {
     //插件项
     plugins: [],
+    devServer: {
+        noInfo: false,
+        hot: true,
+        inline: true
+    },
     //页面入口文件配置
     entry: {
-        index : './src/index.js'
+        index: path.resolve(__dirname, './src/index.js')
     },
     //入口文件输出配置
     output: {

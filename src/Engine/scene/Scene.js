@@ -10,24 +10,24 @@
         }
 
         onEnter() {
-            Log.debug("Scene[" + this._name + "] onEnter");
+            Log.debug("Scene [" + this._name + "] onEnter");
             this._valid = true;
         }
 
         onExit() {
-            Log.debug("Scene[" + this._name + "] onExit");
+            Log.debug("Scene [" + this._name + "] onExit");
             this._valid = false;
         }
 
         update() {
             if(this._valid) {
-                Log.debug("Scene[" + this._name + "] update");
+                Log.debug("Scene [" + this._name + "] update");
             }
         }
 
         render() {
             if(this._valid) {
-                Log.debug("Scene[" + this._name + "] render");
+                Log.debug("Scene [" + this._name + "] render");
             }
         }
 
