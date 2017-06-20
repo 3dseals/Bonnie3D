@@ -1,7 +1,5 @@
 (function ($) {
 
-    let Log = Bonnie3D.Log;
-
     class Application {
 
         constructor() {
@@ -26,7 +24,6 @@
 
         _mainLoop() {
             let callback = function () {
-                Log.debug("callback : " + Application.getInstance()._intervalId);
                 if (!Application.isPlaying) {
 
                     //do main loop

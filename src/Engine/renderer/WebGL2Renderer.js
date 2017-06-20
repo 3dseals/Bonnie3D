@@ -1,7 +1,5 @@
 (function ($) {
 
-    let Log = Bonnie3D.Log;
-
     class WebGL2Renderer {
 
         constructor(params) {
@@ -74,6 +72,13 @@
             let extensions = new Bonnie3D.WebGLExtensions( this._gl );
             this._state = new Bonnie3D.WebGLState( this._gl, extensions, function () {} );
 
+        }
+
+        static getInstance() {
+            if (!WebGL2Renderer._instance) {
+                WebGL2Renderer._instance = new WebGL2Renderer();
+            }
+            return WebGL2Renderer._instance;
         }
 
         clear(color, depth, stencil) {

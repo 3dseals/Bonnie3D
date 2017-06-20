@@ -80,6 +80,22 @@
 
 	__webpack_require__(17);
 
+	__webpack_require__(18);
+
+	__webpack_require__(19);
+
+	__webpack_require__(20);
+
+	__webpack_require__(21);
+
+	__webpack_require__(22);
+
+	__webpack_require__(23);
+
+	__webpack_require__(24);
+
+	Bonnie3D.Application.run();
+
 /***/ }),
 /* 1 */
 /***/ (function(module, exports) {
@@ -99,104 +115,107 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	(function ($) {
-	    var Log = function () {
-	        function Log() {
-	            _classCallCheck(this, Log);
-	        }
-
-	        _createClass(Log, null, [{
-	            key: "info",
-	            value: function info() {
-	                for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	                    args[_key] = arguments[_key];
+	        var Log = function () {
+	                function Log() {
+	                        _classCallCheck(this, Log);
 	                }
 
-	                console.info("INFO: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
-	            }
-	        }, {
-	            key: "debug",
-	            value: function debug() {
-	                for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-	                    args[_key2] = arguments[_key2];
-	                }
+	                _createClass(Log, null, [{
+	                        key: "info",
+	                        value: function info() {
+	                                for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	                                        args[_key] = arguments[_key];
+	                                }
 
-	                if (Log.level) console.log("DEBUG: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
-	            }
-	        }, {
-	            key: "warning",
-	            value: function warning() {
-	                for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-	                    args[_key3] = arguments[_key3];
-	                }
+	                                console.info("[" + new Date().getTime() + "] INFO: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
+	                        }
+	                }, {
+	                        key: "debug",
+	                        value: function debug() {
+	                                for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+	                                        args[_key2] = arguments[_key2];
+	                                }
 
-	                console.warn("WARNING: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
-	            }
-	        }, {
-	            key: "error",
-	            value: function error() {
-	                for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-	                    args[_key4] = arguments[_key4];
-	                }
+	                                if (Log.level) console.log("[" + new Date().getTime() + "] DEBUG: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
+	                        }
+	                }, {
+	                        key: "warning",
+	                        value: function warning() {
+	                                for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+	                                        args[_key3] = arguments[_key3];
+	                                }
 
-	                console.error("ERROR: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
-	            }
-	        }, {
-	            key: "alert",
-	            value: function (_alert) {
-	                function alert() {
-	                    return _alert.apply(this, arguments);
-	                }
+	                                console.warn("[" + new Date().getTime() + "] WARNING: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
+	                        }
+	                }, {
+	                        key: "error",
+	                        value: function error() {
+	                                for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+	                                        args[_key4] = arguments[_key4];
+	                                }
 
-	                alert.toString = function () {
-	                    return _alert.toString();
-	                };
+	                                console.error("[" + new Date().getTime() + "] ERROR: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
+	                        }
+	                }, {
+	                        key: "alert",
+	                        value: function (_alert) {
+	                                function alert() {
+	                                        return _alert.apply(this, arguments);
+	                                }
 
-	                return alert;
-	            }(function () {
-	                for (var _len5 = arguments.length, args = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
-	                    args[_key5] = arguments[_key5];
-	                }
+	                                alert.toString = function () {
+	                                        return _alert.toString();
+	                                };
 
-	                console.log("ALERT: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
-	                alert("ALERT: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
-	            })
-	        }, {
-	            key: "trace",
-	            value: function trace() {
-	                for (var _len6 = arguments.length, args = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-	                    args[_key6] = arguments[_key6];
-	                }
+	                                return alert;
+	                        }(function () {
+	                                for (var _len5 = arguments.length, args = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+	                                        args[_key5] = arguments[_key5];
+	                                }
 
-	                console.trace("TRACE: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
-	            }
-	        }, {
-	            key: "assert",
-	            value: function assert(condition) {
-	                if (condition === false) {
-	                    for (var _len7 = arguments.length, args = Array(_len7 > 1 ? _len7 - 1 : 0), _key7 = 1; _key7 < _len7; _key7++) {
-	                        args[_key7 - 1] = arguments[_key7];
-	                    }
+	                                console.log("[" + new Date().getTime() + "] ALERT: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
+	                                alert("[" + new Date().getTime() + "] ALERT: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
+	                        })
+	                }, {
+	                        key: "trace",
+	                        value: function trace() {
+	                                for (var _len6 = arguments.length, args = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+	                                        args[_key6] = arguments[_key6];
+	                                }
 
-	                    console.trace("ASSERT: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
-	                }
-	            }
-	        }, {
-	            key: "level",
-	            get: function get() {
-	                return Log._level ? Log._level : Log.INFO;
-	            },
-	            set: function set(l) {
-	                Log._level = l;
-	            }
-	        }]);
+	                                console.trace("[" + new Date().getTime() + "] TRACE: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
+	                        }
+	                }, {
+	                        key: "assert",
+	                        value: function assert(condition) {
 
-	        return Log;
-	    }();
+	                                if (condition === false) {
+	                                        for (var _len7 = arguments.length, args = Array(_len7 > 1 ? _len7 - 1 : 0), _key7 = 1; _key7 < _len7; _key7++) {
+	                                                args[_key7 - 1] = arguments[_key7];
+	                                        }
 
-	    Log.INFO = 0;
-	    Log.DEBUG = 1;
+	                                        console.trace("[" + new Date().getTime() + "] ASSERT: " + new (Function.prototype.bind.apply(Bonnie3D.StringFormat, [null].concat(args)))());
+	                                }
+	                        }
+	                }, {
+	                        key: "level",
+	                        get: function get() {
 
-	    Bonnie3D.Log = Log;
+	                                return Log._level ? Log._level : Log.INFO;
+	                        },
+	                        set: function set(l) {
+
+	                                Log._level = l;
+	                        }
+	                }]);
+
+	                return Log;
+	        }();
+
+	        Log.INFO = 0;
+	        Log.DEBUG = 1;
+
+	        Bonnie3D.Log = Log;
 	})(undefined);
 
 /***/ }),
@@ -321,6 +340,7 @@
 	        _createClass(StringFormat, [{
 	            key: 'toString',
 	            value: function toString() {
+
 	                return this._string;
 	            }
 	        }]);
@@ -349,6 +369,44 @@
 
 /***/ }),
 /* 5 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	        var Vector3 = function () {
+	                function Vector3(x, y, z) {
+	                        _classCallCheck(this, Vector3);
+
+	                        this.x = x || 0;
+	                        this.y = y || 0;
+	                        this.z = z || 0;
+	                }
+
+	                _createClass(Vector3, [{
+	                        key: "set",
+	                        value: function set(x, y, z) {
+
+	                                this.x = x;
+	                                this.y = y;
+	                                this.z = z;
+
+	                                return this;
+	                        }
+	                }]);
+
+	                return Vector3;
+	        }();
+
+	        Bonnie3D.Vector3 = Vector3;
+	})(undefined);
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -388,22 +446,6 @@
 	})(undefined);
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-	"use strict";
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	(function ($) {
-	    var Object = function Object() {
-	        _classCallCheck(this, Object);
-	    };
-
-	    Bonnie3D.Object = Object;
-	})(undefined);
-
-/***/ }),
 /* 7 */
 /***/ (function(module, exports) {
 
@@ -414,9 +456,37 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	(function ($) {
+	    var Object = function () {
+	        function Object(name) {
+	            _classCallCheck(this, Object);
 
-	    var Log = Bonnie3D.Log;
+	            this._name = name || "";
+	        }
 
+	        _createClass(Object, [{
+	            key: "name",
+	            get: function get() {
+	                return this._name;
+	            }
+	        }]);
+
+	        return Object;
+	    }();
+
+	    Bonnie3D.Object = Object;
+	})(undefined);
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
 	    var Application = function () {
 	        function Application() {
 	            _classCallCheck(this, Application);
@@ -439,7 +509,6 @@
 	            key: "_mainLoop",
 	            value: function _mainLoop() {
 	                var callback = function callback() {
-	                    Log.debug("callback : " + Application.getInstance()._intervalId);
 	                    if (!Application.isPlaying) {
 
 	                        //do main loop
@@ -507,10 +576,12 @@
 	})(undefined);
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -519,26 +590,44 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	(function ($) {
-	    var Node = function (_Bonnie3D$Object) {
-	        _inherits(Node, _Bonnie3D$Object);
+	        var Node = function (_Bonnie3D$Object) {
+	                _inherits(Node, _Bonnie3D$Object);
 
-	        function Node() {
-	            _classCallCheck(this, Node);
+	                function Node(name) {
+	                        _classCallCheck(this, Node);
 
-	            return _possibleConstructorReturn(this, (Node.__proto__ || Object.getPrototypeOf(Node)).apply(this, arguments));
-	        }
+	                        var _this = _possibleConstructorReturn(this, (Node.__proto__ || Object.getPrototypeOf(Node)).call(this, name));
 
-	        return Node;
-	    }(Bonnie3D.Object);
+	                        _this._position = new Bonnie3D.Vector3();
+	                        return _this;
+	                }
 
-	    Bonnie3D.Node = Node;
+	                _createClass(Node, [{
+	                        key: "addChild",
+	                        value: function addChild(node) {}
+	                }, {
+	                        key: "addComponent",
+	                        value: function addComponent(component) {}
+	                }, {
+	                        key: "position",
+	                        get: function get() {
+	                                return this._position;
+	                        }
+	                }]);
+
+	                return Node;
+	        }(Bonnie3D.Object);
+
+	        Bonnie3D.Node = Node;
 	})(undefined);
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
 	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -550,11 +639,25 @@
 	    var Component = function (_Bonnie3D$Object) {
 	        _inherits(Component, _Bonnie3D$Object);
 
-	        function Component() {
+	        function Component(name) {
 	            _classCallCheck(this, Component);
 
-	            return _possibleConstructorReturn(this, (Component.__proto__ || Object.getPrototypeOf(Component)).apply(this, arguments));
+	            var _this = _possibleConstructorReturn(this, (Component.__proto__ || Object.getPrototypeOf(Component)).call(this, name));
+
+	            _this._node = new Bonnie3D.Node(name);
+
+	            return _this;
 	        }
+
+	        _createClass(Component, [{
+	            key: "node",
+	            set: function set(node) {
+	                this._node = node;
+	            },
+	            get: function get() {
+	                return this._node;
+	            }
+	        }]);
 
 	        return Component;
 	    }(Bonnie3D.Object);
@@ -563,7 +666,35 @@
 	})(undefined);
 
 /***/ }),
-/* 10 */
+/* 11 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
+	    var Camera = function (_Bonnie3D$Component) {
+	        _inherits(Camera, _Bonnie3D$Component);
+
+	        function Camera() {
+	            _classCallCheck(this, Camera);
+
+	            return _possibleConstructorReturn(this, (Camera.__proto__ || Object.getPrototypeOf(Camera)).apply(this, arguments));
+	        }
+
+	        return Camera;
+	    }(Bonnie3D.Component);
+
+	    Bonnie3D.Camera = Camera;
+	})(undefined);
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -591,7 +722,90 @@
 	})(undefined);
 
 /***/ }),
-/* 11 */
+/* 13 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
+	    var BoxGeometry = function (_Bonnie3D$Geometry) {
+	        _inherits(BoxGeometry, _Bonnie3D$Geometry);
+
+	        function BoxGeometry() {
+	            _classCallCheck(this, BoxGeometry);
+
+	            return _possibleConstructorReturn(this, (BoxGeometry.__proto__ || Object.getPrototypeOf(BoxGeometry)).apply(this, arguments));
+	        }
+
+	        return BoxGeometry;
+	    }(Bonnie3D.Geometry);
+
+	    Bonnie3D.BoxGeometry = BoxGeometry;
+	})(undefined);
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
+	    var BoxBufferGeometry = function (_Bonnie3D$Geometry) {
+	        _inherits(BoxBufferGeometry, _Bonnie3D$Geometry);
+
+	        function BoxBufferGeometry() {
+	            _classCallCheck(this, BoxBufferGeometry);
+
+	            return _possibleConstructorReturn(this, (BoxBufferGeometry.__proto__ || Object.getPrototypeOf(BoxBufferGeometry)).apply(this, arguments));
+	        }
+
+	        return BoxBufferGeometry;
+	    }(Bonnie3D.Geometry);
+
+	    Bonnie3D.BoxBufferGeometry = BoxBufferGeometry;
+	})(undefined);
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	    var TextureLoader = function () {
+	        function TextureLoader() {
+	            _classCallCheck(this, TextureLoader);
+	        }
+
+	        _createClass(TextureLoader, null, [{
+	            key: "load",
+	            value: function load(path) {}
+	        }]);
+
+	        return TextureLoader;
+	    }();
+
+	    Bonnie3D.TextureLoader = TextureLoader;
+	})(undefined);
+
+/***/ }),
+/* 16 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -619,7 +833,35 @@
 	})(undefined);
 
 /***/ }),
-/* 12 */
+/* 17 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
+	    var MeshBasicMaterial = function (_Bonnie3D$Material) {
+	        _inherits(MeshBasicMaterial, _Bonnie3D$Material);
+
+	        function MeshBasicMaterial() {
+	            _classCallCheck(this, MeshBasicMaterial);
+
+	            return _possibleConstructorReturn(this, (MeshBasicMaterial.__proto__ || Object.getPrototypeOf(MeshBasicMaterial)).apply(this, arguments));
+	        }
+
+	        return MeshBasicMaterial;
+	    }(Bonnie3D.Material);
+
+	    Bonnie3D.MeshBasicMaterial = MeshBasicMaterial;
+	})(undefined);
+
+/***/ }),
+/* 18 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -647,7 +889,7 @@
 	})(undefined);
 
 /***/ }),
-/* 13 */
+/* 19 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -663,7 +905,7 @@
 	})(undefined);
 
 /***/ }),
-/* 14 */
+/* 20 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -738,7 +980,7 @@
 	})(undefined);
 
 /***/ }),
-/* 15 */
+/* 21 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -748,9 +990,6 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	(function ($) {
-
-	            var Log = Bonnie3D.Log;
-
 	            var WebGL2Renderer = function () {
 	                        function WebGL2Renderer(params) {
 	                                    _classCallCheck(this, WebGL2Renderer);
@@ -895,6 +1134,14 @@
 
 	                                                event.preventDefault();
 	                                    }
+	                        }], [{
+	                                    key: 'getInstance',
+	                                    value: function getInstance() {
+	                                                if (!WebGL2Renderer._instance) {
+	                                                            WebGL2Renderer._instance = new WebGL2Renderer();
+	                                                }
+	                                                return WebGL2Renderer._instance;
+	                                    }
 	                        }]);
 
 	                        return WebGL2Renderer;
@@ -904,7 +1151,7 @@
 	})(undefined);
 
 /***/ }),
-/* 16 */
+/* 22 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -913,65 +1160,91 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	(function ($) {
 
-	    var Log = Bonnie3D.Log;
+	        var Log = Bonnie3D.Log;
 
-	    var Scene = function () {
-	        function Scene(name) {
-	            _classCallCheck(this, Scene);
+	        var Scene = function (_Bonnie3D$Node) {
+	                _inherits(Scene, _Bonnie3D$Node);
 
-	            this._name = name;
-	            this._valid = false;
-	            this._objects = [];
-	        }
+	                function Scene(name) {
+	                        _classCallCheck(this, Scene);
 
-	        _createClass(Scene, [{
-	            key: "onEnter",
-	            value: function onEnter() {
-	                Log.debug("Scene [" + this._name + "] onEnter");
-	                this._valid = true;
-	            }
-	        }, {
-	            key: "onExit",
-	            value: function onExit() {
-	                Log.debug("Scene [" + this._name + "] onExit");
-	                this._valid = false;
-	            }
-	        }, {
-	            key: "update",
-	            value: function update() {
-	                if (this._valid) {
-	                    Log.debug("Scene [" + this._name + "] update");
+	                        var _this = _possibleConstructorReturn(this, (Scene.__proto__ || Object.getPrototypeOf(Scene)).call(this, name));
+
+	                        _this._valid = false;
+	                        _this._objects = [];
+	                        _this._renderer = Bonnie3D.WebGL2Renderer.getInstance();
+
+	                        return _this;
 	                }
-	            }
-	        }, {
-	            key: "render",
-	            value: function render() {
-	                if (this._valid) {
-	                    Log.debug("Scene [" + this._name + "] render");
-	                }
-	            }
-	        }, {
-	            key: "isValid",
-	            get: function get() {
-	                return this._valid;
-	            }
-	        }, {
-	            key: "rootGameObjects",
-	            get: function get() {
-	                return this._objects;
-	            }
-	        }]);
 
-	        return Scene;
-	    }();
+	                _createClass(Scene, [{
+	                        key: "onEnter",
+	                        value: function onEnter() {
 
-	    Bonnie3D.Scene = Scene;
+	                                Log.debug("Scene [" + this._name + "] onEnter");
+	                                this._valid = true;
+	                        }
+	                }, {
+	                        key: "onExit",
+	                        value: function onExit() {
+
+	                                Log.debug("Scene [" + this._name + "] onExit");
+	                                this._valid = false;
+	                        }
+	                }, {
+	                        key: "update",
+	                        value: function update() {
+
+	                                if (this._valid) {
+	                                        Log.debug("Scene [" + this._name + "] update");
+	                                }
+	                        }
+	                }, {
+	                        key: "render",
+	                        value: function render() {
+
+	                                if (this._valid) {
+	                                        Log.debug("Scene [" + this._name + "] render");
+	                                        this._renderer.render();
+	                                }
+	                        }
+	                }, {
+	                        key: "add",
+	                        value: function add(object) {
+	                                if (object instanceof Bonnie3D.Component) {
+	                                        this.addChild(object.node);
+	                                } else if (object instanceof Bonnie3D.Node) {
+	                                        this.addChild(object);
+	                                }
+	                        }
+	                }, {
+	                        key: "isValid",
+	                        get: function get() {
+
+	                                return this._valid;
+	                        }
+	                }, {
+	                        key: "rootGameObjects",
+	                        get: function get() {
+
+	                                return this._objects;
+	                        }
+	                }]);
+
+	                return Scene;
+	        }(Bonnie3D.Node);
+
+	        Bonnie3D.Scene = Scene;
 	})(undefined);
 
 /***/ }),
-/* 17 */
+/* 23 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -981,53 +1254,78 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	(function ($) {
-	    var SceneManager = function () {
-	        function SceneManager() {
-	            _classCallCheck(this, SceneManager);
+	        var SceneManager = function () {
+	                function SceneManager() {
+	                        _classCallCheck(this, SceneManager);
 
-	            this._current = null;
-	        }
-
-	        _createClass(SceneManager, [{
-	            key: "_loadScene",
-	            value: function _loadScene(scene) {
-	                if (this._current) {
-	                    this._current.onExit();
+	                        this._current = null;
 	                }
-	                this._current = new Bonnie3D.Scene(scene);
-	                if (this._current) {
-	                    this._current.onEnter();
-	                }
-	            }
-	        }, {
-	            key: "_currentScene",
-	            get: function get() {
-	                return this._current;
-	            }
-	        }], [{
-	            key: "getInstance",
-	            value: function getInstance() {
-	                if (!SceneManager._instance) {
-	                    SceneManager._instance = new SceneManager();
-	                }
-	                return SceneManager._instance;
-	            }
-	        }, {
-	            key: "loadScene",
-	            value: function loadScene(scene) {
-	                SceneManager.getInstance()._loadScene(scene);
-	            }
-	        }, {
-	            key: "currentScene",
-	            get: function get() {
-	                return SceneManager.getInstance()._currentScene;
-	            }
-	        }]);
 
-	        return SceneManager;
-	    }();
+	                _createClass(SceneManager, [{
+	                        key: "_loadScene",
+	                        value: function _loadScene(scene) {
 
-	    Bonnie3D.SceneManager = SceneManager;
+	                                if (this._current) {
+	                                        this._current.onExit();
+	                                }
+	                                if (typeof scene === "string") {
+	                                        this._current = new Bonnie3D.Scene(scene);
+	                                } else {
+	                                        this._current = scene;
+	                                }
+	                                if (this._current) {
+	                                        this._current.onEnter();
+	                                }
+	                        }
+	                }, {
+	                        key: "_currentScene",
+	                        get: function get() {
+
+	                                return this._current;
+	                        }
+	                }], [{
+	                        key: "getInstance",
+	                        value: function getInstance() {
+
+	                                if (!SceneManager._instance) {
+	                                        SceneManager._instance = new SceneManager();
+	                                }
+	                                return SceneManager._instance;
+	                        }
+	                }, {
+	                        key: "loadScene",
+	                        value: function loadScene(scene) {
+
+	                                SceneManager.getInstance()._loadScene(scene);
+	                        }
+	                }, {
+	                        key: "currentScene",
+	                        get: function get() {
+
+	                                return SceneManager.getInstance()._currentScene;
+	                        }
+	                }]);
+
+	                return SceneManager;
+	        }();
+
+	        Bonnie3D.SceneManager = SceneManager;
+	})(undefined);
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	    var Texture = function Texture() {
+	        _classCallCheck(this, Texture);
+	    };
+
+	    Bonnie3D.Texture = Texture;
 	})(undefined);
 
 /***/ })

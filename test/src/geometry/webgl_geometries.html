@@ -17,9 +17,25 @@
 
 <script src="../../../dist/bonnie3d.js"></script>
 <script>
+
     Bonnie3D.Log.level = Bonnie3D.Log.DEBUG;
-    Bonnie3D.Application.run();
-    Bonnie3D.SceneManager.loadScene("test");
+
+    scene = new Bonnie3D.Scene("test");
+
+    camera = new Bonnie3D.Camera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
+    camera.node.position.z = 400;
+    scene.add( camera );
+
+    let texture = Bonnie3D.TextureLoader.load( 'textures/crate.gif' );
+
+    let geometry = new Bonnie3D.BoxBufferGeometry( 200, 200, 200 );
+    let material = new Bonnie3D.MeshBasicMaterial( { map: texture } );
+
+    mesh = new Bonnie3D.Mesh( geometry, material );
+    scene.add( mesh );
+
+    Bonnie3D.SceneManager.loadScene(scene);
+
 </script>
 
 <script id="__bs_script__">

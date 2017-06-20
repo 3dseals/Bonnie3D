@@ -3,6 +3,7 @@
     class StringFormat {
 
         constructor(string, ...args) {
+
             let _args = args;
             let _explicit = false;
             let _idx = 0;
@@ -89,10 +90,13 @@
                     return value;
                 }));
             }
+
         }
 
         toString() {
+
             return this._string;
+
         }
     }
 
