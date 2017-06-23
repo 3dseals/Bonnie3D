@@ -4,7 +4,7 @@
 
         constructor(name) {
 
-            super(name)
+            super(name);
 
             this._position = new Bonnie3D.Vector3();
         }
@@ -18,7 +18,9 @@
         }
 
         get position() {
+
             return this._position;
+
         }
 
     }

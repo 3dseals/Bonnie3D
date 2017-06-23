@@ -3,6 +3,10 @@ import {} from "./Engine/Core/Log.js";
 import {} from "./Engine/Core/StringFormat.js";
 
 import {} from "./Engine/Math/Color.js"
+import {} from "./Engine/Math/Math.js"
+import {} from "./Engine/Math/Matrix3.js"
+import {} from "./Engine/Math/Matrix4.js"
+import {} from "./Engine/Math/Quaternion.js"
 import {} from "./Engine/Math/Vector3.js"
 import {} from "./Engine/Math/Vector4.js"
 
@@ -11,6 +15,7 @@ import {} from "./Engine/Base/Application.js";
 import {} from "./Engine/Base/Node.js";
 import {} from "./Engine/Base/Component.js";
 
+import {} from "./Engine/Camera/BasicCamera.js";
 import {} from "./Engine/Camera/Camera.js";
 
 import {} from "./Engine/Geometry/Geometry.js";
@@ -33,4 +38,5 @@ import {} from "./Engine/Scene/SceneManager.js";
 
 import {} from "./Engine/Texture/Texture.js";
 
-Bonnie3D.Application.run();
+window["B3D"] = window["Bonnie3D"];
+window["B3D"].Application.run();
