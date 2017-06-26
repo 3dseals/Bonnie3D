@@ -104,6 +104,12 @@
 
 	__webpack_require__(29);
 
+	__webpack_require__(30);
+
+	__webpack_require__(31);
+
+	__webpack_require__(32);
+
 	window["B3D"] = window["Bonnie3D"];
 	window["B3D"].Application.run();
 
@@ -114,6 +120,14 @@
 	"use strict";
 
 	window["Bonnie3D"] = window["Bonnie3D"] || {};
+
+	Bonnie3D.UVMapping = 300;
+	Bonnie3D.ClampToEdgeWrapping = 1001;
+	Bonnie3D.LinearFilter = 1006;
+	Bonnie3D.LinearMipMapLinearFilter = 1008;
+	Bonnie3D.UnsignedByteType = 1009;
+	Bonnie3D.RGBAFormat = 1023;
+	Bonnie3D.LinearEncoding = 3000;
 
 /***/ }),
 /* 2 */
@@ -628,6 +642,42 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	(function ($) {
+	        var Vector2 = function () {
+	                function Vector2(x, y, z) {
+	                        _classCallCheck(this, Vector2);
+
+	                        this.x = x || 0;
+	                        this.y = y || 0;
+	                }
+
+	                _createClass(Vector2, [{
+	                        key: "set",
+	                        value: function set(x, y, z) {
+
+	                                this.x = x;
+	                                this.y = y;
+
+	                                return this;
+	                        }
+	                }]);
+
+	                return Vector2;
+	        }();
+
+	        Bonnie3D.Vector2 = Vector2;
+	})(undefined);
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
 	        var Vector3 = function () {
 	                function Vector3(x, y, z) {
 	                        _classCallCheck(this, Vector3);
@@ -656,7 +706,7 @@
 	})(undefined);
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -696,7 +746,7 @@
 	})(undefined);
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -770,7 +820,7 @@
 	})(undefined);
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -890,7 +940,7 @@
 	})(undefined);
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -937,7 +987,7 @@
 	})(undefined);
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -983,7 +1033,7 @@
 	})(undefined);
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1015,7 +1065,7 @@
 	})(undefined);
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1187,7 +1237,7 @@
 	})(undefined);
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1215,7 +1265,7 @@
 	})(undefined);
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1243,7 +1293,7 @@
 	})(undefined);
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1271,7 +1321,69 @@
 	})(undefined);
 
 /***/ }),
-/* 20 */
+/* 21 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	    var ImageLoader = function () {
+	        function ImageLoader() {
+	            _classCallCheck(this, ImageLoader);
+	        }
+
+	        _createClass(ImageLoader, null, [{
+	            key: "load",
+	            value: function load(url, onLoad, onProgress, onError) {}
+	        }]);
+
+	        return ImageLoader;
+	    }();
+
+	    Bonnie3D.ImageLoader = ImageLoader;
+	})(undefined);
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	    var LoadingManager = function () {
+	        function LoadingManager() {
+	            _classCallCheck(this, LoadingManager);
+	        }
+
+	        _createClass(LoadingManager, null, [{
+	            key: "getInstance",
+	            value: function getInstance() {
+
+	                if (!LoadingManager._instance) {
+
+	                    LoadingManager._instance = new LoadingManager();
+	                }
+
+	                return LoadingManager._instance;
+	            }
+	        }]);
+
+	        return LoadingManager;
+	    }();
+
+	    Bonnie3D.LoadingManager = LoadingManager;
+	})(undefined);
+
+/***/ }),
+/* 23 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1288,7 +1400,7 @@
 
 	        _createClass(TextureLoader, null, [{
 	            key: "load",
-	            value: function load(path) {}
+	            value: function load(url, onLoad, onProgress, onError) {}
 	        }]);
 
 	        return TextureLoader;
@@ -1298,7 +1410,7 @@
 	})(undefined);
 
 /***/ }),
-/* 21 */
+/* 24 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1326,7 +1438,7 @@
 	})(undefined);
 
 /***/ }),
-/* 22 */
+/* 25 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1354,7 +1466,7 @@
 	})(undefined);
 
 /***/ }),
-/* 23 */
+/* 26 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1382,7 +1494,7 @@
 	})(undefined);
 
 /***/ }),
-/* 24 */
+/* 27 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1398,7 +1510,7 @@
 	})(undefined);
 
 /***/ }),
-/* 25 */
+/* 28 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1473,7 +1585,7 @@
 	})(undefined);
 
 /***/ }),
-/* 26 */
+/* 29 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -1644,7 +1756,7 @@
 	})(undefined);
 
 /***/ }),
-/* 27 */
+/* 30 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1737,7 +1849,7 @@
 	})(undefined);
 
 /***/ }),
-/* 28 */
+/* 31 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1806,19 +1918,70 @@
 	})(undefined);
 
 /***/ }),
-/* 29 */
+/* 32 */
 /***/ (function(module, exports) {
 
 	"use strict";
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	(function ($) {
-	    var Texture = function Texture() {
-	        _classCallCheck(this, Texture);
-	    };
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	    Bonnie3D.Texture = Texture;
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
+	            var Texture = function (_Bonnie3D$Object) {
+	                        _inherits(Texture, _Bonnie3D$Object);
+
+	                        function Texture(name, image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding) {
+	                                    _classCallCheck(this, Texture);
+
+	                                    var _this = _possibleConstructorReturn(this, (Texture.__proto__ || Object.getPrototypeOf(Texture)).call(this, name));
+
+	                                    _this._id = Bonnie3D.Texture.textureId++;
+	                                    _this._image = image !== undefined ? image : Texture.DEFAULT_IMAGE;
+	                                    _this._mipmaps = [];
+
+	                                    _this._mapping = mapping !== undefined ? mapping : Texture.DEFAULT_MAPPING;
+
+	                                    _this._wrapS = wrapS !== undefined ? wrapS : Bonnie3D.ClampToEdgeWrapping;
+	                                    _this._wrapT = wrapT !== undefined ? wrapT : Bonnie3D.ClampToEdgeWrapping;
+
+	                                    _this._magFilter = magFilter !== undefined ? magFilter : Bonnie3D.LinearFilter;
+	                                    _this._minFilter = minFilter !== undefined ? minFilter : Bonnie3D.LinearMipMapLinearFilter;
+
+	                                    _this._anisotropy = anisotropy !== undefined ? anisotropy : 1;
+
+	                                    _this._format = format !== undefined ? format : Bonnie3D.RGBAFormat;
+	                                    _this._type = type !== undefined ? type : Bonnie3D.UnsignedByteType;
+
+	                                    _this._offset = new Bonnie3D.Vector2(0, 0);
+	                                    _this._repeat = new Bonnie3D.Vector2(1, 1);
+
+	                                    _this._generateMipmaps = true;
+	                                    _this._premultiplyAlpha = false;
+	                                    _this._flipY = true;
+	                                    _this._unpackAlignment = 4; // valid values: 1, 2, 4, 8 (see http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml)
+
+	                                    // Values of encoding !== THREE.LinearEncoding only supported on map, envMap and emissiveMap.
+	                                    //
+	                                    // Also changing the encoding after already used by a Material will not automatically make the Material
+	                                    // update.  You need to explicitly call Material.needsUpdate to trigger it to recompile.
+	                                    _this._encoding = encoding !== undefined ? encoding : Bonnie3D.LinearEncoding;
+
+	                                    _this._version = 0;
+	                                    _this._onUpdate = null;
+	                                    return _this;
+	                        }
+
+	                        return Texture;
+	            }(Bonnie3D.Object);
+
+	            Texture.textureId = 0;
+	            Texture.DEFAULT_IMAGE = undefined;
+	            Texture.DEFAULT_MAPPING = Bonnie3D.UVMapping;
+
+	            Bonnie3D.Texture = Texture;
 	})(undefined);
 
 /***/ })

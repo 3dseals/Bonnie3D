@@ -1,6 +1,6 @@
 (function ($) {
 
-    class TextureLoader {
+    class ImageLoader {
 
         static load(url, onLoad, onProgress, onError) {
 
@@ -8,6 +8,6 @@
 
     }
 
-    Bonnie3D.TextureLoader = TextureLoader;
+    Bonnie3D.ImageLoader = ImageLoader;
 
 }(this));

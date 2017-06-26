@@ -7,6 +7,7 @@ import {} from "./Engine/Math/Math.js"
 import {} from "./Engine/Math/Matrix3.js"
 import {} from "./Engine/Math/Matrix4.js"
 import {} from "./Engine/Math/Quaternion.js"
+import {} from "./Engine/Math/Vector2.js"
 import {} from "./Engine/Math/Vector3.js"
 import {} from "./Engine/Math/Vector4.js"
 
@@ -22,6 +23,8 @@ import {} from "./Engine/Geometry/Geometry.js";
 import {} from "./Engine/Geometry/BoxGeometry.js";
 import {} from "./Engine/Geometry/BoxBufferGeometry.js";
 
+import {} from "./Engine/Loader/ImageLoader.js";
+import {} from "./Engine/Loader/LoadingManager.js";
 import {} from "./Engine/Loader/TextureLoader.js";
 
 import {} from "./Engine/Material/Material.js";
