@@ -1,5 +1,20 @@
 window["Bonnie3D"] = window["Bonnie3D"] || {};
 
+Bonnie3D.NormalBlending = 1;
+Bonnie3D.FrontSide = 0;
+Bonnie3D.SmoothShading = 2;
+Bonnie3D.NoColors = 0;
+Bonnie3D.AddEquation = 100;
+Bonnie3D.SrcColorFactor = 202;
+Bonnie3D.OneMinusSrcColorFactor = 203;
+Bonnie3D.SrcAlphaFactor = 204;
+Bonnie3D.OneMinusSrcAlphaFactor = 205;
+Bonnie3D.DstAlphaFactor = 206;
+Bonnie3D.OneMinusDstAlphaFactor = 207;
+Bonnie3D.DstColorFactor = 208;
+Bonnie3D.OneMinusDstColorFactor = 209;
+Bonnie3D.SrcAlphaSaturateFactor = 210;
+Bonnie3D.LessEqualDepth = 3;
 Bonnie3D.UVMapping = 300;
 Bonnie3D.ClampToEdgeWrapping = 1001;
 Bonnie3D.LinearFilter = 1006;

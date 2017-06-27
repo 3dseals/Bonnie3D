@@ -30,6 +30,23 @@
             return Bonnie3D.Math._uuid.join( '' );
         }
 
+
+
+        static clamp (value, min, max) {
+
+            return window.Math.max( min, window.Math.min( max, value ) );
+
+        }
+
+        // compute euclidian modulo of m % n
+        // https://en.wikipedia.org/wiki/Modulo_operation
+
+        static euclideanModulo (n, m) {
+
+            return ( ( n % m ) + m ) % m;
+
+        }
+
     }
 
     Math._chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split( '' );

@@ -20,6 +20,16 @@
 
         }
 
+        copy (v) {
+
+            this.x = v.x;
+            this.y = v.y;
+            this.z = v.z;
+
+            return this;
+
+        }
+
         applyToBufferAttribute( attribute ) {
 
             let v1 = new Bonnie3D.Vector3();
