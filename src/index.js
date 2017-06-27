@@ -3,6 +3,7 @@ import {} from "./Engine/Core/Log.js";
 import {} from "./Engine/Core/StringFormat.js";
 
 import {} from "./Engine/Math/Color.js"
+import {} from "./Engine/Math/Face.js"
 import {} from "./Engine/Math/Math.js"
 import {} from "./Engine/Math/Matrix3.js"
 import {} from "./Engine/Math/Matrix4.js"
@@ -11,16 +12,19 @@ import {} from "./Engine/Math/Vector2.js"
 import {} from "./Engine/Math/Vector3.js"
 import {} from "./Engine/Math/Vector4.js"
 
-import {} from "./Engine/Base/Object.js";
-import {} from "./Engine/Base/Application.js";
-import {} from "./Engine/Base/Node.js";
-import {} from "./Engine/Base/Component.js";
+import {} from "./Engine/Basic/Object.js";
+import {} from "./Engine/Basic/Application.js";
+import {} from "./Engine/Basic/BufferAttribute.js";
+import {} from "./Engine/Basic/Component.js";
+import {} from "./Engine/Basic/InstancedBufferAttribute.js";
+import {} from "./Engine/Basic/Node.js";
 
 import {} from "./Engine/Camera/BasicCamera.js";
 import {} from "./Engine/Camera/Camera.js";
 
 import {} from "./Engine/Geometry/Geometry.js";
 import {} from "./Engine/Geometry/BoxGeometry.js";
+import {} from "./Engine/Geometry/BufferGeometry.js";
 import {} from "./Engine/Geometry/BoxBufferGeometry.js";
 
 import {} from "./Engine/Loader/Cache.js";
