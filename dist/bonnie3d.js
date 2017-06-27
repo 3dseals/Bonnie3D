@@ -110,6 +110,8 @@
 
 	__webpack_require__(32);
 
+	__webpack_require__(33);
+
 	window["B3D"] = window["Bonnie3D"];
 	window["B3D"].Application.run();
 
@@ -126,6 +128,7 @@
 	Bonnie3D.LinearFilter = 1006;
 	Bonnie3D.LinearMipMapLinearFilter = 1008;
 	Bonnie3D.UnsignedByteType = 1009;
+	Bonnie3D.RGBFormat = 1022;
 	Bonnie3D.RGBAFormat = 1023;
 	Bonnie3D.LinearEncoding = 3000;
 
@@ -1324,62 +1327,137 @@
 /* 21 */
 /***/ (function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	(function ($) {
-	    var ImageLoader = function () {
-	        function ImageLoader() {
-	            _classCallCheck(this, ImageLoader);
-	        }
+	            var Cache = function () {
+	                        function Cache() {
+	                                    _classCallCheck(this, Cache);
+	                        }
 
-	        _createClass(ImageLoader, null, [{
-	            key: "load",
-	            value: function load(url, onLoad, onProgress, onError) {}
-	        }]);
+	                        _createClass(Cache, null, [{
+	                                    key: 'add',
+	                                    value: function add(key, file) {
 
-	        return ImageLoader;
-	    }();
+	                                                if (Cache.enabled === false) return;
 
-	    Bonnie3D.ImageLoader = ImageLoader;
+	                                                Bonnie3D.Log.debug('[Cache]', 'Adding key:', key);
+
+	                                                Cache.files[key] = file;
+	                                    }
+	                        }, {
+	                                    key: 'get',
+	                                    value: function get(key) {
+
+	                                                if (Cache.enabled === false) return;
+
+	                                                Bonnie3D.Log.debug('[Cache]', 'Checking key:', key);
+
+	                                                return Cache.files[key];
+	                                    }
+	                        }, {
+	                                    key: 'remove',
+	                                    value: function remove(key) {
+
+	                                                delete Cache.files[key];
+	                                    }
+	                        }, {
+	                                    key: 'clear',
+	                                    value: function clear() {
+
+	                                                Cache.files = {};
+	                                    }
+	                        }]);
+
+	                        return Cache;
+	            }();
+
+	            Cache.enabled = false;
+	            Cache.files = {};
+
+	            Bonnie3D.Cache = Cache;
 	})(undefined);
 
 /***/ }),
 /* 22 */
 /***/ (function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	(function ($) {
-	    var LoadingManager = function () {
-	        function LoadingManager() {
-	            _classCallCheck(this, LoadingManager);
-	        }
+	            var ImageLoader = function () {
+	                        function ImageLoader() {
+	                                    _classCallCheck(this, ImageLoader);
+	                        }
 
-	        _createClass(LoadingManager, null, [{
-	            key: "getInstance",
-	            value: function getInstance() {
+	                        _createClass(ImageLoader, null, [{
+	                                    key: 'load',
+	                                    value: function load(url, onLoad, onError) {
 
-	                if (!LoadingManager._instance) {
+	                                                if (url === undefined) url = '';
 
-	                    LoadingManager._instance = new LoadingManager();
-	                }
+	                                                if (ImageLoader.path !== undefined) url = ImageLoader.path + url;
 
-	                return LoadingManager._instance;
-	            }
-	        }]);
+	                                                var cached = Bonnie3D.Cache.get(url);
 
-	        return LoadingManager;
-	    }();
+	                                                if (cached !== undefined) {
 
-	    Bonnie3D.LoadingManager = LoadingManager;
+	                                                            Bonnie3D.LoadingManager.getInstance().itemStart(url);
+
+	                                                            setTimeout(function () {
+
+	                                                                        if (onLoad) onLoad(cached);
+
+	                                                                        Bonnie3D.LoadingManager.getInstance().itemEnd(url);
+	                                                            }, 0);
+
+	                                                            return cached;
+	                                                }
+
+	                                                var image = document.createElementNS('http://www.w3.org/1999/xhtml', 'img');
+
+	                                                image.addEventListener('load', function () {
+
+	                                                            Bonnie3D.Cache.add(url, this);
+
+	                                                            if (onLoad) onLoad(this);
+
+	                                                            Bonnie3D.LoadingManager.getInstance().itemEnd(url);
+	                                                }, false);
+
+	                                                image.addEventListener('error', function (event) {
+
+	                                                            if (onError) onError(event);
+
+	                                                            Bonnie3D.LoadingManager.getInstance().itemEnd(url);
+	                                                            Bonnie3D.LoadingManager.getInstance().itemError(url);
+	                                                }, false);
+
+	                                                if (url.substr(0, 5) !== 'data:') {
+
+	                                                            if (ImageLoader.crossOrigin !== undefined) image.crossOrigin = ImageLoader.crossOrigin;
+	                                                }
+
+	                                                Bonnie3D.LoadingManager.getInstance().itemStart(url);
+
+	                                                image.src = url;
+
+	                                                return image;
+	                                    }
+	                        }]);
+
+	                        return ImageLoader;
+	            }();
+
+	            Bonnie3D.ImageLoader = ImageLoader;
 	})(undefined);
 
 /***/ }),
@@ -1393,24 +1471,134 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	(function ($) {
-	    var TextureLoader = function () {
-	        function TextureLoader() {
-	            _classCallCheck(this, TextureLoader);
-	        }
+	            var LoadingManager = function () {
+	                        function LoadingManager(onLoad, onProgress, onError) {
+	                                    _classCallCheck(this, LoadingManager);
 
-	        _createClass(TextureLoader, null, [{
-	            key: "load",
-	            value: function load(url, onLoad, onProgress, onError) {}
-	        }]);
+	                                    this._isLoading = false;
+	                                    this._itemsLoaded = 0;
+	                                    this._itemsTotal = 0;
 
-	        return TextureLoader;
-	    }();
+	                                    this._onStart = undefined;
+	                                    this._onLoad = onLoad;
+	                                    this._onProgress = onProgress;
+	                                    this._onError = onError;
+	                        }
 
-	    Bonnie3D.TextureLoader = TextureLoader;
+	                        _createClass(LoadingManager, [{
+	                                    key: "itemStart",
+	                                    value: function itemStart(url) {
+
+	                                                this._itemsTotal++;
+
+	                                                if (this._isLoading === false) {
+
+	                                                            if (this._onStart !== undefined) {
+
+	                                                                        this._onStart(url, this._itemsLoaded, this._itemsTotal);
+	                                                            }
+	                                                }
+
+	                                                this._isLoading = true;
+	                                    }
+	                        }, {
+	                                    key: "itemEnd",
+	                                    value: function itemEnd(url) {
+
+	                                                this._itemsLoaded++;
+
+	                                                if (this._onProgress !== undefined) {
+
+	                                                            this._onProgress(url, this._itemsLoaded, this._itemsTotal);
+	                                                }
+
+	                                                if (this._itemsLoaded === this._itemsTotal) {
+
+	                                                            this._isLoading = false;
+
+	                                                            if (this._onLoad !== undefined) {
+
+	                                                                        this._onLoad();
+	                                                            }
+	                                                }
+	                                    }
+	                        }, {
+	                                    key: "itemError",
+	                                    value: function itemError(url) {
+
+	                                                if (this._onError !== undefined) {
+
+	                                                            this._onError(url);
+	                                                }
+	                                    }
+	                        }], [{
+	                                    key: "getInstance",
+	                                    value: function getInstance() {
+
+	                                                if (!LoadingManager._instance) {
+
+	                                                            LoadingManager._instance = new LoadingManager();
+	                                                }
+
+	                                                return LoadingManager._instance;
+	                                    }
+	                        }]);
+
+	                        return LoadingManager;
+	            }();
+
+	            Bonnie3D.LoadingManager = LoadingManager;
 	})(undefined);
 
 /***/ }),
 /* 24 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	                var TextureLoader = function () {
+	                                function TextureLoader() {
+	                                                _classCallCheck(this, TextureLoader);
+	                                }
+
+	                                _createClass(TextureLoader, null, [{
+	                                                key: "load",
+	                                                value: function load(url, onLoad, onProgress, onError) {
+	                                                                Bonnie3D.ImageLoader.crossOrigin = TextureLoader.crossOrigin;
+	                                                                Bonnie3D.ImageLoader.path = TextureLoader.path;
+
+	                                                                var texture = new Bonnie3D.Texture();
+	                                                                texture.image = Bonnie3D.ImageLoader.load(url, function () {
+
+	                                                                                // JPEGs can't have an alpha channel, so memory can be saved by storing them as RGB.
+	                                                                                var isJPEG = url.search(/\.(jpg|jpeg)$/) > 0 || url.search(/^data\:image\/jpeg/) === 0;
+
+	                                                                                texture.format = isJPEG ? Bonnie3D.RGBFormat : Bonnie3D.RGBAFormat;
+	                                                                                texture.needsUpdate = true;
+
+	                                                                                if (onLoad !== undefined) {
+
+	                                                                                                onLoad(texture);
+	                                                                                }
+	                                                                }, onProgress, onError);
+
+	                                                                return texture;
+	                                                }
+	                                }]);
+
+	                                return TextureLoader;
+	                }();
+
+	                Bonnie3D.TextureLoader = TextureLoader;
+	})(undefined);
+
+/***/ }),
+/* 25 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1438,7 +1626,7 @@
 	})(undefined);
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1466,7 +1654,7 @@
 	})(undefined);
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1494,7 +1682,7 @@
 	})(undefined);
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1510,7 +1698,7 @@
 	})(undefined);
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1585,7 +1773,7 @@
 	})(undefined);
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -1756,7 +1944,7 @@
 	})(undefined);
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1849,7 +2037,7 @@
 	})(undefined);
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1918,10 +2106,12 @@
 	})(undefined);
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports) {
 
 	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1973,6 +2163,13 @@
 	                                    _this._onUpdate = null;
 	                                    return _this;
 	                        }
+
+	                        _createClass(Texture, [{
+	                                    key: "image",
+	                                    set: function set(img) {
+	                                                this._image = img;
+	                                    }
+	                        }]);
 
 	                        return Texture;
 	            }(Bonnie3D.Object);

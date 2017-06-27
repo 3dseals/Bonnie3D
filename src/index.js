@@ -23,6 +23,7 @@ import {} from "./Engine/Geometry/Geometry.js";
 import {} from "./Engine/Geometry/BoxGeometry.js";
 import {} from "./Engine/Geometry/BoxBufferGeometry.js";
 
+import {} from "./Engine/Loader/Cache.js";
 import {} from "./Engine/Loader/ImageLoader.js";
 import {} from "./Engine/Loader/LoadingManager.js";
 import {} from "./Engine/Loader/TextureLoader.js";

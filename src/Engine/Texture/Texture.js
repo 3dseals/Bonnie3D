@@ -41,6 +41,9 @@
             this._onUpdate = null;
         }
 
+        set image(img) {
+            this._image = img;
+        }
     }
 
     Texture.textureId = 0;
