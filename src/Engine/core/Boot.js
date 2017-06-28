@@ -14,6 +14,7 @@ Bonnie3D.OneMinusDstAlphaFactor = 207;
 Bonnie3D.DstColorFactor = 208;
 Bonnie3D.OneMinusDstColorFactor = 209;
 Bonnie3D.SrcAlphaSaturateFactor = 210;
+Bonnie3D.MultiplyOperation = 0;
 Bonnie3D.LessEqualDepth = 3;
 Bonnie3D.UVMapping = 300;
 Bonnie3D.ClampToEdgeWrapping = 1001;
@@ -23,6 +24,7 @@ Bonnie3D.UnsignedByteType = 1009;
 Bonnie3D.RGBFormat = 1022;
 Bonnie3D.RGBAFormat = 1023;
 Bonnie3D.LinearEncoding = 3000;
+Bonnie3D.TrianglesDrawMode = 0;
 
 Bonnie3D.arrayMin = function( array ) {
 

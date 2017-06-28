@@ -4,7 +4,7 @@
 
         constructor() {
 
-            super('Geometry');
+            super();
 
             this._id = Bonnie3D.Geometry.countId++;
 

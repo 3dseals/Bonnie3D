@@ -2,10 +2,16 @@
 
     class Object {
 
-        constructor(name) {
+        constructor() {
 
             this._uuid = Bonnie3D.Math.generateUUID();
-            this._name = name || "";
+            this._name = "";
+
+        }
+
+        set name(name) {
+
+            this._name = name;
 
         }
 

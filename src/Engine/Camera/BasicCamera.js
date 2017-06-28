@@ -2,9 +2,9 @@
 
     class BasicCamera extends Bonnie3D.Component {
 
-        constructor(name) {
+        constructor() {
 
-            super(name);
+            super();
 
             this._projectionMatrix = new Bonnie3D.Matrix4();
 

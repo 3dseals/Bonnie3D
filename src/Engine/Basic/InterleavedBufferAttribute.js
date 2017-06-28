@@ -4,7 +4,7 @@
 
         constructor(interleavedBuffer, itemSize, offset, normalized) {
 
-            super('InterleavedBufferAttribute');
+            super();
 
             this._data = interleavedBuffer;
             this._itemSize = itemSize;

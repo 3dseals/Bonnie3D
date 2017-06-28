@@ -20,19 +20,19 @@
 
     B3D.Log.level = B3D.Log.DEBUG;
 
-    scene = new B3D.Scene("test");
+    let scene = new B3D.Scene("test");
 
-    camera = new B3D.Camera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
+    let camera = new B3D.Camera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
+    scene.addChild( camera );
     camera.node.position.z = 400;
-    scene.add( camera );
 
-    let texture = B3D.TextureLoader.load( 'res/textures/crate.gif' );
+    let texture = B3D.TextureLoader.load( '../../res/textures/crate.gif' );
 
     let geometry = new B3D.BoxBufferGeometry( 200, 200, 200 );
     let material = new B3D.MeshBasicMaterial( { map: texture } );
 
-    mesh = new B3D.Mesh( geometry, material );
-    scene.add( mesh );
+    let mesh = new B3D.Mesh( geometry, material );
+    scene.addChild( mesh );
 
     B3D.SceneManager.loadScene(scene);
 

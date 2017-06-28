@@ -2,9 +2,9 @@
 
     class Material extends Bonnie3D.Object {
 
-        constructor(name) {
+        constructor() {
 
-            super(name);
+            super();
 
             this._id = Bonnie3D.Material.materialId++;
 
@@ -70,7 +70,7 @@
 
                 }
 
-                let currentValue = this[ key ];
+                let currentValue = this[ "_" + key ];
 
                 if ( currentValue === undefined ) {
 
@@ -90,11 +90,11 @@
                 } else if ( key === 'overdraw' ) {
 
                     // ensure overdraw is backwards-compatible with legacy boolean type
-                    this[ key ] = Number( newValue );
+                    this[ "_" + key ] = Number( newValue );
 
                 } else {
 
-                    this[ key ] = newValue;
+                    this[ "_" + key ] = newValue;
 
                 }
 

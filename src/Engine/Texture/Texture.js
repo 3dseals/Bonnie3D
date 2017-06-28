@@ -2,9 +2,9 @@
 
     class Texture extends Bonnie3D.Object {
 
-        constructor(name, image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding) {
+        constructor(image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding) {
 
-            super(name);
+            super();
 
             this._id = Bonnie3D.Texture.textureId++;
             this._image = image !== undefined ? image : Texture.DEFAULT_IMAGE;

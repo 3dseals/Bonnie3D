@@ -2,11 +2,11 @@
 
     class Component extends Bonnie3D.Object {
 
-        constructor(name) {
+        constructor() {
 
-            super(name);
+            super();
 
-            this._node = new Bonnie3D.Node(name);
+            this._node = null;
 
         }
 

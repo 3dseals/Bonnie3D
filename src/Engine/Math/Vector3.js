@@ -30,6 +30,12 @@
 
         }
 
+        clone　() {
+
+            return new Bonnie3D.Vector3( this.x, this.y, this.z );
+
+        }
+
         applyToBufferAttribute( attribute ) {
 
             let v1 = new Bonnie3D.Vector3();
@@ -73,6 +79,53 @@
             let w =  e[ 3 ] * x + e[ 7 ] * y + e[ 11 ] * z + e[ 15 ];
 
             return this.divideScalar( w );
+
+        }
+
+        applyQuaternion (q) {
+
+            let x = this.x, y = this.y, z = this.z;
+            let qx = q.x, qy = q.y, qz = q.z, qw = q.w;
+
+            // calculate quat * vector
+
+            let ix =  qw * x + qy * z - qz * y;
+            let iy =  qw * y + qz * x - qx * z;
+            let iz =  qw * z + qx * y - qy * x;
+            let iw = - qx * x - qy * y - qz * z;
+
+            // calculate result * inverse quat
+
+            this.x = ix * qw + iw * - qx + iy * - qz - iz * - qy;
+            this.y = iy * qw + iw * - qy + iz * - qx - ix * - qz;
+            this.z = iz * qw + iw * - qz + ix * - qy - iy * - qx;
+
+            return this;
+
+        }
+
+        setFromMatrixPosition　(m) {
+
+            return this.setFromMatrixColumn( m, 3 );
+
+        }
+
+        setFromMatrixColumn (m, index) {
+
+
+            return this.fromArray( m.elements, index * 4 );
+
+        }
+
+        fromArray (array, offset) {
+
+            if ( offset === undefined ) offset = 0;
+
+            this.x = array[ offset ];
+            this.y = array[ offset + 1 ];
+            this.z = array[ offset + 2 ];
+
+            return this;
 
         }
 

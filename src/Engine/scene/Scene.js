@@ -4,9 +4,9 @@
 
     class Scene extends Bonnie3D.Node {
 
-        constructor(name) {
+        constructor() {
 
-            super(name)
+            super()
 
             this._valid = false;
             this._objects = [];
@@ -55,14 +55,6 @@
 
             return this._objects;
 
-        }
-
-        add(object) {
-            if(object instanceof Bonnie3D.Component) {
-                this.addChild(object.node);
-            }else if (object instanceof Bonnie3D.Node) {
-                this.addChild(object);
-            }
         }
     }
 

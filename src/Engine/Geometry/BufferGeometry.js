@@ -4,7 +4,7 @@
 
         constructor() {
 
-            super('BufferGeometry');
+            super();
 
             this._index = null;
             this._attributes = {};

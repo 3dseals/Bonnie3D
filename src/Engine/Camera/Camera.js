@@ -2,9 +2,9 @@
 
     class Camera extends Bonnie3D.BasicCamera {
 
-        constructor(name, fov, aspect, near, far) {
+        constructor(fov, aspect, near, far) {
 
-            super(name);
+            super();
 
             this._fov = fov !== undefined ? fov : 50;
             this._zoom = 1;

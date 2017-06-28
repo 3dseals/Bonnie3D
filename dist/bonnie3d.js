@@ -120,6 +120,10 @@
 
 	__webpack_require__(37);
 
+	__webpack_require__(38);
+
+	__webpack_require__(39);
+
 	window["B3D"] = window["Bonnie3D"];
 	window["B3D"].Application.run();
 
@@ -145,6 +149,7 @@
 	Bonnie3D.DstColorFactor = 208;
 	Bonnie3D.OneMinusDstColorFactor = 209;
 	Bonnie3D.SrcAlphaSaturateFactor = 210;
+	Bonnie3D.MultiplyOperation = 0;
 	Bonnie3D.LessEqualDepth = 3;
 	Bonnie3D.UVMapping = 300;
 	Bonnie3D.ClampToEdgeWrapping = 1001;
@@ -154,6 +159,7 @@
 	Bonnie3D.RGBFormat = 1022;
 	Bonnie3D.RGBAFormat = 1023;
 	Bonnie3D.LinearEncoding = 3000;
+	Bonnie3D.TrianglesDrawMode = 0;
 
 	Bonnie3D.arrayMin = function (array) {
 
@@ -681,6 +687,194 @@
 /* 5 */
 /***/ (function(module, exports) {
 
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	            var Euler = function () {
+	                        function Euler(x, y, z, order) {
+	                                    _classCallCheck(this, Euler);
+
+	                                    this._x = x || 0;
+	                                    this._y = y || 0;
+	                                    this._z = z || 0;
+	                                    this._order = order || Euler.DefaultOrder;
+
+	                                    this._onChangeCallback = function () {};
+	                        }
+
+	                        _createClass(Euler, [{
+	                                    key: 'setFromRotationMatrix',
+	                                    value: function setFromRotationMatrix(m, order, update) {
+
+	                                                var clamp = Bonnie3D.Math.clamp;
+
+	                                                // assumes the upper 3x3 of m is a pure rotation matrix (i.e, unscaled)
+
+	                                                var te = m.elements;
+	                                                var m11 = te[0],
+	                                                    m12 = te[4],
+	                                                    m13 = te[8];
+	                                                var m21 = te[1],
+	                                                    m22 = te[5],
+	                                                    m23 = te[9];
+	                                                var m31 = te[2],
+	                                                    m32 = te[6],
+	                                                    m33 = te[10];
+
+	                                                order = order || this._order;
+
+	                                                if (order === 'XYZ') {
+
+	                                                            this._y = Math.asin(clamp(m13, -1, 1));
+
+	                                                            if (Math.abs(m13) < 0.99999) {
+
+	                                                                        this._x = Math.atan2(-m23, m33);
+	                                                                        this._z = Math.atan2(-m12, m11);
+	                                                            } else {
+
+	                                                                        this._x = Math.atan2(m32, m22);
+	                                                                        this._z = 0;
+	                                                            }
+	                                                } else if (order === 'YXZ') {
+
+	                                                            this._x = Math.asin(-clamp(m23, -1, 1));
+
+	                                                            if (Math.abs(m23) < 0.99999) {
+
+	                                                                        this._y = Math.atan2(m13, m33);
+	                                                                        this._z = Math.atan2(m21, m22);
+	                                                            } else {
+
+	                                                                        this._y = Math.atan2(-m31, m11);
+	                                                                        this._z = 0;
+	                                                            }
+	                                                } else if (order === 'ZXY') {
+
+	                                                            this._x = Math.asin(clamp(m32, -1, 1));
+
+	                                                            if (Math.abs(m32) < 0.99999) {
+
+	                                                                        this._y = Math.atan2(-m31, m33);
+	                                                                        this._z = Math.atan2(-m12, m22);
+	                                                            } else {
+
+	                                                                        this._y = 0;
+	                                                                        this._z = Math.atan2(m21, m11);
+	                                                            }
+	                                                } else if (order === 'ZYX') {
+
+	                                                            this._y = Math.asin(-clamp(m31, -1, 1));
+
+	                                                            if (Math.abs(m31) < 0.99999) {
+
+	                                                                        this._x = Math.atan2(m32, m33);
+	                                                                        this._z = Math.atan2(m21, m11);
+	                                                            } else {
+
+	                                                                        this._x = 0;
+	                                                                        this._z = Math.atan2(-m12, m22);
+	                                                            }
+	                                                } else if (order === 'YZX') {
+
+	                                                            this._z = Math.asin(clamp(m21, -1, 1));
+
+	                                                            if (Math.abs(m21) < 0.99999) {
+
+	                                                                        this._x = Math.atan2(-m23, m22);
+	                                                                        this._y = Math.atan2(-m31, m11);
+	                                                            } else {
+
+	                                                                        this._x = 0;
+	                                                                        this._y = Math.atan2(m13, m33);
+	                                                            }
+	                                                } else if (order === 'XZY') {
+
+	                                                            this._z = Math.asin(-clamp(m12, -1, 1));
+
+	                                                            if (Math.abs(m12) < 0.99999) {
+
+	                                                                        this._x = Math.atan2(m32, m22);
+	                                                                        this._y = Math.atan2(m13, m11);
+	                                                            } else {
+
+	                                                                        this._x = Math.atan2(-m23, m33);
+	                                                                        this._y = 0;
+	                                                            }
+	                                                } else {
+
+	                                                            Bonnie3D.Log.warning('Bonnie3D.Euler: .setFromRotationMatrix() given unsupported order: ' + order);
+	                                                }
+
+	                                                this._order = order;
+
+	                                                if (update !== false) this._onChangeCallback();
+
+	                                                return this;
+	                                    }
+	                        }, {
+	                                    key: 'setFromQuaternion',
+	                                    value: function setFromQuaternion(q, order, update) {
+
+	                                                var matrix = new Bonnie3D.Matrix4();
+
+	                                                matrix.makeRotationFromQuaternion(q);
+
+	                                                this.setFromRotationMatrix(matrix, order, update);
+
+	                                                return this;
+	                                    }
+	                        }, {
+	                                    key: 'onChange',
+	                                    value: function onChange(callback) {
+
+	                                                this._onChangeCallback = callback;
+
+	                                                return this;
+	                                    }
+	                        }, {
+	                                    key: 'x',
+	                                    get: function get() {
+
+	                                                return this._x;
+	                                    }
+	                        }, {
+	                                    key: 'y',
+	                                    get: function get() {
+
+	                                                return this._y;
+	                                    }
+	                        }, {
+	                                    key: 'z',
+	                                    get: function get() {
+
+	                                                return this._z;
+	                                    }
+	                        }, {
+	                                    key: 'order',
+	                                    get: function get() {
+
+	                                                return this._order;
+	                                    }
+	                        }]);
+
+	                        return Euler;
+	            }();
+
+	            Euler.RotationOrders = ['XYZ', 'YZX', 'ZXY', 'XZY', 'YXZ', 'ZYX'];
+	            Euler.DefaultOrder = 'XYZ';
+
+	            Bonnie3D.Euler = Euler;
+	})(undefined);
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
 	"use strict";
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -724,7 +918,7 @@
 	})(undefined);
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -796,7 +990,7 @@
 	})(undefined);
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -937,7 +1131,7 @@
 	})(undefined);
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -992,6 +1186,218 @@
 	                                                return this;
 	                                    }
 	                        }, {
+	                                    key: "copy",
+	                                    value: function copy(m) {
+
+	                                                var te = this.elements;
+	                                                var me = m.elements;
+
+	                                                te[0] = me[0];te[1] = me[1];te[2] = me[2];te[3] = me[3];
+	                                                te[4] = me[4];te[5] = me[5];te[6] = me[6];te[7] = me[7];
+	                                                te[8] = me[8];te[9] = me[9];te[10] = me[10];te[11] = me[11];
+	                                                te[12] = me[12];te[13] = me[13];te[14] = me[14];te[15] = me[15];
+
+	                                                return this;
+	                                    }
+	                        }, {
+	                                    key: "makeRotationFromQuaternion",
+	                                    value: function makeRotationFromQuaternion(q) {
+
+	                                                var te = this.elements;
+
+	                                                var x = q._x,
+	                                                    y = q._y,
+	                                                    z = q._z,
+	                                                    w = q._w;
+	                                                var x2 = x + x,
+	                                                    y2 = y + y,
+	                                                    z2 = z + z;
+	                                                var xx = x * x2,
+	                                                    xy = x * y2,
+	                                                    xz = x * z2;
+	                                                var yy = y * y2,
+	                                                    yz = y * z2,
+	                                                    zz = z * z2;
+	                                                var wx = w * x2,
+	                                                    wy = w * y2,
+	                                                    wz = w * z2;
+
+	                                                te[0] = 1 - (yy + zz);
+	                                                te[4] = xy - wz;
+	                                                te[8] = xz + wy;
+
+	                                                te[1] = xy + wz;
+	                                                te[5] = 1 - (xx + zz);
+	                                                te[9] = yz - wx;
+
+	                                                te[2] = xz - wy;
+	                                                te[6] = yz + wx;
+	                                                te[10] = 1 - (xx + yy);
+
+	                                                // last column
+	                                                te[3] = 0;
+	                                                te[7] = 0;
+	                                                te[11] = 0;
+
+	                                                // bottom row
+	                                                te[12] = 0;
+	                                                te[13] = 0;
+	                                                te[14] = 0;
+	                                                te[15] = 1;
+
+	                                                return this;
+	                                    }
+	                        }, {
+	                                    key: "multiplyMatrices",
+	                                    value: function multiplyMatrices(a, b) {
+
+	                                                var ae = a.elements;
+	                                                var be = b.elements;
+	                                                var te = this.elements;
+
+	                                                var a11 = ae[0],
+	                                                    a12 = ae[4],
+	                                                    a13 = ae[8],
+	                                                    a14 = ae[12];
+	                                                var a21 = ae[1],
+	                                                    a22 = ae[5],
+	                                                    a23 = ae[9],
+	                                                    a24 = ae[13];
+	                                                var a31 = ae[2],
+	                                                    a32 = ae[6],
+	                                                    a33 = ae[10],
+	                                                    a34 = ae[14];
+	                                                var a41 = ae[3],
+	                                                    a42 = ae[7],
+	                                                    a43 = ae[11],
+	                                                    a44 = ae[15];
+
+	                                                var b11 = be[0],
+	                                                    b12 = be[4],
+	                                                    b13 = be[8],
+	                                                    b14 = be[12];
+	                                                var b21 = be[1],
+	                                                    b22 = be[5],
+	                                                    b23 = be[9],
+	                                                    b24 = be[13];
+	                                                var b31 = be[2],
+	                                                    b32 = be[6],
+	                                                    b33 = be[10],
+	                                                    b34 = be[14];
+	                                                var b41 = be[3],
+	                                                    b42 = be[7],
+	                                                    b43 = be[11],
+	                                                    b44 = be[15];
+
+	                                                te[0] = a11 * b11 + a12 * b21 + a13 * b31 + a14 * b41;
+	                                                te[4] = a11 * b12 + a12 * b22 + a13 * b32 + a14 * b42;
+	                                                te[8] = a11 * b13 + a12 * b23 + a13 * b33 + a14 * b43;
+	                                                te[12] = a11 * b14 + a12 * b24 + a13 * b34 + a14 * b44;
+
+	                                                te[1] = a21 * b11 + a22 * b21 + a23 * b31 + a24 * b41;
+	                                                te[5] = a21 * b12 + a22 * b22 + a23 * b32 + a24 * b42;
+	                                                te[9] = a21 * b13 + a22 * b23 + a23 * b33 + a24 * b43;
+	                                                te[13] = a21 * b14 + a22 * b24 + a23 * b34 + a24 * b44;
+
+	                                                te[2] = a31 * b11 + a32 * b21 + a33 * b31 + a34 * b41;
+	                                                te[6] = a31 * b12 + a32 * b22 + a33 * b32 + a34 * b42;
+	                                                te[10] = a31 * b13 + a32 * b23 + a33 * b33 + a34 * b43;
+	                                                te[14] = a31 * b14 + a32 * b24 + a33 * b34 + a34 * b44;
+
+	                                                te[3] = a41 * b11 + a42 * b21 + a43 * b31 + a44 * b41;
+	                                                te[7] = a41 * b12 + a42 * b22 + a43 * b32 + a44 * b42;
+	                                                te[11] = a41 * b13 + a42 * b23 + a43 * b33 + a44 * b43;
+	                                                te[15] = a41 * b14 + a42 * b24 + a43 * b34 + a44 * b44;
+
+	                                                return this;
+	                                    }
+	                        }, {
+	                                    key: "setPosition",
+	                                    value: function setPosition(v) {
+
+	                                                var te = this.elements;
+
+	                                                te[12] = v.x;
+	                                                te[13] = v.y;
+	                                                te[14] = v.z;
+
+	                                                return this;
+	                                    }
+	                        }, {
+	                                    key: "scale",
+	                                    value: function scale(v) {
+
+	                                                var te = this.elements;
+	                                                var x = v.x,
+	                                                    y = v.y,
+	                                                    z = v.z;
+
+	                                                te[0] *= x;te[4] *= y;te[8] *= z;
+	                                                te[1] *= x;te[5] *= y;te[9] *= z;
+	                                                te[2] *= x;te[6] *= y;te[10] *= z;
+	                                                te[3] *= x;te[7] *= y;te[11] *= z;
+
+	                                                return this;
+	                                    }
+	                        }, {
+	                                    key: "compose",
+	                                    value: function compose(position, quaternion, scale) {
+
+	                                                this.makeRotationFromQuaternion(quaternion);
+	                                                this.scale(scale);
+	                                                this.setPosition(position);
+
+	                                                return this;
+	                                    }
+	                        }, {
+	                                    key: "decompose",
+	                                    value: function decompose(position, quaternion, scale) {
+
+	                                                var vector = new Bonnie3D.Vector3();
+	                                                var matrix = new Bonnie3D.Matrix4();
+
+	                                                var te = this.elements;
+
+	                                                var sx = vector.set(te[0], te[1], te[2]).length();
+	                                                var sy = vector.set(te[4], te[5], te[6]).length();
+	                                                var sz = vector.set(te[8], te[9], te[10]).length();
+
+	                                                // if determine is negative, we need to invert one scale
+	                                                var det = this.determinant();
+	                                                if (det < 0) sx = -sx;
+
+	                                                position.x = te[12];
+	                                                position.y = te[13];
+	                                                position.z = te[14];
+
+	                                                // scale the rotation part
+	                                                matrix.copy(this);
+
+	                                                var invSX = 1 / sx;
+	                                                var invSY = 1 / sy;
+	                                                var invSZ = 1 / sz;
+
+	                                                matrix.elements[0] *= invSX;
+	                                                matrix.elements[1] *= invSX;
+	                                                matrix.elements[2] *= invSX;
+
+	                                                matrix.elements[4] *= invSY;
+	                                                matrix.elements[5] *= invSY;
+	                                                matrix.elements[6] *= invSY;
+
+	                                                matrix.elements[8] *= invSZ;
+	                                                matrix.elements[9] *= invSZ;
+	                                                matrix.elements[10] *= invSZ;
+
+	                                                quaternion.setFromRotationMatrix(matrix);
+
+	                                                scale.x = sx;
+	                                                scale.y = sy;
+	                                                scale.z = sz;
+
+	                                                return this;
+	                                    }
+	                        }, {
 	                                    key: "makePerspective",
 	                                    value: function makePerspective(left, right, top, bottom, near, far) {
 
@@ -1010,6 +1416,34 @@
 
 	                                                return this;
 	                                    }
+	                        }, {
+	                                    key: "determinant",
+	                                    value: function determinant() {
+
+	                                                var te = this.elements;
+
+	                                                var n11 = te[0],
+	                                                    n12 = te[4],
+	                                                    n13 = te[8],
+	                                                    n14 = te[12];
+	                                                var n21 = te[1],
+	                                                    n22 = te[5],
+	                                                    n23 = te[9],
+	                                                    n24 = te[13];
+	                                                var n31 = te[2],
+	                                                    n32 = te[6],
+	                                                    n33 = te[10],
+	                                                    n34 = te[14];
+	                                                var n41 = te[3],
+	                                                    n42 = te[7],
+	                                                    n43 = te[11],
+	                                                    n44 = te[15];
+
+	                                                //TODO: make this more efficient
+	                                                //( based on http://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm )
+
+	                                                return n41 * (+n14 * n23 * n32 - n13 * n24 * n32 - n14 * n22 * n33 + n12 * n24 * n33 + n13 * n22 * n34 - n12 * n23 * n34) + n42 * (+n11 * n23 * n34 - n11 * n24 * n33 + n14 * n21 * n33 - n13 * n21 * n34 + n13 * n24 * n31 - n14 * n23 * n31) + n43 * (+n11 * n24 * n32 - n11 * n22 * n34 - n14 * n21 * n32 + n12 * n21 * n34 + n14 * n22 * n31 - n12 * n24 * n31) + n44 * (-n13 * n22 * n31 - n11 * n23 * n32 + n11 * n22 * n33 + n13 * n21 * n32 - n12 * n21 * n33 + n12 * n23 * n31);
+	                                    }
 	                        }]);
 
 	                        return Matrix4;
@@ -1019,47 +1453,123 @@
 	})(undefined);
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	(function ($) {
-	        var Quaternion = function () {
-	                function Quaternion(x, y, z, w) {
-	                        _classCallCheck(this, Quaternion);
+	            var Quaternion = function () {
+	                        function Quaternion(x, y, z, w) {
+	                                    _classCallCheck(this, Quaternion);
 
-	                        this.x = x || 0;
-	                        this.y = y || 0;
-	                        this.z = z || 0;
-	                        this.w = w !== undefined ? w : 1;
-	                }
+	                                    this._x = x || 0;
+	                                    this._y = y || 0;
+	                                    this._z = z || 0;
+	                                    this._w = w !== undefined ? w : 1;
 
-	                _createClass(Quaternion, [{
-	                        key: "set",
-	                        value: function set(x, y, z, w) {
-
-	                                this.x = x;
-	                                this.y = y;
-	                                this.z = z;
-	                                this.w = w;
-
-	                                return this;
+	                                    this._onChangeCallback = function () {};
 	                        }
-	                }]);
 
-	                return Quaternion;
-	        }();
+	                        _createClass(Quaternion, [{
+	                                    key: 'set',
+	                                    value: function set(x, y, z, w) {
 
-	        Bonnie3D.Quaternion = Quaternion;
+	                                                this._x = x;
+	                                                this._y = y;
+	                                                this._z = z;
+	                                                this._w = w;
+
+	                                                return this;
+	                                    }
+	                        }, {
+	                                    key: 'setFromEuler',
+	                                    value: function setFromEuler(euler, update) {
+
+	                                                var x = euler.x,
+	                                                    y = euler.y,
+	                                                    z = euler.z,
+	                                                    order = euler.order;
+
+	                                                // http://www.mathworks.com/matlabcentral/fileexchange/
+	                                                // 	20696-function-to-convert-between-dcm-euler-angles-quaternions-and-euler-vectors/
+	                                                //	content/SpinCalc.m
+
+	                                                var cos = Math.cos;
+	                                                var sin = Math.sin;
+
+	                                                var c1 = cos(x / 2);
+	                                                var c2 = cos(y / 2);
+	                                                var c3 = cos(z / 2);
+
+	                                                var s1 = sin(x / 2);
+	                                                var s2 = sin(y / 2);
+	                                                var s3 = sin(z / 2);
+
+	                                                if (order === 'XYZ') {
+
+	                                                            this._x = s1 * c2 * c3 + c1 * s2 * s3;
+	                                                            this._y = c1 * s2 * c3 - s1 * c2 * s3;
+	                                                            this._z = c1 * c2 * s3 + s1 * s2 * c3;
+	                                                            this._w = c1 * c2 * c3 - s1 * s2 * s3;
+	                                                } else if (order === 'YXZ') {
+
+	                                                            this._x = s1 * c2 * c3 + c1 * s2 * s3;
+	                                                            this._y = c1 * s2 * c3 - s1 * c2 * s3;
+	                                                            this._z = c1 * c2 * s3 - s1 * s2 * c3;
+	                                                            this._w = c1 * c2 * c3 + s1 * s2 * s3;
+	                                                } else if (order === 'ZXY') {
+
+	                                                            this._x = s1 * c2 * c3 - c1 * s2 * s3;
+	                                                            this._y = c1 * s2 * c3 + s1 * c2 * s3;
+	                                                            this._z = c1 * c2 * s3 + s1 * s2 * c3;
+	                                                            this._w = c1 * c2 * c3 - s1 * s2 * s3;
+	                                                } else if (order === 'ZYX') {
+
+	                                                            this._x = s1 * c2 * c3 - c1 * s2 * s3;
+	                                                            this._y = c1 * s2 * c3 + s1 * c2 * s3;
+	                                                            this._z = c1 * c2 * s3 - s1 * s2 * c3;
+	                                                            this._w = c1 * c2 * c3 + s1 * s2 * s3;
+	                                                } else if (order === 'YZX') {
+
+	                                                            this._x = s1 * c2 * c3 + c1 * s2 * s3;
+	                                                            this._y = c1 * s2 * c3 + s1 * c2 * s3;
+	                                                            this._z = c1 * c2 * s3 - s1 * s2 * c3;
+	                                                            this._w = c1 * c2 * c3 - s1 * s2 * s3;
+	                                                } else if (order === 'XZY') {
+
+	                                                            this._x = s1 * c2 * c3 - c1 * s2 * s3;
+	                                                            this._y = c1 * s2 * c3 - s1 * c2 * s3;
+	                                                            this._z = c1 * c2 * s3 + s1 * s2 * c3;
+	                                                            this._w = c1 * c2 * c3 + s1 * s2 * s3;
+	                                                }
+
+	                                                if (update !== false) this._onChangeCallback();
+
+	                                                return this;
+	                                    }
+	                        }, {
+	                                    key: 'onChange',
+	                                    value: function onChange(callback) {
+
+	                                                this._onChangeCallback = callback;
+
+	                                                return this;
+	                                    }
+	                        }]);
+
+	                        return Quaternion;
+	            }();
+
+	            Bonnie3D.Quaternion = Quaternion;
 	})(undefined);
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1122,7 +1632,7 @@
 	})(undefined);
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1160,6 +1670,12 @@
 	                                                this.z = v.z;
 
 	                                                return this;
+	                                    }
+	                        }, {
+	                                    key: "clone",
+	                                    value: function clone() {
+
+	                                                return new Bonnie3D.Vector3(this.x, this.y, this.z);
 	                                    }
 	                        }, {
 	                                    key: "applyToBufferAttribute",
@@ -1212,6 +1728,57 @@
 	                                                return this.divideScalar(w);
 	                                    }
 	                        }, {
+	                                    key: "applyQuaternion",
+	                                    value: function applyQuaternion(q) {
+
+	                                                var x = this.x,
+	                                                    y = this.y,
+	                                                    z = this.z;
+	                                                var qx = q.x,
+	                                                    qy = q.y,
+	                                                    qz = q.z,
+	                                                    qw = q.w;
+
+	                                                // calculate quat * vector
+
+	                                                var ix = qw * x + qy * z - qz * y;
+	                                                var iy = qw * y + qz * x - qx * z;
+	                                                var iz = qw * z + qx * y - qy * x;
+	                                                var iw = -qx * x - qy * y - qz * z;
+
+	                                                // calculate result * inverse quat
+
+	                                                this.x = ix * qw + iw * -qx + iy * -qz - iz * -qy;
+	                                                this.y = iy * qw + iw * -qy + iz * -qx - ix * -qz;
+	                                                this.z = iz * qw + iw * -qz + ix * -qy - iy * -qx;
+
+	                                                return this;
+	                                    }
+	                        }, {
+	                                    key: "setFromMatrixPosition",
+	                                    value: function setFromMatrixPosition(m) {
+
+	                                                return this.setFromMatrixColumn(m, 3);
+	                                    }
+	                        }, {
+	                                    key: "setFromMatrixColumn",
+	                                    value: function setFromMatrixColumn(m, index) {
+
+	                                                return this.fromArray(m.elements, index * 4);
+	                                    }
+	                        }, {
+	                                    key: "fromArray",
+	                                    value: function fromArray(array, offset) {
+
+	                                                if (offset === undefined) offset = 0;
+
+	                                                this.x = array[offset];
+	                                                this.y = array[offset + 1];
+	                                                this.z = array[offset + 2];
+
+	                                                return this;
+	                                    }
+	                        }, {
 	                                    key: "multiplyScalar",
 	                                    value: function multiplyScalar(scalar) {
 
@@ -1248,7 +1815,7 @@
 	})(undefined);
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1353,7 +1920,7 @@
 	})(undefined);
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -1364,11 +1931,11 @@
 
 	(function ($) {
 	            var Object = function () {
-	                        function Object(name) {
+	                        function Object() {
 	                                    _classCallCheck(this, Object);
 
 	                                    this._uuid = Bonnie3D.Math.generateUUID();
-	                                    this._name = name || "";
+	                                    this._name = "";
 	                        }
 
 	                        _createClass(Object, [{
@@ -1414,6 +1981,10 @@
 	                                    }
 	                        }, {
 	                                    key: 'name',
+	                                    set: function set(name) {
+
+	                                                this._name = name;
+	                                    },
 	                                    get: function get() {
 
 	                                                return this._name;
@@ -1427,7 +1998,7 @@
 	})(undefined);
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1547,10 +2118,10 @@
 	})(undefined);
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports) {
 
-	'use strict';
+	"use strict";
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -1567,7 +2138,7 @@
 	                function BufferAttribute(array, itemSize, normalized, arrayType) {
 	                        _classCallCheck(this, BufferAttribute);
 
-	                        var _this = _possibleConstructorReturn(this, (BufferAttribute.__proto__ || Object.getPrototypeOf(BufferAttribute)).call(this, 'BufferAttribute'));
+	                        var _this = _possibleConstructorReturn(this, (BufferAttribute.__proto__ || Object.getPrototypeOf(BufferAttribute)).call(this));
 
 	                        _this._array = arrayType !== undefined ? new arrayType(array) : array;
 	                        _this._itemSize = itemSize;
@@ -1583,13 +2154,13 @@
 	                }
 
 	                _createClass(BufferAttribute, [{
-	                        key: 'getX',
+	                        key: "getX",
 	                        value: function getX(index) {
 
 	                                return this._array[index * this._itemSize];
 	                        }
 	                }, {
-	                        key: 'setX',
+	                        key: "setX",
 	                        value: function setX(index, x) {
 
 	                                this._array[index * this._itemSize] = x;
@@ -1597,13 +2168,13 @@
 	                                return this;
 	                        }
 	                }, {
-	                        key: 'getY',
+	                        key: "getY",
 	                        value: function getY(index) {
 
 	                                return this._array[index * this._itemSize + 1];
 	                        }
 	                }, {
-	                        key: 'setY',
+	                        key: "setY",
 	                        value: function setY(index, y) {
 
 	                                this._array[index * this._itemSize + 1] = y;
@@ -1611,13 +2182,13 @@
 	                                return this;
 	                        }
 	                }, {
-	                        key: 'getZ',
+	                        key: "getZ",
 	                        value: function getZ(index) {
 
 	                                return this._array[index * this._itemSize + 2];
 	                        }
 	                }, {
-	                        key: 'setZ',
+	                        key: "setZ",
 	                        value: function setZ(index, z) {
 
 	                                this._array[index * this._itemSize + 2] = z;
@@ -1625,13 +2196,13 @@
 	                                return this;
 	                        }
 	                }, {
-	                        key: 'getW',
+	                        key: "getW",
 	                        value: function getW(index) {
 
 	                                return this._array[index * this._itemSize + 3];
 	                        }
 	                }, {
-	                        key: 'setW',
+	                        key: "setW",
 	                        value: function setW(index, w) {
 
 	                                this._array[index * this._itemSize + 3] = w;
@@ -1639,7 +2210,7 @@
 	                                return this;
 	                        }
 	                }, {
-	                        key: 'setXYZ',
+	                        key: "setXYZ",
 	                        value: function setXYZ(index, x, y, z) {
 
 	                                index *= this._itemSize;
@@ -1659,7 +2230,7 @@
 	})(undefined);
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1676,12 +2247,12 @@
 	        var Component = function (_Bonnie3D$Object) {
 	                _inherits(Component, _Bonnie3D$Object);
 
-	                function Component(name) {
+	                function Component() {
 	                        _classCallCheck(this, Component);
 
-	                        var _this = _possibleConstructorReturn(this, (Component.__proto__ || Object.getPrototypeOf(Component)).call(this, name));
+	                        var _this = _possibleConstructorReturn(this, (Component.__proto__ || Object.getPrototypeOf(Component)).call(this));
 
-	                        _this._node = new Bonnie3D.Node(name);
+	                        _this._node = null;
 
 	                        return _this;
 	                }
@@ -1705,7 +2276,7 @@
 	})(undefined);
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1737,53 +2308,6 @@
 	})(undefined);
 
 /***/ }),
-/* 18 */
-/***/ (function(module, exports) {
-
-	"use strict";
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	(function ($) {
-	        var Node = function (_Bonnie3D$Object) {
-	                _inherits(Node, _Bonnie3D$Object);
-
-	                function Node(name) {
-	                        _classCallCheck(this, Node);
-
-	                        var _this = _possibleConstructorReturn(this, (Node.__proto__ || Object.getPrototypeOf(Node)).call(this, name));
-
-	                        _this._position = new Bonnie3D.Vector3();
-	                        return _this;
-	                }
-
-	                _createClass(Node, [{
-	                        key: "addChild",
-	                        value: function addChild(node) {}
-	                }, {
-	                        key: "addComponent",
-	                        value: function addComponent(component) {}
-	                }, {
-	                        key: "position",
-	                        get: function get() {
-
-	                                return this._position;
-	                        }
-	                }]);
-
-	                return Node;
-	        }(Bonnie3D.Object);
-
-	        Bonnie3D.Node = Node;
-	})(undefined);
-
-/***/ }),
 /* 19 */
 /***/ (function(module, exports) {
 
@@ -1796,23 +2320,23 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	(function ($) {
-	    var BasicCamera = function (_Bonnie3D$Component) {
-	        _inherits(BasicCamera, _Bonnie3D$Component);
+	    var Layers = function (_Bonnie3D$Object) {
+	        _inherits(Layers, _Bonnie3D$Object);
 
-	        function BasicCamera(name) {
-	            _classCallCheck(this, BasicCamera);
+	        function Layers() {
+	            _classCallCheck(this, Layers);
 
-	            var _this = _possibleConstructorReturn(this, (BasicCamera.__proto__ || Object.getPrototypeOf(BasicCamera)).call(this, name));
+	            var _this = _possibleConstructorReturn(this, (Layers.__proto__ || Object.getPrototypeOf(Layers)).call(this));
 
-	            _this._projectionMatrix = new Bonnie3D.Matrix4();
+	            _this._mask = 1 | 0;
 
 	            return _this;
 	        }
 
-	        return BasicCamera;
-	    }(Bonnie3D.Component);
+	        return Layers;
+	    }(Bonnie3D.Object);
 
-	    Bonnie3D.BasicCamera = BasicCamera;
+	    Bonnie3D.Layers = Layers;
 	})(undefined);
 
 /***/ }),
@@ -1830,13 +2354,371 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	(function ($) {
+	            var Node = function (_Bonnie3D$Object) {
+	                        _inherits(Node, _Bonnie3D$Object);
+
+	                        function Node() {
+	                                    _classCallCheck(this, Node);
+
+	                                    var _this = _possibleConstructorReturn(this, (Node.__proto__ || Object.getPrototypeOf(Node)).call(this));
+
+	                                    _this._parent = null;
+	                                    _this._children = [];
+	                                    _this._components = [];
+
+	                                    _this._up = Node.DefaultUp.clone();
+
+	                                    var position = new Bonnie3D.Vector3();
+	                                    var rotation = new Bonnie3D.Euler();
+	                                    var quaternion = new Bonnie3D.Quaternion();
+	                                    var scale = new Bonnie3D.Vector3(1, 1, 1);
+
+	                                    var onRotationChange = function onRotationChange() {
+
+	                                                quaternion.setFromEuler(rotation, false);
+	                                    };
+
+	                                    var onQuaternionChange = function onQuaternionChange() {
+
+	                                                rotation.setFromQuaternion(quaternion, undefined, false);
+	                                    };
+
+	                                    rotation.onChange(onRotationChange);
+	                                    quaternion.onChange(onQuaternionChange);
+
+	                                    _this._position = position;
+	                                    _this._rotation = rotation;
+	                                    _this._quaternion = quaternion;
+	                                    _this._scale = scale;
+	                                    _this._modelViewMatrix = new Bonnie3D.Matrix4();
+	                                    _this._normalMatrix = new Bonnie3D.Matrix4();
+
+	                                    _this._matrix = new Bonnie3D.Matrix4();
+	                                    _this._matrixWorld = new Bonnie3D.Matrix4();
+
+	                                    _this._matrixAutoUpdate = Node.DefaultMatrixAutoUpdate;
+	                                    _this._matrixWorldNeedsUpdate = false;
+
+	                                    _this._layers = new Bonnie3D.Layers();
+	                                    _this._visible = true;
+
+	                                    _this._castShadow = false;
+	                                    _this._receiveShadow = false;
+
+	                                    _this._frustumCulled = true;
+	                                    _this._renderOrder = 0;
+
+	                                    _this._userData = {};
+	                                    return _this;
+	                        }
+
+	                        _createClass(Node, [{
+	                                    key: "isEmptyNode",
+	                                    value: function isEmptyNode() {
+	                                                return false;
+	                                    }
+	                        }, {
+	                                    key: "addChild",
+	                                    value: function addChild(object) {
+
+	                                                if (object === this) {
+
+	                                                            Bonnie3D.Log.error("Bonnie3D.Node.addChild: node can't be added as a child of itself.", object);
+	                                                            return this;
+	                                                }
+
+	                                                if (object instanceof Bonnie3D.Node) {
+
+	                                                            if (object._parent !== null) {
+
+	                                                                        object._parent.removeChild(object);
+	                                                            }
+
+	                                                            object._parent = this;
+	                                                            //object.dispatchEvent( { type: 'added' } );
+
+	                                                            this._children.push(object);
+	                                                } else if (object instanceof Bonnie3D.Component) {
+
+	                                                            if (object._node !== null) {
+
+	                                                                        if (object._node._parent !== null) {
+
+	                                                                                    object._node._parent.removeChild(object._node);
+	                                                                        }
+	                                                            } else {
+
+	                                                                        object._node = new Bonnie3D.Node();
+	                                                                        object._node.addComponent(object);
+	                                                            }
+
+	                                                            object._node._parent = this;
+
+	                                                            this._children.push(object._node);
+	                                                } else {
+
+	                                                            Bonnie3D.Log.error("Bonnie3D.Node.addChild: child not an instance of Bonnie3D.Node or Bonnie3D.Component.", object);
+	                                                }
+
+	                                                return this;
+	                                    }
+	                        }, {
+	                                    key: "removeChild",
+	                                    value: function removeChild(object) {
+
+	                                                var index = this._children.indexOf(object);
+
+	                                                if (index !== -1) {
+
+	                                                            object._parent = null;
+
+	                                                            this._children.splice(index, 1);
+	                                                }
+
+	                                                return this;
+	                                    }
+	                        }, {
+	                                    key: "getObjectById",
+	                                    value: function getObjectById(id) {
+
+	                                                return this.getObjectByProperty('id', id);
+	                                    }
+	                        }, {
+	                                    key: "getObjectByName",
+	                                    value: function getObjectByName(name) {
+
+	                                                return this.getObjectByProperty('name', name);
+	                                    }
+	                        }, {
+	                                    key: "getObjectByProperty",
+	                                    value: function getObjectByProperty(name, value) {}
+	                        }, {
+	                                    key: "addComponent",
+	                                    value: function addComponent(component) {
+
+	                                                if (component instanceof Bonnie3D.Component) {
+
+	                                                            if (component._node !== null) {
+
+	                                                                        component._node.removeComponent(component);
+	                                                            }
+
+	                                                            component._node = this;
+
+	                                                            this._components.push(component);
+	                                                } else {
+
+	                                                            Bonnie3D.Log.error("Bonnie3D.Node.addComponent: child not an instance of Bonnie3D.Component.", component);
+	                                                }
+
+	                                                return this;
+	                                    }
+	                        }, {
+	                                    key: "removeComponent",
+	                                    value: function removeComponent(component) {
+
+	                                                var index = this._components.indexOf(component);
+
+	                                                if (index !== -1) {
+
+	                                                            if (component._node.isEmptyNode()) {
+	                                                                        component._node._parent.removeChild(component._node);
+	                                                            }
+
+	                                                            component._node = null;
+
+	                                                            this._components.splice(index, 1);
+	                                                }
+
+	                                                return this;
+	                                    }
+	                        }, {
+	                                    key: "getComponentById",
+	                                    value: function getComponentById(id) {
+
+	                                                return this.getComponentByProperty('id', id);
+	                                    }
+	                        }, {
+	                                    key: "getComponentByName",
+	                                    value: function getComponentByName(name) {
+
+	                                                return this.getComponentByProperty('name', name);
+	                                    }
+	                        }, {
+	                                    key: "getComponentByProperty",
+	                                    value: function getComponentByProperty(name, value) {}
+	                        }, {
+	                                    key: "getWorldPosition",
+	                                    value: function getWorldPosition(optionalTarget) {
+	                                                var result = optionalTarget || new Bonnie3D.ector3();
+
+	                                                this.updateMatrixWorld(true);
+
+	                                                return result.setFromMatrixPosition(this._matrixWorld);
+	                                    }
+	                        }, {
+	                                    key: "getWorldQuaternion",
+	                                    value: function getWorldQuaternion(optionalTarget) {
+
+	                                                var position = new Bonnie3D.Vector3();
+	                                                var scale = new Bonnie3D.Vector3();
+
+	                                                var result = optionalTarget || new Bonnie3D.Quaternion();
+
+	                                                this.updateMatrixWorld(true);
+
+	                                                this._matrixWorld.decompose(position, result, scale);
+
+	                                                return result;
+	                                    }
+	                        }, {
+	                                    key: "getWorldRotation",
+	                                    value: function getWorldRotation(optionalTarget) {
+
+	                                                var quaternion = new Bonnie3D.Quaternion();
+
+	                                                var result = optionalTarget || new Bonnie3D.Euler();
+
+	                                                this.getWorldQuaternion(quaternion);
+
+	                                                return result.setFromQuaternion(quaternion, this._rotation.order, false);
+	                                    }
+	                        }, {
+	                                    key: "getWorldScale",
+	                                    value: function getWorldScale(optionalTarget) {
+
+	                                                var position = new Bonnie3D.Vector3();
+	                                                var quaternion = new Bonnie3D.Quaternion();
+
+	                                                var result = optionalTarget || new Bonnie3D.Vector3();
+
+	                                                this.updateMatrixWorld(true);
+
+	                                                this._matrixWorld.decompose(position, quaternion, result);
+
+	                                                return result;
+	                                    }
+	                        }, {
+	                                    key: "getWorldDirection",
+	                                    value: function getWorldDirection(optionalTarget) {
+
+	                                                var quaternion = new Bonnie3D.Quaternion();
+
+	                                                var result = optionalTarget || new Bonnie3D.Vector3();
+
+	                                                this.getWorldQuaternion(quaternion);
+
+	                                                return result.set(0, 0, 1).applyQuaternion(quaternion);
+	                                    }
+	                        }, {
+	                                    key: "updateMatrix",
+	                                    value: function updateMatrix() {
+
+	                                                this._matrix.compose(this._position, this._quaternion, this._scale);
+
+	                                                this._matrixWorldNeedsUpdate = true;
+	                                    }
+	                        }, {
+	                                    key: "updateMatrixWorld",
+	                                    value: function updateMatrixWorld(force) {
+
+	                                                if (this._matrixAutoUpdate) this.updateMatrix();
+
+	                                                if (this._matrixWorldNeedsUpdate || force) {
+
+	                                                            if (this.parent === null) {
+
+	                                                                        this._matrixWorld.copy(this._matrix);
+	                                                            } else {
+
+	                                                                        this._matrixWorld.multiplyMatrices(this.parent._matrixWorld, this._matrix);
+	                                                            }
+
+	                                                            this._matrixWorldNeedsUpdate = false;
+
+	                                                            force = true;
+	                                                }
+
+	                                                // update children
+
+	                                                var children = this._children;
+
+	                                                for (var i = 0, l = children.length; i < l; i++) {
+
+	                                                            children[i].updateMatrixWorld(force);
+	                                                }
+	                                    }
+	                        }, {
+	                                    key: "position",
+	                                    get: function get() {
+
+	                                                return this._position;
+	                                    }
+	                        }]);
+
+	                        return Node;
+	            }(Bonnie3D.Object);
+
+	            Node.DefaultUp = new Bonnie3D.Vector3(0, 1, 0);
+	            Node.DefaultMatrixAutoUpdate = true;
+
+	            Bonnie3D.Node = Node;
+	})(undefined);
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
+	    var BasicCamera = function (_Bonnie3D$Component) {
+	        _inherits(BasicCamera, _Bonnie3D$Component);
+
+	        function BasicCamera() {
+	            _classCallCheck(this, BasicCamera);
+
+	            var _this = _possibleConstructorReturn(this, (BasicCamera.__proto__ || Object.getPrototypeOf(BasicCamera)).call(this));
+
+	            _this._projectionMatrix = new Bonnie3D.Matrix4();
+
+	            return _this;
+	        }
+
+	        return BasicCamera;
+	    }(Bonnie3D.Component);
+
+	    Bonnie3D.BasicCamera = BasicCamera;
+	})(undefined);
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
 	            var Camera = function (_Bonnie3D$BasicCamera) {
 	                        _inherits(Camera, _Bonnie3D$BasicCamera);
 
-	                        function Camera(name, fov, aspect, near, far) {
+	                        function Camera(fov, aspect, near, far) {
 	                                    _classCallCheck(this, Camera);
 
-	                                    var _this = _possibleConstructorReturn(this, (Camera.__proto__ || Object.getPrototypeOf(Camera)).call(this, name));
+	                                    var _this = _possibleConstructorReturn(this, (Camera.__proto__ || Object.getPrototypeOf(Camera)).call(this));
 
 	                                    _this._fov = fov !== undefined ? fov : 50;
 	                                    _this._zoom = 1;
@@ -1988,10 +2870,10 @@
 	})(undefined);
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports) {
 
-	'use strict';
+	"use strict";
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -2008,7 +2890,7 @@
 	                        function Geometry() {
 	                                    _classCallCheck(this, Geometry);
 
-	                                    var _this = _possibleConstructorReturn(this, (Geometry.__proto__ || Object.getPrototypeOf(Geometry)).call(this, 'Geometry'));
+	                                    var _this = _possibleConstructorReturn(this, (Geometry.__proto__ || Object.getPrototypeOf(Geometry)).call(this));
 
 	                                    _this._id = Bonnie3D.Geometry.countId++;
 
@@ -2041,7 +2923,7 @@
 	                        }
 
 	                        _createClass(Geometry, [{
-	                                    key: 'applyMatrix',
+	                                    key: "applyMatrix",
 	                                    value: function applyMatrix(matrix) {
 
 	                                                var normalMatrix = new Bonnie3D.Matrix3().getNormalMatrix(matrix);
@@ -2079,10 +2961,10 @@
 	                                                return this;
 	                                    }
 	                        }, {
-	                                    key: 'computeBoundingBox',
+	                                    key: "computeBoundingBox",
 	                                    value: function computeBoundingBox() {}
 	                        }, {
-	                                    key: 'computeBoundingSphere',
+	                                    key: "computeBoundingSphere",
 	                                    value: function computeBoundingSphere() {}
 	                        }]);
 
@@ -2095,7 +2977,7 @@
 	})(undefined);
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -2123,7 +3005,7 @@
 	})(undefined);
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -2143,7 +3025,7 @@
 	                        function BufferGeometry() {
 	                                    _classCallCheck(this, BufferGeometry);
 
-	                                    var _this = _possibleConstructorReturn(this, (BufferGeometry.__proto__ || Object.getPrototypeOf(BufferGeometry)).call(this, 'BufferGeometry'));
+	                                    var _this = _possibleConstructorReturn(this, (BufferGeometry.__proto__ || Object.getPrototypeOf(BufferGeometry)).call(this));
 
 	                                    _this._index = null;
 	                                    _this._attributes = {};
@@ -2297,7 +3179,7 @@
 	})(undefined);
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -2463,7 +3345,7 @@
 	})(undefined);
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -2522,7 +3404,7 @@
 	})(undefined);
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -2600,7 +3482,7 @@
 	})(undefined);
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -2690,7 +3572,7 @@
 	})(undefined);
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -2737,7 +3619,7 @@
 	})(undefined);
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -2754,10 +3636,10 @@
 	            var Material = function (_Bonnie3D$Object) {
 	                        _inherits(Material, _Bonnie3D$Object);
 
-	                        function Material(name) {
+	                        function Material() {
 	                                    _classCallCheck(this, Material);
 
-	                                    var _this = _possibleConstructorReturn(this, (Material.__proto__ || Object.getPrototypeOf(Material)).call(this, name));
+	                                    var _this = _possibleConstructorReturn(this, (Material.__proto__ || Object.getPrototypeOf(Material)).call(this));
 
 	                                    _this._id = Bonnie3D.Material.materialId++;
 
@@ -2825,7 +3707,7 @@
 	                                                                        continue;
 	                                                            }
 
-	                                                            var currentValue = this[key];
+	                                                            var currentValue = this["_" + key];
 
 	                                                            if (currentValue === undefined) {
 
@@ -2842,10 +3724,10 @@
 	                                                            } else if (key === 'overdraw') {
 
 	                                                                        // ensure overdraw is backwards-compatible with legacy boolean type
-	                                                                        this[key] = Number(newValue);
+	                                                                        this["_" + key] = Number(newValue);
 	                                                            } else {
 
-	                                                                        this[key] = newValue;
+	                                                                        this["_" + key] = newValue;
 	                                                            }
 	                                                }
 	                                    }
@@ -2860,63 +3742,112 @@
 	})(undefined);
 
 /***/ }),
-/* 30 */
-/***/ (function(module, exports) {
-
-	"use strict";
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	(function ($) {
-	    var MeshBasicMaterial = function (_Bonnie3D$Material) {
-	        _inherits(MeshBasicMaterial, _Bonnie3D$Material);
-
-	        function MeshBasicMaterial() {
-	            _classCallCheck(this, MeshBasicMaterial);
-
-	            return _possibleConstructorReturn(this, (MeshBasicMaterial.__proto__ || Object.getPrototypeOf(MeshBasicMaterial)).apply(this, arguments));
-	        }
-
-	        return MeshBasicMaterial;
-	    }(Bonnie3D.Material);
-
-	    Bonnie3D.MeshBasicMaterial = MeshBasicMaterial;
-	})(undefined);
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports) {
-
-	"use strict";
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	(function ($) {
-	    var Mesh = function (_Bonnie3D$Component) {
-	        _inherits(Mesh, _Bonnie3D$Component);
-
-	        function Mesh() {
-	            _classCallCheck(this, Mesh);
-
-	            return _possibleConstructorReturn(this, (Mesh.__proto__ || Object.getPrototypeOf(Mesh)).apply(this, arguments));
-	        }
-
-	        return Mesh;
-	    }(Bonnie3D.Component);
-
-	    Bonnie3D.Mesh = Mesh;
-	})(undefined);
-
-/***/ }),
 /* 32 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
+	            var MeshBasicMaterial = function (_Bonnie3D$Material) {
+	                        _inherits(MeshBasicMaterial, _Bonnie3D$Material);
+
+	                        function MeshBasicMaterial(parameters) {
+	                                    _classCallCheck(this, MeshBasicMaterial);
+
+	                                    var _this = _possibleConstructorReturn(this, (MeshBasicMaterial.__proto__ || Object.getPrototypeOf(MeshBasicMaterial)).call(this));
+
+	                                    _this._color = new Bonnie3D.Color(0xffffff); // emissive
+
+	                                    _this._map = null;
+
+	                                    _this._lightMap = null;
+	                                    _this._lightMapIntensity = 1.0;
+
+	                                    _this._aoMap = null;
+	                                    _this._aoMapIntensity = 1.0;
+
+	                                    _this._specularMap = null;
+
+	                                    _this._alphaMap = null;
+
+	                                    _this._envMap = null;
+	                                    _this._combine = Bonnie3D.MultiplyOperation;
+	                                    _this._reflectivity = 1;
+	                                    _this._refractionRatio = 0.98;
+
+	                                    _this._wireframe = false;
+	                                    _this._wireframeLinewidth = 1;
+	                                    _this._wireframeLinecap = 'round';
+	                                    _this._wireframeLinejoin = 'round';
+
+	                                    _this._skinning = false;
+	                                    _this._morphTargets = false;
+
+	                                    _this._lights = false;
+
+	                                    _this.setValues(parameters);
+
+	                                    return _this;
+	                        }
+
+	                        return MeshBasicMaterial;
+	            }(Bonnie3D.Material);
+
+	            Bonnie3D.MeshBasicMaterial = MeshBasicMaterial;
+	})(undefined);
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
+	            var Mesh = function (_Bonnie3D$Component) {
+	                        _inherits(Mesh, _Bonnie3D$Component);
+
+	                        function Mesh(geometry, material) {
+	                                    _classCallCheck(this, Mesh);
+
+	                                    var _this = _possibleConstructorReturn(this, (Mesh.__proto__ || Object.getPrototypeOf(Mesh)).call(this));
+
+	                                    _this._geometry = geometry !== undefined ? geometry : new Bonnie3D.BufferGeometry();
+	                                    _this._material = material !== undefined ? material : new Bonnie3D.MeshBasicMaterial({ color: Math.random() * 0xffffff });
+
+	                                    _this._drawMode = Bonnie3D.TrianglesDrawMode;
+
+	                                    _this.updateMorphTargets();
+
+	                                    return _this;
+	                        }
+
+	                        _createClass(Mesh, [{
+	                                    key: "updateMorphTargets",
+	                                    value: function updateMorphTargets() {}
+	                        }]);
+
+	                        return Mesh;
+	            }(Bonnie3D.Component);
+
+	            Bonnie3D.Mesh = Mesh;
+	})(undefined);
+
+/***/ }),
+/* 34 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -2932,7 +3863,7 @@
 	})(undefined);
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -3007,7 +3938,7 @@
 	})(undefined);
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -3178,7 +4109,7 @@
 	})(undefined);
 
 /***/ }),
-/* 35 */
+/* 37 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -3198,10 +4129,10 @@
 	        var Scene = function (_Bonnie3D$Node) {
 	                _inherits(Scene, _Bonnie3D$Node);
 
-	                function Scene(name) {
+	                function Scene() {
 	                        _classCallCheck(this, Scene);
 
-	                        var _this = _possibleConstructorReturn(this, (Scene.__proto__ || Object.getPrototypeOf(Scene)).call(this, name));
+	                        var _this = _possibleConstructorReturn(this, (Scene.__proto__ || Object.getPrototypeOf(Scene)).call(this));
 
 	                        _this._valid = false;
 	                        _this._objects = [];
@@ -3242,15 +4173,6 @@
 	                                }
 	                        }
 	                }, {
-	                        key: "add",
-	                        value: function add(object) {
-	                                if (object instanceof Bonnie3D.Component) {
-	                                        this.addChild(object.node);
-	                                } else if (object instanceof Bonnie3D.Node) {
-	                                        this.addChild(object);
-	                                }
-	                        }
-	                }, {
 	                        key: "isValid",
 	                        get: function get() {
 
@@ -3271,7 +4193,7 @@
 	})(undefined);
 
 /***/ }),
-/* 36 */
+/* 38 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -3340,7 +4262,7 @@
 	})(undefined);
 
 /***/ }),
-/* 37 */
+/* 39 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -3357,10 +4279,10 @@
 	            var Texture = function (_Bonnie3D$Object) {
 	                        _inherits(Texture, _Bonnie3D$Object);
 
-	                        function Texture(name, image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding) {
+	                        function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding) {
 	                                    _classCallCheck(this, Texture);
 
-	                                    var _this = _possibleConstructorReturn(this, (Texture.__proto__ || Object.getPrototypeOf(Texture)).call(this, name));
+	                                    var _this = _possibleConstructorReturn(this, (Texture.__proto__ || Object.getPrototypeOf(Texture)).call(this));
 
 	                                    _this._id = Bonnie3D.Texture.textureId++;
 	                                    _this._image = image !== undefined ? image : Texture.DEFAULT_IMAGE;

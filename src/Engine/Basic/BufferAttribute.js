@@ -4,7 +4,7 @@
 
         constructor(array, itemSize, normalized, arrayType) {
 
-            super('BufferAttribute');
+            super();
 
             this._array = arrayType !== undefined ? new arrayType(array): array;
             this._itemSize = itemSize;
