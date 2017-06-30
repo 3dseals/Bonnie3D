@@ -6,7 +6,8 @@
 
             super();
 
-            this._projectionMatrix = new Bonnie3D.Matrix4();
+            this.matrixWorldInverse = new Bonnie3D.Matrix4();
+            this.projectionMatrix = new Bonnie3D.Matrix4();
 
         }
 

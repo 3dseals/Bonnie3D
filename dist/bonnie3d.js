@@ -94,6 +94,8 @@
 
 	__webpack_require__(24);
 
+	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./Engine/Camera/OrthographicCamera.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
 	__webpack_require__(25);
 
 	__webpack_require__(26);
@@ -124,6 +126,54 @@
 
 	__webpack_require__(39);
 
+	__webpack_require__(40);
+
+	__webpack_require__(41);
+
+	__webpack_require__(42);
+
+	__webpack_require__(43);
+
+	__webpack_require__(44);
+
+	__webpack_require__(45);
+
+	__webpack_require__(46);
+
+	__webpack_require__(47);
+
+	__webpack_require__(48);
+
+	__webpack_require__(49);
+
+	__webpack_require__(50);
+
+	__webpack_require__(51);
+
+	__webpack_require__(52);
+
+	__webpack_require__(53);
+
+	__webpack_require__(54);
+
+	__webpack_require__(55);
+
+	__webpack_require__(56);
+
+	__webpack_require__(57);
+
+	__webpack_require__(58);
+
+	__webpack_require__(59);
+
+	__webpack_require__(60);
+
+	__webpack_require__(61);
+
+	__webpack_require__(62);
+
+	__webpack_require__(63);
+
 	window["B3D"] = window["Bonnie3D"];
 	window["B3D"].Application.run();
 
@@ -135,11 +185,36 @@
 
 	window["Bonnie3D"] = window["Bonnie3D"] || {};
 
-	Bonnie3D.NormalBlending = 1;
+	Bonnie3D.CullFaceNone = 0;
+	Bonnie3D.CullFaceBack = 1;
+	Bonnie3D.CullFaceFront = 2;
+	Bonnie3D.CullFaceFrontBack = 3;
+	Bonnie3D.FrontFaceDirectionCW = 0;
+	Bonnie3D.FrontFaceDirectionCCW = 1;
+	Bonnie3D.BasicShadowMap = 0;
+	Bonnie3D.PCFShadowMap = 1;
+	Bonnie3D.PCFSoftShadowMap = 2;
 	Bonnie3D.FrontSide = 0;
+	Bonnie3D.BackSide = 1;
+	Bonnie3D.DoubleSide = 2;
+	Bonnie3D.FlatShading = 1;
 	Bonnie3D.SmoothShading = 2;
 	Bonnie3D.NoColors = 0;
+	Bonnie3D.FaceColors = 1;
+	Bonnie3D.VertexColors = 2;
+	Bonnie3D.NoBlending = 0;
+	Bonnie3D.NormalBlending = 1;
+	Bonnie3D.AdditiveBlending = 2;
+	Bonnie3D.SubtractiveBlending = 3;
+	Bonnie3D.MultiplyBlending = 4;
+	Bonnie3D.CustomBlending = 5;
 	Bonnie3D.AddEquation = 100;
+	Bonnie3D.SubtractEquation = 101;
+	Bonnie3D.ReverseSubtractEquation = 102;
+	Bonnie3D.MinEquation = 103;
+	Bonnie3D.MaxEquation = 104;
+	Bonnie3D.ZeroFactor = 200;
+	Bonnie3D.OneFactor = 201;
 	Bonnie3D.SrcColorFactor = 202;
 	Bonnie3D.OneMinusSrcColorFactor = 203;
 	Bonnie3D.SrcAlphaFactor = 204;
@@ -149,17 +224,90 @@
 	Bonnie3D.DstColorFactor = 208;
 	Bonnie3D.OneMinusDstColorFactor = 209;
 	Bonnie3D.SrcAlphaSaturateFactor = 210;
-	Bonnie3D.MultiplyOperation = 0;
+	Bonnie3D.NeverDepth = 0;
+	Bonnie3D.AlwaysDepth = 1;
+	Bonnie3D.LessDepth = 2;
 	Bonnie3D.LessEqualDepth = 3;
+	Bonnie3D.EqualDepth = 4;
+	Bonnie3D.GreaterEqualDepth = 5;
+	Bonnie3D.GreaterDepth = 6;
+	Bonnie3D.NotEqualDepth = 7;
+	Bonnie3D.MultiplyOperation = 0;
+	Bonnie3D.MixOperation = 1;
+	Bonnie3D.AddOperation = 2;
+	Bonnie3D.NoToneMapping = 0;
+	Bonnie3D.LinearToneMapping = 1;
+	Bonnie3D.ReinhardToneMapping = 2;
+	Bonnie3D.Uncharted2ToneMapping = 3;
+	Bonnie3D.CineonToneMapping = 4;
 	Bonnie3D.UVMapping = 300;
+	Bonnie3D.CubeReflectionMapping = 301;
+	Bonnie3D.CubeRefractionMapping = 302;
+	Bonnie3D.EquirectangularReflectionMapping = 303;
+	Bonnie3D.EquirectangularRefractionMapping = 304;
+	Bonnie3D.SphericalReflectionMapping = 305;
+	Bonnie3D.CubeUVReflectionMapping = 306;
+	Bonnie3D.CubeUVRefractionMapping = 307;
+	Bonnie3D.RepeatWrapping = 1000;
 	Bonnie3D.ClampToEdgeWrapping = 1001;
+	Bonnie3D.MirroredRepeatWrapping = 1002;
+	Bonnie3D.NearestFilter = 1003;
+	Bonnie3D.NearestMipMapNearestFilter = 1004;
+	Bonnie3D.NearestMipMapLinearFilter = 1005;
 	Bonnie3D.LinearFilter = 1006;
+	Bonnie3D.LinearMipMapNearestFilter = 1007;
 	Bonnie3D.LinearMipMapLinearFilter = 1008;
 	Bonnie3D.UnsignedByteType = 1009;
+	Bonnie3D.ByteType = 1010;
+	Bonnie3D.ShortType = 1011;
+	Bonnie3D.UnsignedShortType = 1012;
+	Bonnie3D.IntType = 1013;
+	Bonnie3D.UnsignedIntType = 1014;
+	Bonnie3D.FloatType = 1015;
+	Bonnie3D.HalfFloatType = 1016;
+	Bonnie3D.UnsignedShort4444Type = 1017;
+	Bonnie3D.UnsignedShort5551Type = 1018;
+	Bonnie3D.UnsignedShort565Type = 1019;
+	Bonnie3D.UnsignedInt248Type = 1020;
+	Bonnie3D.AlphaFormat = 1021;
 	Bonnie3D.RGBFormat = 1022;
 	Bonnie3D.RGBAFormat = 1023;
-	Bonnie3D.LinearEncoding = 3000;
+	Bonnie3D.LuminanceFormat = 1024;
+	Bonnie3D.LuminanceAlphaFormat = 1025;
+	Bonnie3D.RGBEFormat = Bonnie3D.RGBAFormat;
+	Bonnie3D.DepthFormat = 1026;
+	Bonnie3D.DepthStencilFormat = 1027;
+	Bonnie3D.RGB_S3TC_DXT1_Format = 2001;
+	Bonnie3D.RGBA_S3TC_DXT1_Format = 2002;
+	Bonnie3D.RGBA_S3TC_DXT3_Format = 2003;
+	Bonnie3D.RGBA_S3TC_DXT5_Format = 2004;
+	Bonnie3D.RGB_PVRTC_4BPPV1_Format = 2100;
+	Bonnie3D.RGB_PVRTC_2BPPV1_Format = 2101;
+	Bonnie3D.RGBA_PVRTC_4BPPV1_Format = 2102;
+	Bonnie3D.RGBA_PVRTC_2BPPV1_Format = 2103;
+	Bonnie3D.RGB_ETC1_Format = 2151;
+	Bonnie3D.LoopOnce = 2200;
+	Bonnie3D.LoopRepeat = 2201;
+	Bonnie3D.LoopPingPong = 2202;
+	Bonnie3D.InterpolateDiscrete = 2300;
+	Bonnie3D.InterpolateLinear = 2301;
+	Bonnie3D.InterpolateSmooth = 2302;
+	Bonnie3D.ZeroCurvatureEnding = 2400;
+	Bonnie3D.ZeroSlopeEnding = 2401;
+	Bonnie3D.WrapAroundEnding = 2402;
 	Bonnie3D.TrianglesDrawMode = 0;
+	Bonnie3D.TriangleStripDrawMode = 1;
+	Bonnie3D.TriangleFanDrawMode = 2;
+	Bonnie3D.LinearEncoding = 3000;
+	Bonnie3D.sRGBEncoding = 3001;
+	Bonnie3D.GammaEncoding = 3007;
+	Bonnie3D.RGBEEncoding = 3002;
+	Bonnie3D.LogLuvEncoding = 3003;
+	Bonnie3D.RGBM7Encoding = 3004;
+	Bonnie3D.RGBM16Encoding = 3005;
+	Bonnie3D.RGBDEncoding = 3006;
+	Bonnie3D.BasicDepthPacking = 3200;
+	Bonnie3D.RGBADepthPacking = 3201;
 
 	Bonnie3D.arrayMin = function (array) {
 
@@ -921,6 +1069,35 @@
 /* 7 */
 /***/ (function(module, exports) {
 
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	        var Frustum = function () {
+	                function Frustum(p0, p1, p2, p3, p4, p5) {
+	                        _classCallCheck(this, Frustum);
+
+	                        this.planes = [p0 !== undefined ? p0 : new Bonnie3D.Plane(), p1 !== undefined ? p1 : new Bonnie3D.Plane(), p2 !== undefined ? p2 : new Bonnie3D.Plane(), p3 !== undefined ? p3 : new Bonnie3D.Plane(), p4 !== undefined ? p4 : new Bonnie3D.Plane(), p5 !== undefined ? p5 : new Bonnie3D.Plane()];
+	                }
+
+	                _createClass(Frustum, [{
+	                        key: "setFromMatrix",
+	                        value: function setFromMatrix() {}
+	                }]);
+
+	                return Frustum;
+	        }();
+
+	        Bonnie3D.Frustum = Frustum;
+	})(undefined);
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
 	'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -990,7 +1167,7 @@
 	})(undefined);
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1131,7 +1308,7 @@
 	})(undefined);
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1398,6 +1575,9 @@
 	                                                return this;
 	                                    }
 	                        }, {
+	                                    key: "extractRotation",
+	                                    value: function extractRotation() {}
+	                        }, {
 	                                    key: "makePerspective",
 	                                    value: function makePerspective(left, right, top, bottom, near, far) {
 
@@ -1453,7 +1633,26 @@
 	})(undefined);
 
 /***/ }),
-/* 10 */
+/* 11 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	    var Plane = function Plane(normal, constant) {
+	        _classCallCheck(this, Plane);
+
+	        this.normal = normal !== undefined ? normal : new Bonnie3D.Vector3(1, 0, 0);
+	        this.constant = constant !== undefined ? constant : 0;
+	    };
+
+	    Bonnie3D.Plane = Plane;
+	})(undefined);
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -1569,7 +1768,7 @@
 	})(undefined);
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1632,7 +1831,7 @@
 	})(undefined);
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1815,7 +2014,7 @@
 	})(undefined);
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1911,6 +2110,17 @@
 
 	                                return this.divideScalar(this.length());
 	                        }
+	                }, {
+	                        key: "copy",
+	                        value: function copy(v) {
+
+	                                this.x = v.x;
+	                                this.y = v.y;
+	                                this.z = v.z;
+	                                this.w = v.w !== undefined ? v.w : 1;
+
+	                                return this;
+	                        }
 	                }]);
 
 	                return Vector4;
@@ -1920,7 +2130,7 @@
 	})(undefined);
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -1980,6 +2190,12 @@
 	                                                return output;
 	                                    }
 	                        }, {
+	                                    key: 'id',
+	                                    get: function get() {
+
+	                                                return this._uuid;
+	                                    }
+	                        }, {
 	                                    key: 'name',
 	                                    set: function set(name) {
 
@@ -1998,7 +2214,7 @@
 	})(undefined);
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -2118,7 +2334,7 @@
 	})(undefined);
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -2230,7 +2446,7 @@
 	})(undefined);
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -2276,7 +2492,7 @@
 	})(undefined);
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -2308,7 +2524,7 @@
 	})(undefined);
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -2340,7 +2556,7 @@
 	})(undefined);
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -2417,6 +2633,12 @@
 	                                    value: function isEmptyNode() {
 	                                                return false;
 	                                    }
+	                        }, {
+	                                    key: "onBeforeRender",
+	                                    value: function onBeforeRender() {}
+	                        }, {
+	                                    key: "onAfterRender",
+	                                    value: function onAfterRender() {}
 	                        }, {
 	                                    key: "addChild",
 	                                    value: function addChild(object) {
@@ -2649,10 +2871,25 @@
 	                                                }
 	                                    }
 	                        }, {
+	                                    key: "parent",
+	                                    get: function get() {
+	                                                return this._parent;
+	                                    }
+	                        }, {
 	                                    key: "position",
 	                                    get: function get() {
 
 	                                                return this._position;
+	                                    }
+	                        }, {
+	                                    key: "matrixWorld",
+	                                    get: function get() {
+	                                                return this._matrixWorld;
+	                                    }
+	                        }, {
+	                                    key: "modelViewMatrix",
+	                                    get: function get() {
+	                                                return this._modelViewMatrix;
 	                                    }
 	                        }]);
 
@@ -2666,7 +2903,7 @@
 	})(undefined);
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -2686,7 +2923,8 @@
 
 	            var _this = _possibleConstructorReturn(this, (BasicCamera.__proto__ || Object.getPrototypeOf(BasicCamera)).call(this));
 
-	            _this._projectionMatrix = new Bonnie3D.Matrix4();
+	            _this.matrixWorldInverse = new Bonnie3D.Matrix4();
+	            _this.projectionMatrix = new Bonnie3D.Matrix4();
 
 	            return _this;
 	        }
@@ -2698,7 +2936,7 @@
 	})(undefined);
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -2829,7 +3067,7 @@
 	                                                var skew = this._filmOffset;
 	                                                if (skew !== 0) left += near * skew / this.filmWidth;
 
-	                                                this._projectionMatrix.makePerspective(left, left + width, top, top - height, near, this._far);
+	                                                this.projectionMatrix.makePerspective(left, left + width, top, top - height, near, this._far);
 	                                    }
 	                        }, {
 	                                    key: "focalLength",
@@ -2870,7 +3108,35 @@
 	})(undefined);
 
 /***/ }),
-/* 23 */
+/* 25 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
+	    var ArrayCamera = function (_Bonnie3D$Camera) {
+	        _inherits(ArrayCamera, _Bonnie3D$Camera);
+
+	        function ArrayCamera() {
+	            _classCallCheck(this, ArrayCamera);
+
+	            return _possibleConstructorReturn(this, (ArrayCamera.__proto__ || Object.getPrototypeOf(ArrayCamera)).call(this));
+	        }
+
+	        return ArrayCamera;
+	    }(Bonnie3D.Camera);
+
+	    Bonnie3D.ArrayCamera = ArrayCamera;
+	})(undefined);
+
+/***/ }),
+/* 26 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -2977,7 +3243,7 @@
 	})(undefined);
 
 /***/ }),
-/* 24 */
+/* 27 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -3005,7 +3271,7 @@
 	})(undefined);
 
 /***/ }),
-/* 25 */
+/* 28 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -3175,11 +3441,13 @@
 	                        return BufferGeometry;
 	            }(Bonnie3D.Object);
 
+	            BufferGeometry.MaxIndex = 65535;
+
 	            Bonnie3D.BufferGeometry = BufferGeometry;
 	})(undefined);
 
 /***/ }),
-/* 26 */
+/* 29 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -3345,7 +3613,35 @@
 	})(undefined);
 
 /***/ }),
-/* 27 */
+/* 30 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
+	    var PlaneBufferGeometry = function (_Bonnie3D$Geometry) {
+	        _inherits(PlaneBufferGeometry, _Bonnie3D$Geometry);
+
+	        function PlaneBufferGeometry() {
+	            _classCallCheck(this, PlaneBufferGeometry);
+
+	            return _possibleConstructorReturn(this, (PlaneBufferGeometry.__proto__ || Object.getPrototypeOf(PlaneBufferGeometry)).call(this));
+	        }
+
+	        return PlaneBufferGeometry;
+	    }(Bonnie3D.Geometry);
+
+	    Bonnie3D.PlaneBufferGeometry = PlaneBufferGeometry;
+	})(undefined);
+
+/***/ }),
+/* 31 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -3404,7 +3700,7 @@
 	})(undefined);
 
 /***/ }),
-/* 28 */
+/* 32 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -3482,7 +3778,7 @@
 	})(undefined);
 
 /***/ }),
-/* 29 */
+/* 33 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -3572,7 +3868,7 @@
 	})(undefined);
 
 /***/ }),
-/* 30 */
+/* 34 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -3619,7 +3915,7 @@
 	})(undefined);
 
 /***/ }),
-/* 31 */
+/* 35 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -3742,7 +4038,7 @@
 	})(undefined);
 
 /***/ }),
-/* 32 */
+/* 36 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -3803,7 +4099,23 @@
 	})(undefined);
 
 /***/ }),
-/* 33 */
+/* 37 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	    var ShaderMaterial = function ShaderMaterial() {
+	        _classCallCheck(this, ShaderMaterial);
+	    };
+
+	    Bonnie3D.ShaderMaterial = ShaderMaterial;
+	})(undefined);
+
+/***/ }),
+/* 38 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -3817,37 +4129,47 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	(function ($) {
-	            var Mesh = function (_Bonnie3D$Component) {
-	                        _inherits(Mesh, _Bonnie3D$Component);
+	        var Mesh = function (_Bonnie3D$Component) {
+	                _inherits(Mesh, _Bonnie3D$Component);
 
-	                        function Mesh(geometry, material) {
-	                                    _classCallCheck(this, Mesh);
+	                function Mesh(geometry, material) {
+	                        _classCallCheck(this, Mesh);
 
-	                                    var _this = _possibleConstructorReturn(this, (Mesh.__proto__ || Object.getPrototypeOf(Mesh)).call(this));
+	                        var _this = _possibleConstructorReturn(this, (Mesh.__proto__ || Object.getPrototypeOf(Mesh)).call(this));
 
-	                                    _this._geometry = geometry !== undefined ? geometry : new Bonnie3D.BufferGeometry();
-	                                    _this._material = material !== undefined ? material : new Bonnie3D.MeshBasicMaterial({ color: Math.random() * 0xffffff });
+	                        _this._geometry = geometry !== undefined ? geometry : new Bonnie3D.BufferGeometry();
+	                        _this._material = material !== undefined ? material : new Bonnie3D.MeshBasicMaterial({ color: Math.random() * 0xffffff });
 
-	                                    _this._drawMode = Bonnie3D.TrianglesDrawMode;
+	                        _this._drawMode = Bonnie3D.TrianglesDrawMode;
 
-	                                    _this.updateMorphTargets();
+	                        _this.updateMorphTargets();
 
-	                                    return _this;
+	                        return _this;
+	                }
+
+	                _createClass(Mesh, [{
+	                        key: "updateMorphTargets",
+	                        value: function updateMorphTargets() {}
+	                }, {
+	                        key: "geometry",
+	                        get: function get() {
+	                                return this._geometry;
 	                        }
+	                }, {
+	                        key: "material",
+	                        get: function get() {
+	                                return this._material;
+	                        }
+	                }]);
 
-	                        _createClass(Mesh, [{
-	                                    key: "updateMorphTargets",
-	                                    value: function updateMorphTargets() {}
-	                        }]);
+	                return Mesh;
+	        }(Bonnie3D.Component);
 
-	                        return Mesh;
-	            }(Bonnie3D.Component);
-
-	            Bonnie3D.Mesh = Mesh;
+	        Bonnie3D.Mesh = Mesh;
 	})(undefined);
 
 /***/ }),
-/* 34 */
+/* 39 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -3855,15 +4177,449 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	(function ($) {
-	    var WebGLExtensions = function WebGLExtensions(gl) {
-	        _classCallCheck(this, WebGLExtensions);
+	    var ShaderChunk = function ShaderChunk() {
+	        _classCallCheck(this, ShaderChunk);
 	    };
 
-	    Bonnie3D.WebGLExtensions = WebGLExtensions;
+	    ShaderChunk.cube_frag = "";
+	    ShaderChunk.cube_vert = "";
+
+	    Bonnie3D.ShaderChunk = ShaderChunk;
 	})(undefined);
 
 /***/ }),
-/* 35 */
+/* 40 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	    var ShaderLib = function ShaderLib() {
+	        _classCallCheck(this, ShaderLib);
+	    };
+
+	    ShaderLib.cube = {
+
+	        uniforms: {
+	            tCube: { value: null },
+	            tFlip: { value: -1 },
+	            opacity: { value: 1.0 }
+	        },
+
+	        vertexShader: Bonnie3D.ShaderChunk.cube_vert,
+	        fragmentShader: Bonnie3D.ShaderChunk.cube_frag
+
+	    }, Bonnie3D.ShaderLib = ShaderLib;
+	})(undefined);
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	        var LensFlarePlugin = function () {
+	                function LensFlarePlugin() {
+	                        _classCallCheck(this, LensFlarePlugin);
+	                }
+
+	                _createClass(LensFlarePlugin, [{
+	                        key: "render",
+	                        value: function render(scene, camera, viewport) {}
+	                }]);
+
+	                return LensFlarePlugin;
+	        }();
+
+	        Bonnie3D.LensFlarePlugin = LensFlarePlugin;
+	})(undefined);
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	        var SpritePlugin = function () {
+	                function SpritePlugin() {
+	                        _classCallCheck(this, SpritePlugin);
+	                }
+
+	                _createClass(SpritePlugin, [{
+	                        key: "render",
+	                        value: function render(scene, camera) {}
+	                }]);
+
+	                return SpritePlugin;
+	        }();
+
+	        Bonnie3D.SpritePlugin = SpritePlugin;
+	})(undefined);
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	    var WebGLAttributes = function WebGLAttributes() {
+	        _classCallCheck(this, WebGLAttributes);
+	    };
+
+	    Bonnie3D.WebGLAttributes = WebGLAttributes;
+	})(undefined);
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	    var WebGLBufferRenderer = function WebGLBufferRenderer() {
+	        _classCallCheck(this, WebGLBufferRenderer);
+	    };
+
+	    Bonnie3D.WebGLBufferRenderer = WebGLBufferRenderer;
+	})(undefined);
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	    var WebGLCapabilities = function WebGLCapabilities() {
+	        _classCallCheck(this, WebGLCapabilities);
+	    };
+
+	    Bonnie3D.WebGLCapabilities = WebGLCapabilities;
+	})(undefined);
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	        var WebGLClipping = function () {
+	                function WebGLClipping() {
+	                        _classCallCheck(this, WebGLClipping);
+	                }
+
+	                _createClass(WebGLClipping, [{
+	                        key: "init",
+	                        value: function init() {}
+	                }, {
+	                        key: "beginShadows",
+	                        value: function beginShadows() {}
+	                }, {
+	                        key: "endShadows",
+	                        value: function endShadows() {}
+	                }]);
+
+	                return WebGLClipping;
+	        }();
+
+	        Bonnie3D.WebGLClipping = WebGLClipping;
+	})(undefined);
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	            var WebGLExtensions = function () {
+	                        function WebGLExtensions(gl) {
+	                                    _classCallCheck(this, WebGLExtensions);
+
+	                                    this.gl = gl;
+	                                    this.extensions = {};
+	                        }
+
+	                        _createClass(WebGLExtensions, [{
+	                                    key: 'get',
+	                                    value: function get(name) {
+
+	                                                if (this.extensions[name] !== undefined) {
+
+	                                                            return this.extensions[name];
+	                                                }
+
+	                                                var extension = void 0;
+
+	                                                switch (name) {
+
+	                                                            case 'WEBGL_depth_texture':
+	                                                                        extension = this.gl.getExtension('WEBGL_depth_texture') || this.gl.getExtension('MOZ_WEBGL_depth_texture') || this.gl.getExtension('WEBKIT_WEBGL_depth_texture');
+	                                                                        break;
+
+	                                                            case 'EXT_texture_filter_anisotropic':
+	                                                                        extension = this.gl.getExtension('EXT_texture_filter_anisotropic') || this.gl.getExtension('MOZ_EXT_texture_filter_anisotropic') || this.gl.getExtension('WEBKIT_EXT_texture_filter_anisotropic');
+	                                                                        break;
+
+	                                                            case 'WEBGL_compressed_texture_s3tc':
+	                                                                        extension = this.gl.getExtension('WEBGL_compressed_texture_s3tc') || this.gl.getExtension('MOZ_WEBGL_compressed_texture_s3tc') || this.gl.getExtension('WEBKIT_WEBGL_compressed_texture_s3tc');
+	                                                                        break;
+
+	                                                            case 'WEBGL_compressed_texture_pvrtc':
+	                                                                        extension = this.gl.getExtension('WEBGL_compressed_texture_pvrtc') || this.gl.getExtension('WEBKIT_WEBGL_compressed_texture_pvrtc');
+	                                                                        break;
+
+	                                                            case 'WEBGL_compressed_texture_etc1':
+	                                                                        extension = this.gl.getExtension('WEBGL_compressed_texture_etc1');
+	                                                                        break;
+
+	                                                            default:
+	                                                                        extension = this.gl.getExtension(name);
+
+	                                                }
+
+	                                                if (extension === null) {
+
+	                                                            Bonnie3D.Log.warning('THREE.WebGLRenderer: ' + name + ' extension not supported.');
+	                                                }
+
+	                                                this.extensions[name] = extension;
+
+	                                                return extension;
+	                                    }
+	                        }]);
+
+	                        return WebGLExtensions;
+	            }();
+
+	            Bonnie3D.WebGLExtensions = WebGLExtensions;
+	})(undefined);
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	    var WebGLGeometries = function WebGLGeometries() {
+	        _classCallCheck(this, WebGLGeometries);
+	    };
+
+	    Bonnie3D.WebGLGeometries = WebGLGeometries;
+	})(undefined);
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	    var WebGLIndexedBufferRenderer = function WebGLIndexedBufferRenderer() {
+	        _classCallCheck(this, WebGLIndexedBufferRenderer);
+	    };
+
+	    Bonnie3D.WebGLIndexedBufferRenderer = WebGLIndexedBufferRenderer;
+	})(undefined);
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	    var WebGLLights = function WebGLLights() {
+	        _classCallCheck(this, WebGLLights);
+	    };
+
+	    Bonnie3D.WebGLLights = WebGLLights;
+	})(undefined);
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	    var WebGLObjects = function WebGLObjects() {
+	        _classCallCheck(this, WebGLObjects);
+	    };
+
+	    Bonnie3D.WebGLObjects = WebGLObjects;
+	})(undefined);
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	    var WebGLPrograms = function WebGLPrograms() {
+	        _classCallCheck(this, WebGLPrograms);
+	    };
+
+	    Bonnie3D.WebGLPrograms = WebGLPrograms;
+	})(undefined);
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	    var WebGLProperties = function WebGLProperties() {
+	        _classCallCheck(this, WebGLProperties);
+	    };
+
+	    Bonnie3D.WebGLProperties = WebGLProperties;
+	})(undefined);
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	        var WebGLRenderList = function () {
+	                function WebGLRenderList() {
+	                        _classCallCheck(this, WebGLRenderList);
+
+	                        this.opaque = [];
+	                        this.transparent = [];
+	                }
+
+	                _createClass(WebGLRenderList, [{
+	                        key: 'init',
+	                        value: function init() {}
+	                }, {
+	                        key: 'finish',
+	                        value: function finish() {}
+	                }, {
+	                        key: 'sort',
+	                        value: function sort() {}
+	                }]);
+
+	                return WebGLRenderList;
+	        }();
+
+	        var WebGLRenderLists = function () {
+	                function WebGLRenderLists() {
+	                        _classCallCheck(this, WebGLRenderLists);
+
+	                        this.lists = {};
+	                }
+
+	                _createClass(WebGLRenderLists, [{
+	                        key: 'get',
+	                        value: function get(scene, camera) {
+
+	                                var hash = scene.id + ',' + camera.id;
+	                                var list = this.lists[hash];
+
+	                                if (list === undefined) {
+
+	                                        // console.log( 'THREE.WebGLRenderLists:', hash );
+
+	                                        list = new WebGLRenderList();
+	                                        this.lists[hash] = list;
+	                                }
+
+	                                return list;
+	                        }
+	                }, {
+	                        key: 'dispose',
+	                        value: function dispose() {
+
+	                                this.lists = {};
+	                        }
+	                }]);
+
+	                return WebGLRenderLists;
+	        }();
+
+	        Bonnie3D.WebGLRenderList = WebGLRenderList;
+	        Bonnie3D.WebGLRenderLists = WebGLRenderLists;
+	})(undefined);
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	        var WebGLShadowMap = function () {
+	                function WebGLShadowMap() {
+	                        _classCallCheck(this, WebGLShadowMap);
+	                }
+
+	                _createClass(WebGLShadowMap, [{
+	                        key: "render",
+	                        value: function render(scene, camera) {}
+	                }]);
+
+	                return WebGLShadowMap;
+	        }();
+
+	        Bonnie3D.WebGLShadowMap = WebGLShadowMap;
+	})(undefined);
+
+/***/ }),
+/* 56 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -3938,7 +4694,34 @@
 	})(undefined);
 
 /***/ }),
-/* 36 */
+/* 57 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	        var WebGLTextures = function () {
+	                function WebGLTextures() {
+	                        _classCallCheck(this, WebGLTextures);
+	                }
+
+	                _createClass(WebGLTextures, [{
+	                        key: "updateRenderTargetMipmap",
+	                        value: function updateRenderTargetMipmap(renderTarget) {}
+	                }]);
+
+	                return WebGLTextures;
+	        }();
+
+	        Bonnie3D.WebGLTextures = WebGLTextures;
+	})(undefined);
+
+/***/ }),
+/* 58 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -3953,6 +4736,7 @@
 	                                    _classCallCheck(this, WebGL2Renderer);
 
 	                                    var parameters = params || {};
+
 	                                    this._canvas = parameters.canvas !== undefined ? parameters.canvas : document.createElementNS('http://www.w3.org/1999/xhtml', 'canvas');
 	                                    this._context = parameters.context !== undefined ? parameters.context : null;
 
@@ -4014,6 +4798,9 @@
 
 	                                    var extensions = new Bonnie3D.WebGLExtensions(this._gl);
 	                                    this._state = new Bonnie3D.WebGLState(this._gl, extensions, function () {});
+
+	                                    this.setSize(window.innerWidth, window.innerHeight);
+	                                    document.body.appendChild(this._canvas);
 	                        }
 
 	                        _createClass(WebGL2Renderer, [{
@@ -4109,7 +4896,687 @@
 	})(undefined);
 
 /***/ }),
-/* 37 */
+/* 59 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	(function ($) {
+	            var WebGLRenderer = function () {
+	                        function WebGLRenderer(params) {
+	                                    _classCallCheck(this, WebGLRenderer);
+
+	                                    var parameters = params || {};
+
+	                                    this._canvas = parameters.canvas !== undefined ? parameters.canvas : document.createElementNS('http://www.w3.org/1999/xhtml', 'canvas');
+	                                    this._context = parameters.context !== undefined ? parameters.context : null;
+
+	                                    this._alpha = parameters.alpha !== undefined ? parameters.alpha : false;
+	                                    this._depth = parameters.depth !== undefined ? parameters.depth : true;
+	                                    this._stencil = parameters.stencil !== undefined ? parameters.stencil : true;
+	                                    this._antialias = parameters.antialias !== undefined ? parameters.antialias : false;
+	                                    this._premultipliedAlpha = parameters.premultipliedAlpha !== undefined ? parameters.premultipliedAlpha : true;
+	                                    this._preserveDrawingBuffer = parameters.preserveDrawingBuffer !== undefined ? parameters.preserveDrawingBuffer : false;
+
+	                                    this.lights = [];
+
+	                                    this.currentRenderList = null;
+
+	                                    this.morphInfluences = new Float32Array(8);
+
+	                                    this.sprites = [];
+	                                    this.lensFlares = [];
+
+	                                    // public properties
+
+	                                    this.domElement = this._canvas;
+	                                    this.context = null;
+
+	                                    // clearing
+
+	                                    this.autoClear = true;
+	                                    this.autoClearColor = true;
+	                                    this.autoClearDepth = true;
+	                                    this.autoClearStencil = true;
+
+	                                    // scene graph
+
+	                                    this.sortObjects = true;
+
+	                                    // user-defined clipping
+
+	                                    this.clippingPlanes = [];
+	                                    this.localClippingEnabled = false;
+
+	                                    // physically based shading
+
+	                                    this.gammaFactor = 2.0; // for backwards compatibility
+	                                    this.gammaInput = false;
+	                                    this.gammaOutput = false;
+
+	                                    // physical lights
+
+	                                    this.physicallyCorrectLights = false;
+
+	                                    // tone mapping
+
+	                                    this.toneMapping = Bonnie3D.LinearToneMapping;
+	                                    this.toneMappingExposure = 1.0;
+	                                    this.toneMappingWhitePoint = 1.0;
+
+	                                    // morphs
+
+	                                    this.maxMorphTargets = 8;
+	                                    this.maxMorphNormals = 4;
+
+	                                    // internal state cache
+
+	                                    this._currentProgram = null;
+	                                    this._currentRenderTarget = null;
+	                                    this._currentFramebuffer = null;
+	                                    this._currentMaterialId = -1;
+	                                    this._currentGeometryProgram = '';
+	                                    this._currentCamera = null;
+
+	                                    this._currentScissor = new Bonnie3D.Vector4();
+	                                    this._currentScissorTest = null;
+
+	                                    this._currentViewport = new Bonnie3D.Vector4();
+
+	                                    //
+
+	                                    this._usedTextureUnits = 0;
+
+	                                    //
+
+	                                    this._clearColor = new Bonnie3D.Color(0x000000);
+	                                    this._clearAlpha = 0;
+
+	                                    this._width = this._canvas.width;
+	                                    this._height = this._canvas.height;
+
+	                                    this._pixelRatio = 1;
+
+	                                    this._scissor = new Bonnie3D.Vector4(0, 0, this._width, this._height);
+	                                    this._scissorTest = false;
+
+	                                    this._viewport = new Bonnie3D.Vector4(0, 0, this._width, this._height);
+
+	                                    // frustum
+
+	                                    this._frustum = new Bonnie3D.Frustum();
+
+	                                    // clipping
+
+	                                    this._clipping = new Bonnie3D.WebGLClipping();
+	                                    this._clippingEnabled = false;
+	                                    this._localClippingEnabled = false;
+
+	                                    // camera matrices cache
+
+	                                    this._projScreenMatrix = new Bonnie3D.Matrix4();
+
+	                                    this._vector3 = new Bonnie3D.Vector3();
+	                                    this._matrix4 = new Bonnie3D.Matrix4();
+	                                    this._matrix42 = new Bonnie3D.Matrix4();
+
+	                                    // light arrays cache
+
+	                                    this._lights = {
+
+	                                                hash: '',
+
+	                                                ambient: [0, 0, 0],
+	                                                directional: [],
+	                                                directionalShadowMap: [],
+	                                                directionalShadowMatrix: [],
+	                                                spot: [],
+	                                                spotShadowMap: [],
+	                                                spotShadowMatrix: [],
+	                                                rectArea: [],
+	                                                point: [],
+	                                                pointShadowMap: [],
+	                                                pointShadowMatrix: [],
+	                                                hemi: [],
+
+	                                                shadows: []
+
+	                                    };
+
+	                                    // info
+
+	                                    this._infoMemory = {
+	                                                geometries: 0,
+	                                                textures: 0
+	                                    };
+
+	                                    this._infoRender = {
+
+	                                                frame: 0,
+	                                                calls: 0,
+	                                                vertices: 0,
+	                                                faces: 0,
+	                                                points: 0
+
+	                                    };
+
+	                                    this.info = {
+
+	                                                render: this._infoRender,
+	                                                memory: this._infoMemory,
+	                                                programs: null
+
+	                                    };
+
+	                                    // initialize gl
+
+	                                    try {
+
+	                                                var contextAttributes = {
+	                                                            alpha: this._alpha,
+	                                                            depth: this._depth,
+	                                                            stencil: this._stencil,
+	                                                            antialias: this._antialias,
+	                                                            premultipliedAlpha: this._premultipliedAlpha,
+	                                                            preserveDrawingBuffer: this._preserveDrawingBuffer
+	                                                };
+
+	                                                this._gl = this._context || this._canvas.getContext('webgl', contextAttributes) || this._canvas.getContext('experimental-webgl', contextAttributes);;
+
+	                                                if (this._gl === null) {
+
+	                                                            if (this._canvas.getContext('webgl') !== null) {
+
+	                                                                        throw 'Error creating WebGL context with your selected attributes.';
+	                                                            } else {
+
+	                                                                        throw 'Error creating WebGL context.';
+	                                                            }
+	                                                }
+
+	                                                // Some experimental-webgl implementations do not have getShaderPrecisionFormat
+
+	                                                if (this._gl.getShaderPrecisionFormat === undefined) {
+
+	                                                            this._gl.getShaderPrecisionFormat = function () {
+
+	                                                                        return { 'rangeMin': 1, 'rangeMax': 1, 'precision': 1 };
+	                                                            };
+	                                                }
+
+	                                                this._canvas.addEventListener('webglcontextlost', this.onContextLost, false);
+	                                    } catch (error) {
+
+	                                                Log.error('WebGLRenderer: ' + error);
+	                                    }
+
+	                                    //
+
+	                                    var extensions = new Bonnie3D.WebGLExtensions(this._gl);
+	                                    extensions.get('WEBGL_depth_texture');
+	                                    extensions.get('OES_texture_float');
+	                                    extensions.get('OES_texture_float_linear');
+	                                    extensions.get('OES_texture_half_float');
+	                                    extensions.get('OES_texture_half_float_linear');
+	                                    extensions.get('OES_standard_derivatives');
+	                                    extensions.get('ANGLE_instanced_arrays');
+
+	                                    if (extensions.get('OES_element_index_uint')) {
+
+	                                                Bonnie3D.BufferGeometry.MaxIndex = 4294967296;
+	                                    }
+	                                    this.extensions = extensions;
+
+	                                    this.capabilities = new Bonnie3D.WebGLCapabilities(this._gl, extensions, parameters);
+
+	                                    this.state = new Bonnie3D.WebGLState(this._gl, extensions, this.paramToGL);
+
+	                                    this.properties = new Bonnie3D.WebGLProperties();
+	                                    this.textures = new Bonnie3D.WebGLTextures(this._gl, extensions, this.state, this.properties, this.capabilities, this.paramToGL, this._infoMemory);
+	                                    this.attributes = new Bonnie3D.WebGLAttributes(this._gl);
+	                                    this.geometries = new Bonnie3D.WebGLGeometries(this._gl, this.attributes, this._infoMemory);
+	                                    this.objects = new Bonnie3D.WebGLObjects(this._gl, this.geometries, this._infoRender);
+	                                    this.programCache = new Bonnie3D.WebGLPrograms(this, this.capabilities);
+	                                    this.lightCache = new Bonnie3D.WebGLLights();
+	                                    this.renderLists = new Bonnie3D.WebGLRenderLists();
+	                                    //this.vr = new Bonnie3D.WebVRManager( this );
+
+	                                    this.info.programs = this.programCache.programs;
+
+	                                    this.bufferRenderer = new Bonnie3D.WebGLBufferRenderer(this._gl, extensions, this._infoRender);
+	                                    this.indexedBufferRenderer = new Bonnie3D.WebGLIndexedBufferRenderer(this._gl, extensions, this._infoRender);
+
+	                                    //
+
+	                                    this.backgroundPlaneCamera;
+	                                    this.backgroundPlaneMesh;
+	                                    this.backgroundBoxCamera;
+	                                    this.backgroundBoxMesh;
+
+	                                    // shadow map
+
+	                                    this.shadowMap = new Bonnie3D.WebGLShadowMap(this, this._lights, this.objects, this.capabilities);
+
+	                                    // Plugins
+
+	                                    this.spritePlugin = new Bonnie3D.SpritePlugin(this, this.sprites);
+	                                    this.lensFlarePlugin = new Bonnie3D.LensFlarePlugin(this, this.lensFlares);
+
+	                                    this.setSize(window.innerWidth, window.innerHeight);
+	                                    document.body.appendChild(this._canvas);
+	                        }
+
+	                        _createClass(WebGLRenderer, [{
+	                                    key: 'clear',
+	                                    value: function clear(color, depth, stencil) {
+
+	                                                var bits = 0;
+
+	                                                if (color === undefined || color) bits |= this._gl.COLOR_BUFFER_BIT;
+	                                                if (depth === undefined || depth) bits |= this._gl.DEPTH_BUFFER_BIT;
+	                                                if (stencil === undefined || stencil) bits |= this._gl.STENCIL_BUFFER_BIT;
+
+	                                                this._gl.clear(bits);
+	                                    }
+	                        }, {
+	                                    key: 'setPixelRatio',
+	                                    value: function setPixelRatio(value) {
+
+	                                                if (value === undefined) return;
+
+	                                                this._pixelRatio = value;
+
+	                                                this.setSize(this._width, this._height, false);
+	                                    }
+	                        }, {
+	                                    key: 'setSize',
+	                                    value: function setSize(width, height, updateStyle) {
+
+	                                                this._width = width;
+	                                                this._height = height;
+
+	                                                this._canvas.width = width * this._pixelRatio;
+	                                                this._canvas.height = height * this._pixelRatio;
+
+	                                                if (updateStyle !== false) {
+
+	                                                            this._canvas.style.width = width + 'px';
+	                                                            this._canvas.style.height = height + 'px';
+	                                                }
+
+	                                                this.setViewport(0, 0, width, height);
+	                                    }
+	                        }, {
+	                                    key: 'setViewport',
+	                                    value: function setViewport(x, y, width, height) {
+
+	                                                this._viewport.set(x, this._height - y - height, width, height);
+	                                                this.state.viewport(this._currentViewport.copy(this._viewport).multiplyScalar(this._pixelRatio));
+	                                    }
+	                        }, {
+	                                    key: 'render',
+	                                    value: function render(renderTarget, forceClear) {
+
+	                                                var scene = Bonnie3D.SceneManager.currentScene;
+	                                                if (scene) {
+
+	                                                            // reset caching for this frame
+
+	                                                            this._currentGeometryProgram = '';
+	                                                            this._currentMaterialId = -1;
+	                                                            this._currentCamera = null;
+
+	                                                            // update scene graph
+
+	                                                            if (scene.autoUpdate === true) scene.updateMatrixWorld();
+
+	                                                            // update camera matrices and frustum
+
+	                                                            camera.node.onBeforeRender(this);
+
+	                                                            if (camera.node.parent === null) camera.node.updateMatrixWorld();
+
+	                                                            // if ( vr.enabled ) {
+	                                                            //
+	                                                            //     camera = vr.getCamera( camera );
+	                                                            //
+	                                                            // }
+
+	                                                            this._projScreenMatrix.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
+	                                                            this._frustum.setFromMatrix(this._projScreenMatrix);
+
+	                                                            this.lights.length = 0;
+	                                                            this.sprites.length = 0;
+	                                                            this.lensFlares.length = 0;
+
+	                                                            this._localClippingEnabled = this.localClippingEnabled;
+	                                                            this._clippingEnabled = this._clipping.init(this.clippingPlanes, this._localClippingEnabled, camera);
+
+	                                                            this.currentRenderList = this.renderLists.get(scene, camera);
+	                                                            this.currentRenderList.init();
+
+	                                                            this.projectObject(scene, camera, this.sortObjects);
+
+	                                                            this.currentRenderList.finish();
+
+	                                                            if (this.sortObjects === true) {
+
+	                                                                        this.currentRenderList.sort();
+	                                                            }
+
+	                                                            //
+
+	                                                            if (this._clippingEnabled) this._clipping.beginShadows();
+
+	                                                            this.setupShadows(this.lights);
+
+	                                                            this.shadowMap.render(scene, camera);
+
+	                                                            this.setupLights(this.lights, camera);
+
+	                                                            if (this._clippingEnabled) this._clipping.endShadows();
+
+	                                                            //
+
+	                                                            this._infoRender.frame++;
+	                                                            this._infoRender.calls = 0;
+	                                                            this._infoRender.vertices = 0;
+	                                                            this._infoRender.faces = 0;
+	                                                            this._infoRender.points = 0;
+
+	                                                            if (renderTarget === undefined) {
+
+	                                                                        renderTarget = null;
+	                                                            }
+
+	                                                            this.setRenderTarget(renderTarget);
+
+	                                                            //
+
+	                                                            var background = scene.background;
+
+	                                                            if (background === null) {
+
+	                                                                        this.state.buffers.color.setClear(this._clearColor.r, this._clearColor.g, this._clearColor.b, this._clearAlpha, this._premultipliedAlpha);
+	                                                            } else if (background instanceof Bonnie3D.Color) {
+
+	                                                                        this.state.buffers.color.setClear(background.r, background.g, background.b, 1, this._premultipliedAlpha);
+	                                                                        forceClear = true;
+	                                                            }
+
+	                                                            if (this.autoClear || forceClear) {
+
+	                                                                        this.clear(this.autoClearColor, this.autoClearDepth, this.autoClearStencil);
+	                                                            }
+
+	                                                            if (background instanceof Bonnie3D.CubeTexture) {
+
+	                                                                        if (this.backgroundBoxCamera === undefined) {
+
+	                                                                                    this.backgroundBoxCamera = new Bonnie3D.Camera();
+
+	                                                                                    this.backgroundBoxMesh = new Bonnie3D.Mesh(new Bonnie3D.BoxBufferGeometry(5, 5, 5), new Bonnie3D.ShaderMaterial({
+	                                                                                                uniforms: Bonnie3D.ShaderLib.cube.uniforms,
+	                                                                                                vertexShader: Bonnie3D.ShaderLib.cube.vertexShader,
+	                                                                                                fragmentShader: Bonnie3D.ShaderLib.cube.fragmentShader,
+	                                                                                                side: Bonnie3D.BackSide,
+	                                                                                                depthTest: false,
+	                                                                                                depthWrite: false,
+	                                                                                                fog: false
+	                                                                                    }));
+	                                                                        }
+
+	                                                                        this.backgroundBoxCamera.projectionMatrix.copy(camera.projectionMatrix);
+
+	                                                                        this.backgroundBoxCamera.node.matrixWorld.extractRotation(camera.node.matrixWorld);
+	                                                                        this.backgroundBoxCamera.matrixWorldInverse.getInverse(this.backgroundBoxCamera.node.matrixWorld);
+
+	                                                                        this.backgroundBoxMesh.material.uniforms["tCube"].value = background;
+	                                                                        this.backgroundBoxMesh.node.modelViewMatrix.multiplyMatrices(this.backgroundBoxCamera.matrixWorldInverse, this.backgroundBoxMesh.node.matrixWorld);
+
+	                                                                        this.objects.update(this.backgroundBoxMesh);
+
+	                                                                        this.renderBufferDirect(this.backgroundBoxCamera, null, this.backgroundBoxMesh.geometry, this.backgroundBoxMesh.material, this.backgroundBoxMesh, null);
+	                                                            } else if (background instanceof Bonnie3D.Texture) {
+
+	                                                                        if (this.backgroundPlaneCamera === undefined) {
+
+	                                                                                    this.backgroundPlaneCamera = new Bonnie3D.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+	                                                                                    this.backgroundPlaneMesh = new Bonnie3D.Mesh(new Bonnie3D.PlaneBufferGeometry(2, 2), new Bonnie3D.MeshBasicMaterial({ depthTest: false, depthWrite: false, fog: false }));
+	                                                                        }
+
+	                                                                        this.backgroundPlaneMesh.material.map = background;
+
+	                                                                        this.objects.update(this.backgroundPlaneMesh);
+
+	                                                                        this.renderBufferDirect(this.backgroundPlaneCamera, null, this.backgroundPlaneMesh.geometry, this.backgroundPlaneMesh.material, this.backgroundPlaneMesh, null);
+	                                                            }
+
+	                                                            //
+
+	                                                            var opaqueObjects = this.currentRenderList.opaque;
+	                                                            var transparentObjects = this.currentRenderList.transparent;
+
+	                                                            if (scene.overrideMaterial) {
+
+	                                                                        var overrideMaterial = scene.overrideMaterial;
+
+	                                                                        if (opaqueObjects.length) this.renderObjects(opaqueObjects, scene, camera, overrideMaterial);
+	                                                                        if (transparentObjects.length) this.renderObjects(transparentObjects, scene, camera, overrideMaterial);
+	                                                            } else {
+
+	                                                                        // opaque pass (front-to-back order)
+
+	                                                                        if (opaqueObjects.length) this.renderObjects(opaqueObjects, scene, camera);
+
+	                                                                        // transparent pass (back-to-front order)
+
+	                                                                        if (transparentObjects.length) this.renderObjects(transparentObjects, scene, camera);
+	                                                            }
+
+	                                                            // custom render plugins (post pass)
+
+	                                                            this.spritePlugin.render(scene, camera);
+	                                                            this.lensFlarePlugin.render(scene, camera, this._currentViewport);
+
+	                                                            // Generate mipmap if we're using any kind of mipmap filtering
+
+	                                                            if (renderTarget) {
+
+	                                                                        this.textures.updateRenderTargetMipmap(renderTarget);
+	                                                            }
+
+	                                                            // Ensure depth buffer writing is enabled so it can be cleared on next render
+
+	                                                            // this.state.buffers.depth.setTest( true );
+	                                                            // this.state.buffers.depth.setMask( true );
+	                                                            // this.state.buffers.color.setMask( true );
+
+	                                                            if (camera instanceof Bonnie3D.ArrayCamera) {
+
+	                                                                        this.setScissorTest(false);
+	                                                            }
+
+	                                                            camera.node.onAfterRender(this);
+	                                                }
+	                                    }
+	                        }, {
+	                                    key: 'setScissorTest',
+	                                    value: function setScissorTest(boolean) {}
+	                        }, {
+	                                    key: 'renderObjects',
+	                                    value: function renderObjects(renderList, scene, camera, overrideMaterial) {}
+	                        }, {
+	                                    key: 'renderBufferDirect',
+	                                    value: function renderBufferDirect(camera, fog, geometry, material, object, group) {}
+	                        }, {
+	                                    key: 'projectObject',
+	                                    value: function projectObject(object, camera, sortObjects) {}
+	                        }, {
+	                                    key: 'setupShadows',
+	                                    value: function setupShadows(lights) {}
+	                        }, {
+	                                    key: 'setupLights',
+	                                    value: function setupLights(lights, camera) {}
+	                        }, {
+	                                    key: 'setRenderTarget',
+	                                    value: function setRenderTarget(renderTarget) {}
+	                        }, {
+	                                    key: 'resetGLState',
+	                                    value: function resetGLState() {}
+	                        }, {
+	                                    key: 'setDefaultGLState',
+	                                    value: function setDefaultGLState() {}
+	                        }, {
+	                                    key: 'onContextLost',
+	                                    value: function onContextLost(event) {
+
+	                                                event.preventDefault();
+
+	                                                this.resetGLState();
+	                                                this.setDefaultGLState();
+
+	                                                this.properties.clear();
+	                                                this.objects.clear();
+	                                    }
+	                        }, {
+	                                    key: 'paramToGL',
+	                                    value: function paramToGL(p) {
+
+	                                                var extension = void 0;
+
+	                                                if (p === Bonnie3D.RepeatWrapping) return this._gl.REPEAT;
+	                                                if (p === Bonnie3D.ClampToEdgeWrapping) return this._gl.CLAMP_TO_EDGE;
+	                                                if (p === Bonnie3D.MirroredRepeatWrapping) return this._gl.MIRRORED_REPEAT;
+
+	                                                if (p === Bonnie3D.NearestFilter) return this._gl.NEAREST;
+	                                                if (p === Bonnie3D.NearestMipMapNearestFilter) return this._gl.NEAREST_MIPMAP_NEAREST;
+	                                                if (p === Bonnie3D.NearestMipMapLinearFilter) return this._gl.NEAREST_MIPMAP_LINEAR;
+
+	                                                if (p === Bonnie3D.LinearFilter) return this._gl.LINEAR;
+	                                                if (p === Bonnie3D.LinearMipMapNearestFilter) return this._gl.LINEAR_MIPMAP_NEAREST;
+	                                                if (p === Bonnie3D.LinearMipMapLinearFilter) return this._gl.LINEAR_MIPMAP_LINEAR;
+
+	                                                if (p === Bonnie3D.UnsignedByteType) return this._gl.UNSIGNED_BYTE;
+	                                                if (p === Bonnie3D.UnsignedShort4444Type) return this._gl.UNSIGNED_SHORT_4_4_4_4;
+	                                                if (p === Bonnie3D.UnsignedShort5551Type) return this._gl.UNSIGNED_SHORT_5_5_5_1;
+	                                                if (p === Bonnie3D.UnsignedShort565Type) return this._gl.UNSIGNED_SHORT_5_6_5;
+
+	                                                if (p === Bonnie3D.ByteType) return this._gl.BYTE;
+	                                                if (p === Bonnie3D.ShortType) return this._gl.SHORT;
+	                                                if (p === Bonnie3D.UnsignedShortType) return this._gl.UNSIGNED_SHORT;
+	                                                if (p === Bonnie3D.IntType) return this._gl.INT;
+	                                                if (p === Bonnie3D.UnsignedIntType) return this._gl.UNSIGNED_INT;
+	                                                if (p === Bonnie3D.FloatType) return this._gl.FLOAT;
+
+	                                                if (p === Bonnie3D.HalfFloatType) {
+
+	                                                            extension = this.extensions.get('OES_texture_half_float');
+
+	                                                            if (extension !== null) return extension.HALF_FLOAT_OES;
+	                                                }
+
+	                                                if (p === Bonnie3D.AlphaFormat) return this._gl.ALPHA;
+	                                                if (p === Bonnie3D.RGBFormat) return this._gl.RGB;
+	                                                if (p === Bonnie3D.RGBAFormat) return this._gl.RGBA;
+	                                                if (p === Bonnie3D.LuminanceFormat) return this._gl.LUMINANCE;
+	                                                if (p === Bonnie3D.LuminanceAlphaFormat) return this._gl.LUMINANCE_ALPHA;
+	                                                if (p === Bonnie3D.DepthFormat) return this._gl.DEPTH_COMPONENT;
+	                                                if (p === Bonnie3D.DepthStencilFormat) return this._gl.DEPTH_STENCIL;
+
+	                                                if (p === Bonnie3D.AddEquation) return this._gl.FUNC_ADD;
+	                                                if (p === Bonnie3D.SubtractEquation) return this._gl.FUNC_SUBTRACT;
+	                                                if (p === Bonnie3D.ReverseSubtractEquation) return this._gl.FUNC_REVERSE_SUBTRACT;
+
+	                                                if (p === Bonnie3D.ZeroFactor) return this._gl.ZERO;
+	                                                if (p === Bonnie3D.OneFactor) return this._gl.ONE;
+	                                                if (p === Bonnie3D.SrcColorFactor) return this._gl.SRC_COLOR;
+	                                                if (p === Bonnie3D.OneMinusSrcColorFactor) return this._gl.ONE_MINUS_SRC_COLOR;
+	                                                if (p === Bonnie3D.SrcAlphaFactor) return this._gl.SRC_ALPHA;
+	                                                if (p === Bonnie3D.OneMinusSrcAlphaFactor) return this._gl.ONE_MINUS_SRC_ALPHA;
+	                                                if (p === Bonnie3D.DstAlphaFactor) return this._gl.DST_ALPHA;
+	                                                if (p === Bonnie3D.OneMinusDstAlphaFactor) return this._gl.ONE_MINUS_DST_ALPHA;
+
+	                                                if (p === Bonnie3D.DstColorFactor) return this._gl.DST_COLOR;
+	                                                if (p === Bonnie3D.OneMinusDstColorFactor) return this._gl.ONE_MINUS_DST_COLOR;
+	                                                if (p === Bonnie3D.SrcAlphaSaturateFactor) return _this.gl.SRC_ALPHA_SATURATE;
+
+	                                                if (p === Bonnie3D.RGB_S3TC_DXT1_Format || p === Bonnie3D.RGBA_S3TC_DXT1_Format || p === Bonnie3D.RGBA_S3TC_DXT3_Format || p === Bonnie3D.RGBA_S3TC_DXT5_Format) {
+
+	                                                            extension = this.extensions.get('WEBGL_compressed_texture_s3tc');
+
+	                                                            if (extension !== null) {
+
+	                                                                        if (p === Bonnie3D.RGB_S3TC_DXT1_Format) return extension.COMPRESSED_RGB_S3TC_DXT1_EXT;
+	                                                                        if (p === Bonnie3D.RGBA_S3TC_DXT1_Format) return extension.COMPRESSED_RGBA_S3TC_DXT1_EXT;
+	                                                                        if (p === Bonnie3D.RGBA_S3TC_DXT3_Format) return extension.COMPRESSED_RGBA_S3TC_DXT3_EXT;
+	                                                                        if (p === Bonnie3D.RGBA_S3TC_DXT5_Format) return extension.COMPRESSED_RGBA_S3TC_DXT5_EXT;
+	                                                            }
+	                                                }
+
+	                                                if (p === Bonnie3D.RGB_PVRTC_4BPPV1_Format || p === Bonnie3D.RGB_PVRTC_2BPPV1_Format || p === Bonnie3D.RGBA_PVRTC_4BPPV1_Format || p === Bonnie3D.RGBA_PVRTC_2BPPV1_Format) {
+
+	                                                            extension = this.extensions.get('WEBGL_compressed_texture_pvrtc');
+
+	                                                            if (extension !== null) {
+
+	                                                                        if (p === Bonnie3D.RGB_PVRTC_4BPPV1_Format) return extension.COMPRESSED_RGB_PVRTC_4BPPV1_IMG;
+	                                                                        if (p === Bonnie3D.RGB_PVRTC_2BPPV1_Format) return extension.COMPRESSED_RGB_PVRTC_2BPPV1_IMG;
+	                                                                        if (p === Bonnie3D.RGBA_PVRTC_4BPPV1_Format) return extension.COMPRESSED_RGBA_PVRTC_4BPPV1_IMG;
+	                                                                        if (p === Bonnie3D.RGBA_PVRTC_2BPPV1_Format) return extension.COMPRESSED_RGBA_PVRTC_2BPPV1_IMG;
+	                                                            }
+	                                                }
+
+	                                                if (p === Bonnie3D.RGB_ETC1_Format) {
+
+	                                                            extension = this.extensions.get('WEBGL_compressed_texture_etc1');
+
+	                                                            if (extension !== null) return extension.COMPRESSED_RGB_ETC1_WEBGL;
+	                                                }
+
+	                                                if (p === Bonnie3D.MinEquation || p === Bonnie3D.MaxEquation) {
+
+	                                                            extension = this.extensions.get('EXT_blend_minmax');
+
+	                                                            if (extension !== null) {
+
+	                                                                        if (p === Bonnie3D.MinEquation) return extension.MIN_EXT;
+	                                                                        if (p === Bonnie3D.MaxEquation) return extension.MAX_EXT;
+	                                                            }
+	                                                }
+
+	                                                if (p === Bonnie3D.UnsignedInt248Type) {
+
+	                                                            extension = this.extensions.get('WEBGL_depth_texture');
+
+	                                                            if (extension !== null) return extension.UNSIGNED_INT_24_8_WEBGL;
+	                                                }
+
+	                                                return 0;
+	                                    }
+	                        }], [{
+	                                    key: 'getInstance',
+	                                    value: function getInstance() {
+	                                                if (!WebGLRenderer._instance) {
+	                                                            WebGLRenderer._instance = new WebGLRenderer();
+	                                                }
+	                                                return WebGLRenderer._instance;
+	                                    }
+	                        }]);
+
+	                        return WebGLRenderer;
+	            }();
+
+	            Bonnie3D.WebGLRenderer = WebGLRenderer;
+	})(undefined);
+
+/***/ }),
+/* 60 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -4135,8 +5602,13 @@
 	                        var _this = _possibleConstructorReturn(this, (Scene.__proto__ || Object.getPrototypeOf(Scene)).call(this));
 
 	                        _this._valid = false;
-	                        _this._objects = [];
-	                        _this._renderer = Bonnie3D.WebGL2Renderer.getInstance();
+	                        _this._renderer = Bonnie3D.WebGLRenderer.getInstance();
+
+	                        _this.background = null;
+	                        _this.fog = null;
+	                        _this.overrideMaterial = null;
+
+	                        _this.autoUpdate = true; // checked by the renderer
 
 	                        return _this;
 	                }
@@ -4178,12 +5650,6 @@
 
 	                                return this._valid;
 	                        }
-	                }, {
-	                        key: "rootGameObjects",
-	                        get: function get() {
-
-	                                return this._objects;
-	                        }
 	                }]);
 
 	                return Scene;
@@ -4193,7 +5659,7 @@
 	})(undefined);
 
 /***/ }),
-/* 38 */
+/* 61 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -4262,7 +5728,7 @@
 	})(undefined);
 
 /***/ }),
-/* 39 */
+/* 62 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -4322,6 +5788,9 @@
 
 	                        _createClass(Texture, [{
 	                                    key: "image",
+	                                    get: function get() {
+	                                                return this._image;
+	                                    },
 	                                    set: function set(img) {
 	                                                this._image = img;
 	                                    }
@@ -4335,6 +5804,41 @@
 	            Texture.DEFAULT_MAPPING = Bonnie3D.UVMapping;
 
 	            Bonnie3D.Texture = Texture;
+	})(undefined);
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
+	            var CubeTexture = function (_Bonnie3D$Texture) {
+	                        _inherits(CubeTexture, _Bonnie3D$Texture);
+
+	                        function CubeTexture(images, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding) {
+	                                    _classCallCheck(this, CubeTexture);
+
+	                                    var _this = _possibleConstructorReturn(this, (CubeTexture.__proto__ || Object.getPrototypeOf(CubeTexture)).call(this, images, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding));
+
+	                                    _this.images = images !== undefined ? images : [];
+	                                    _this.mapping = mapping !== undefined ? mapping : Bonnie3D.CubeReflectionMapping;
+
+	                                    _this.flipY = false;
+
+	                                    return _this;
+	                        }
+
+	                        return CubeTexture;
+	            }(Bonnie3D.Texture);
+
+	            Bonnie3D.CubeTexture = CubeTexture;
 	})(undefined);
 
 /***/ })

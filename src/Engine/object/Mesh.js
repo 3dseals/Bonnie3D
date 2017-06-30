@@ -15,6 +15,14 @@
 
         }
 
+        get geometry() {
+            return this._geometry;
+        }
+
+        get material() {
+            return this._material;
+        }
+
         updateMorphTargets() {
 
         }

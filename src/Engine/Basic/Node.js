@@ -57,12 +57,32 @@
             this._userData = {};
         }
 
+        get parent() {
+            return this._parent;
+        }
+
         get position() {
             return this._position;
         }
 
+        get matrixWorld() {
+            return this._matrixWorld;
+        }
+
+        get modelViewMatrix() {
+            return this._modelViewMatrix;
+        }
+
         isEmptyNode () {
             return false;
+        }
+
+        onBeforeRender() {
+
+        }
+
+        onAfterRender() {
+
         }
 
         addChild(object) {

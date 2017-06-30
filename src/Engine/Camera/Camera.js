@@ -144,7 +144,7 @@
             let skew = this._filmOffset;
             if ( skew !== 0 ) left += near * skew / this.filmWidth;
 
-            this._projectionMatrix.makePerspective( left, left + width, top, top - height, near, this._far );
+            this.projectionMatrix.makePerspective( left, left + width, top, top - height, near, this._far );
         }
 
     }

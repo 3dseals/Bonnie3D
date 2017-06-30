@@ -83,6 +83,18 @@
             return this.divideScalar( this.length() );
 
         }
+
+        copy　( v ) {
+
+            this.x = v.x;
+            this.y = v.y;
+            this.z = v.z;
+            this.w = ( v.w !== undefined ) ? v.w : 1;
+
+            return this;
+
+        }
+
     }
 
     Bonnie3D.Vector4 = Vector4;

@@ -9,6 +9,12 @@
 
         }
 
+        get id() {
+
+            return this._uuid;
+
+        }
+
         set name(name) {
 
             this._name = name;

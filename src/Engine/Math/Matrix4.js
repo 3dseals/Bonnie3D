@@ -241,6 +241,10 @@
 
         }
 
+        extractRotation () {
+
+        }
+
         makePerspective( left, right, top, bottom, near, far ) {
 
             let x = 2 * near / ( right - left );

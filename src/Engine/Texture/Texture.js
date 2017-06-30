@@ -41,6 +41,10 @@
             this._onUpdate = null;
         }
 
+        get image() {
+            return this._image;
+        }
+
         set image(img) {
             this._image = img;
         }

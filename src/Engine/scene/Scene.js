@@ -9,8 +9,13 @@
             super()
 
             this._valid = false;
-            this._objects = [];
-            this._renderer = Bonnie3D.WebGL2Renderer.getInstance();
+            this._renderer = Bonnie3D.WebGLRenderer.getInstance();
+
+            this.background = null;
+            this.fog = null;
+            this.overrideMaterial = null;
+
+            this.autoUpdate = true; // checked by the renderer
 
         }
 
@@ -48,12 +53,6 @@
         get isValid() {
 
             return this._valid;
-
-        }
-
-        get rootGameObjects() {
-
-            return this._objects;
 
         }
     }

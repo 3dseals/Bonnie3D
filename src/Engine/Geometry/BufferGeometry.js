@@ -161,6 +161,8 @@
 
     }
 
+    BufferGeometry.MaxIndex = 65535;
+
     Bonnie3D.BufferGeometry = BufferGeometry;
 
 }(this));

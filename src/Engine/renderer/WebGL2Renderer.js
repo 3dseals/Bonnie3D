@@ -5,6 +5,7 @@
         constructor(params) {
 
             let parameters = params || {};
+
             this._canvas = parameters.canvas !== undefined ? parameters.canvas : document.createElementNS( 'http://www.w3.org/1999/xhtml', 'canvas' );
             this._context = parameters.context !== undefined ? parameters.context : null;
 
@@ -71,6 +72,9 @@
 
             let extensions = new Bonnie3D.WebGLExtensions( this._gl );
             this._state = new Bonnie3D.WebGLState( this._gl, extensions, function () {} );
+
+            this.setSize( window.innerWidth, window.innerHeight );
+            document.body.appendChild( this._canvas );
 
         }
 
