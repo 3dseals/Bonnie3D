@@ -38,6 +38,18 @@
 
         }
 
+        scissor( scissor ) {
+
+        }
+
+        setMaterial( material ) {
+
+        }
+
+        setLineWidth() {
+
+        }
+
     }
 
     Bonnie3D.WebGLState = WebGLState;

@@ -34,6 +34,8 @@ import {} from "./Engine/Geometry/BufferGeometry.js";
 import {} from "./Engine/Geometry/BoxBufferGeometry.js";
 import {} from "./Engine/Geometry/PlaneBufferGeometry.js";
 
+import {} from "./Engine/Light/Light.js";
+
 import {} from "./Engine/Loader/Cache.js";
 import {} from "./Engine/Loader/ImageLoader.js";
 import {} from "./Engine/Loader/LoadingManager.js";
@@ -43,7 +45,15 @@ import {} from "./Engine/Material/Material.js";
 import {} from "./Engine/Material/MeshBasicMaterial.js";
 import {} from "./Engine/Material/ShaderMaterial.js";
 
+import {} from "./Engine/Object/ImmediateRenderObject.js";
+import {} from "./Engine/Object/LensFlare.js";
+import {} from "./Engine/Object/Line.js";
+import {} from "./Engine/Object/LineLoop.js";
+import {} from "./Engine/Object/LineSegments.js";
 import {} from "./Engine/Object/Mesh.js";
+import {} from "./Engine/Object/Points.js";
+import {} from "./Engine/Object/SkinnedMesh.js";
+import {} from "./Engine/Object/Sprite.js";
 
 import {} from "./Engine/Renderer/shader/ShaderChunk.js";
 import {} from "./Engine/Renderer/shader/ShaderLib.js";

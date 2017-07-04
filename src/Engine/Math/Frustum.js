@@ -20,6 +20,10 @@
         setFromMatrix() {
 
         }
+
+        intersectsObject(object) {
+
+        }
     }
 
     Bonnie3D.Frustum = Frustum;

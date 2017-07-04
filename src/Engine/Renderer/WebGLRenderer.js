@@ -292,6 +292,12 @@
 
         }
 
+        getTargetPixelRatio() {
+
+            return this._currentRenderTarget === null ? this._pixelRatio : 1;
+
+        }
+
         setPixelRatio(value) {
 
             if ( value === undefined ) return;
@@ -325,6 +331,13 @@
 
             this._viewport.set( x, this._height - y - height, width, height )
             this.state.viewport( this._currentViewport.copy( this._viewport ).multiplyScalar( this._pixelRatio ) );
+
+        }
+
+        setScissor( x, y, width, height ) {
+
+            this._scissor.set( x, this._height - y - height, width, height )
+            this.state.scissor( this._currentScissor.copy( this._scissor ).multiplyScalar( this._pixelRatio ) );
 
         }
 
@@ -540,16 +553,396 @@
 
         }
 
+
+        projectObject(object, camera, sortObjects) {
+
+            if ( ! object.visible ) return;
+
+            let visible = object.layers.test( camera.node.layers );
+
+            if ( visible ) {
+
+                if ( object instanceof Bonnie3D.Light) {
+
+                    this.lights.push( object );
+
+                } else if ( object instanceof Bonnie3D.Sprite) {
+
+                    // if ( ! object.frustumCulled || this._frustum.intersectsSprite( object ) ) {
+                    //
+                    //     this.sprites.push( object );
+                    //
+                    // }
+
+                } else if ( object instanceof Bonnie3D.LensFlare ) {
+
+                    // this.lensFlares.push( object );
+
+                } else if ( object instanceof Bonnie3D.ImmediateRenderObject ) {
+
+                    // if ( this.sortObjects ) {
+                    //
+                    //     this._vector3.setFromMatrixPosition( object.matrixWorld )
+                    //         .applyMatrix4( this._projScreenMatrix );
+                    //
+                    // }
+                    //
+                    // this.currentRenderList.push( object, null, object.material, this._vector3.z, null );
+
+                } else if ( object instanceof Bonnie3D.Mesh || object instanceof Bonnie3D.Line || object instanceof Bonnie3D.Points ) {
+
+                    if ( object instanceof Bonnie3D.SkinnedMesh ) {
+
+                        object.skeleton.update();
+
+                    }
+
+                    if ( ! object.frustumCulled || this._frustum.intersectsObject( object ) ) {
+
+                        if ( this.sortObjects ) {
+
+                            this._vector3.setFromMatrixPosition( object.matrixWorld )
+                                .applyMatrix4( this._projScreenMatrix );
+
+                        }
+
+                        let geometry = this.objects.update( object );
+                        let material = object.material;
+
+                        if ( Array.isArray( material ) ) {
+
+                            let groups = geometry.groups;
+
+                            for ( let i = 0, l = groups.length; i < l; i ++ ) {
+
+                                let group = groups[ i ];
+                                let groupMaterial = material[ group.materialIndex ];
+
+                                if ( groupMaterial && groupMaterial.visible ) {
+
+                                    this.currentRenderList.push( object, geometry, groupMaterial, this._vector3.z, group );
+
+                                }
+
+                            }
+
+                        } else if ( material.visible ) {
+
+                            this.currentRenderList.push( object, geometry, material, this._vector3.z, null );
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+            let children = object.children;
+
+            for ( let i = 0, l = children.length; i < l; i ++ ) {
+
+                this.projectObject( children[ i ], camera, sortObjects );
+
+            }
+        }
+
         renderObjects(renderList, scene, camera, overrideMaterial) {
+
+            for ( let i = 0, l = renderList.length; i < l; i ++ ) {
+
+                let renderItem = renderList[ i ];
+
+                let object = renderItem.object;
+                let geometry = renderItem.geometry;
+                let material = overrideMaterial === undefined ? renderItem.material : overrideMaterial;
+                let group = renderItem.group;
+
+                object.onBeforeRender( this, scene, camera, geometry, material, group );
+
+                if ( camera instanceof Bonnie3D.ArrayCamera ) {
+
+                    let cameras = camera.cameras;
+
+                    for ( let j = 0, jl = cameras.length; j < jl; j ++ ) {
+
+                        let camera2 = cameras[ j ];
+                        let bounds = camera2.bounds;
+
+                        let x = bounds.x * this._width;
+                        let y = bounds.y * this._height;
+                        let width = bounds.z * this._width;
+                        let height = bounds.w * this._height;
+
+                        this.setViewport( x, y, width, height );
+                        this.setScissor( x, y, width, height );
+                        this.setScissorTest( true );
+
+                        this.renderObject( object, scene, camera2, geometry, material, group );
+
+                    }
+
+                } else {
+
+                    this.renderObject( object, scene, camera, geometry, material, group );
+
+                }
+
+                object.onAfterRender( this, scene, camera, geometry, material, group );
+
+            }
+        }
+
+        renderObject(object, scene, camera, geometry, material, group) {
+
+            object.modelViewMatrix.multiplyMatrices( camera.matrixWorldInverse, object.matrixWorld );
+            object.normalMatrix.getNormalMatrix( object.modelViewMatrix );
+
+            if ( object instanceof Bonnie3D.ImmediateRenderObject ) {
+
+                // this.state.setMaterial( material );
+                //
+                // let program = this.setProgram( camera, scene.fog, material, object );
+                //
+                // this._currentGeometryProgram = '';
+                //
+                // this.renderObjectImmediate( object, program, material );
+
+            } else {
+
+                this.renderBufferDirect( camera, scene.fog, geometry, material, object, group );
+
+            }
+
+        }
+
+        static absNumericalSort( a, b ) {
+
+            return Math.abs( b[ 0 ] ) - Math.abs( a[ 0 ] );
 
         }
 
         renderBufferDirect ( camera, fog, geometry, material, object, group ) {
 
+            this.state.setMaterial( material );
+
+            let program = this.setProgram( camera, fog, material, object );
+            let geometryProgram = geometry.id + '_' + program.id + '_' + ( material.wireframe === true );
+
+            let updateBuffers = false;
+
+            if ( geometryProgram !== _currentGeometryProgram ) {
+
+                this._currentGeometryProgram = geometryProgram;
+                updateBuffers = true;
+
+            }
+
+            // morph targets
+
+            let morphTargetInfluences = object.morphTargetInfluences;
+
+            if ( morphTargetInfluences !== undefined ) {
+
+                // TODO Remove allocations
+
+                let activeInfluences = [];
+
+                for ( let i = 0, l = morphTargetInfluences.length; i < l; i ++ ) {
+
+                    let influence = morphTargetInfluences[ i ];
+                    activeInfluences.push( [ influence, i ] );
+
+                }
+
+                activeInfluences.sort( this.absNumericalSort );
+
+                if ( activeInfluences.length > 8 ) {
+
+                    activeInfluences.length = 8;
+
+                }
+
+                let morphAttributes = geometry.morphAttributes;
+
+                for ( let i = 0, l = activeInfluences.length; i < l; i ++ ) {
+
+                    let influence = activeInfluences[ i ];
+                    this.morphInfluences[ i ] = influence[ 0 ];
+
+                    if ( influence[ 0 ] !== 0 ) {
+
+                        let index = influence[ 1 ];
+
+                        if ( material.morphTargets === true && morphAttributes.position ) geometry.addAttribute( 'morphTarget' + i, morphAttributes.position[ index ] );
+                        if ( material.morphNormals === true && morphAttributes.normal ) geometry.addAttribute( 'morphNormal' + i, morphAttributes.normal[ index ] );
+
+                    } else {
+
+                        if ( material.morphTargets === true ) geometry.removeAttribute( 'morphTarget' + i );
+                        if ( material.morphNormals === true ) geometry.removeAttribute( 'morphNormal' + i );
+
+                    }
+
+                }
+
+                for ( let i = activeInfluences.length, il = this.morphInfluences.length; i < il; i ++ ) {
+
+                    this.morphInfluences[ i ] = 0.0;
+
+                }
+
+                program.getUniforms().setValue( this._gl, 'morphTargetInfluences', this.morphInfluences );
+
+                updateBuffers = true;
+
+            }
+
+            //
+
+            let index = geometry.index;
+            let position = geometry.attributes.position;
+            let rangeFactor = 1;
+
+            if ( material.wireframe === true ) {
+
+                index = this.geometries.getWireframeAttribute( geometry );
+                rangeFactor = 2;
+
+            }
+
+            let attribute;
+            let renderer = this.bufferRenderer;
+
+            if ( index !== null ) {
+
+                attribute = this.attributes.get( index );
+
+                renderer = this.indexedBufferRenderer;
+                renderer.setIndex( attribute );
+
+            }
+
+            if ( updateBuffers ) {
+
+                this.setupVertexAttributes( material, program, geometry );
+
+                if ( index !== null ) {
+
+                    this._gl.bindBuffer( this._gl.ELEMENT_ARRAY_BUFFER, attribute.buffer );
+
+                }
+
+            }
+
+            //
+
+            let dataCount = 0;
+
+            if ( index !== null ) {
+
+                dataCount = index.count;
+
+            } else if ( position !== undefined ) {
+
+                dataCount = position.count;
+
+            }
+
+            let rangeStart = geometry.drawRange.start * rangeFactor;
+            let rangeCount = geometry.drawRange.count * rangeFactor;
+
+            let groupStart = group !== null ? group.start * rangeFactor : 0;
+            let groupCount = group !== null ? group.count * rangeFactor : Infinity;
+
+            let drawStart = Math.max( rangeStart, groupStart );
+            let drawEnd = Math.min( dataCount, rangeStart + rangeCount, groupStart + groupCount ) - 1;
+
+            let drawCount = Math.max( 0, drawEnd - drawStart + 1 );
+
+            if ( drawCount === 0 ) return;
+
+            //
+
+            if ( object instanceof Bonnie3D.Mesh ) {
+
+                if ( material.wireframe === true ) {
+
+                    // this.state.setLineWidth( material.wireframeLinewidth * this.getTargetPixelRatio() );
+                    // renderer.setMode( _gl.LINES );
+
+                } else {
+
+                    switch ( object.drawMode ) {
+
+                        case Bonnie3D.TrianglesDrawMode:
+                            renderer.setMode( this._gl.TRIANGLES );
+                            break;
+
+                        case Bonnie3D.TriangleStripDrawMode:
+                            renderer.setMode( this._gl.TRIANGLE_STRIP );
+                            break;
+
+                        case Bonnie3D.TriangleFanDrawMode:
+                            renderer.setMode( this._gl.TRIANGLE_FAN );
+                            break;
+
+                    }
+
+                }
+
+
+            } else if ( object instanceof Bonnie3D.Line ) {
+
+                let lineWidth = material.linewidth;
+
+                if ( lineWidth === undefined ) lineWidth = 1; // Not using Line*Material
+
+                this.state.setLineWidth( lineWidth * this.getTargetPixelRatio() );
+
+                if ( object instanceof Bonnie3D.LineSegments ) {
+
+                    renderer.setMode( this._gl.LINES );
+
+                } else if ( object instanceof Bonnie3D.LineLoop ) {
+
+                    renderer.setMode( this._gl.LINE_LOOP );
+
+                } else {
+
+                    renderer.setMode( this._gl.LINE_STRIP );
+
+                }
+
+            } else if ( object instanceof Bonnie3D.Points ) {
+
+                renderer.setMode( this._gl.POINTS );
+
+            }
+
+            // if ( geometry && geometry.isInstancedBufferGeometry ) {
+            //
+            //     if ( geometry.maxInstancedCount > 0 ) {
+            //
+            //         renderer.renderInstances( geometry, drawStart, drawCount );
+            //
+            //     }
+            //
+            // } else {
+            //
+            //     renderer.render( drawStart, drawCount );
+            //
+            // }
+
+            renderer.render( drawStart, drawCount );
+
         }
 
+        setupVertexAttributes( material, program, geometry, startIndex ) {
 
-        projectObject(object, camera, sortObjects) {
+        }
+
+        setProgram( camera, fog, material, object ) {
 
         }
 

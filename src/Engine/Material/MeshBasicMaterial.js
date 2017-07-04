@@ -39,6 +39,12 @@
 
         }
 
+        get wireframe() {
+
+            return this._wireframe;
+
+        }
+
     }
 
     Bonnie3D.MeshBasicMaterial = MeshBasicMaterial;

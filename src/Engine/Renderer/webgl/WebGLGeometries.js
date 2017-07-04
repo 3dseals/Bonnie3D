@@ -3,6 +3,11 @@
     class WebGLGeometries {
 
         constructor() {
+
+        }
+
+        getWireframeAttribute( geometry ) {
+
         }
 
     }

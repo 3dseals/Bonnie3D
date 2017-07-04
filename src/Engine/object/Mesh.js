@@ -15,6 +15,10 @@
 
         }
 
+        get drawMode() {
+            return this._drawMode;
+        }
+
         get geometry() {
             return this._geometry;
         }

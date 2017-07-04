@@ -53,8 +53,8 @@
     Math._uuid = new Array( 36 );
     Math._rnd = 0;
 
-    Math.DEG2RAD = Math.PI / 180;
-    Math.RAD2DEG = 180 / Math.PI;
+    Math.DEG2RAD = window.Math.PI / 180;
+    Math.RAD2DEG = 180 / window.Math.PI;
 
     Bonnie3D.Math = Math;
 

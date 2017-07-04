@@ -2,7 +2,18 @@
 
     class WebGLBufferRenderer {
 
-        constructor() {
+        constructor(gl, extensions, infoRender) {
+            this.mode = gl.TRIANGLES
+        }
+
+        setMode( value ) {
+
+            this.mode = value;
+
+        }
+
+        setIndex(index) {
+
         }
 
     }

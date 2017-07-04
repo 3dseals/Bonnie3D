@@ -94,8 +94,6 @@
 
 	__webpack_require__(24);
 
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./Engine/Camera/OrthographicCamera.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-
 	__webpack_require__(25);
 
 	__webpack_require__(26);
@@ -173,6 +171,26 @@
 	__webpack_require__(62);
 
 	__webpack_require__(63);
+
+	__webpack_require__(64);
+
+	__webpack_require__(65);
+
+	__webpack_require__(66);
+
+	__webpack_require__(67);
+
+	__webpack_require__(68);
+
+	__webpack_require__(69);
+
+	__webpack_require__(70);
+
+	__webpack_require__(71);
+
+	__webpack_require__(72);
+
+	__webpack_require__(73);
 
 	window["B3D"] = window["Bonnie3D"];
 	window["B3D"].Application.run();
@@ -1086,6 +1104,9 @@
 	                _createClass(Frustum, [{
 	                        key: "setFromMatrix",
 	                        value: function setFromMatrix() {}
+	                }, {
+	                        key: "intersectsObject",
+	                        value: function intersectsObject(object) {}
 	                }]);
 
 	                return Frustum;
@@ -1160,8 +1181,8 @@
 	        Math._uuid = new Array(36);
 	        Math._rnd = 0;
 
-	        Math.DEG2RAD = Math.PI / 180;
-	        Math.RAD2DEG = 180 / Math.PI;
+	        Math.DEG2RAD = window.Math.PI / 180;
+	        Math.RAD2DEG = 180 / window.Math.PI;
 
 	        Bonnie3D.Math = Math;
 	})(undefined);
@@ -2145,6 +2166,7 @@
 	                                    _classCallCheck(this, Object);
 
 	                                    this._uuid = Bonnie3D.Math.generateUUID();
+	                                    this._id = Bonnie3D.Object.objectId++;
 	                                    this._name = "";
 	                        }
 
@@ -2193,7 +2215,7 @@
 	                                    key: 'id',
 	                                    get: function get() {
 
-	                                                return this._uuid;
+	                                                return this._id;
 	                                    }
 	                        }, {
 	                                    key: 'name',
@@ -2209,6 +2231,8 @@
 
 	                        return Object;
 	            }();
+
+	            Object.objectId = 0;
 
 	            Bonnie3D.Object = Object;
 	})(undefined);
@@ -2529,6 +2553,8 @@
 
 	"use strict";
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -2536,23 +2562,36 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	(function ($) {
-	    var Layers = function (_Bonnie3D$Object) {
-	        _inherits(Layers, _Bonnie3D$Object);
+	        var Layers = function (_Bonnie3D$Object) {
+	                _inherits(Layers, _Bonnie3D$Object);
 
-	        function Layers() {
-	            _classCallCheck(this, Layers);
+	                function Layers() {
+	                        _classCallCheck(this, Layers);
 
-	            var _this = _possibleConstructorReturn(this, (Layers.__proto__ || Object.getPrototypeOf(Layers)).call(this));
+	                        var _this = _possibleConstructorReturn(this, (Layers.__proto__ || Object.getPrototypeOf(Layers)).call(this));
 
-	            _this._mask = 1 | 0;
+	                        _this._mask = 1 | 0;
 
-	            return _this;
-	        }
+	                        return _this;
+	                }
 
-	        return Layers;
-	    }(Bonnie3D.Object);
+	                _createClass(Layers, [{
+	                        key: "test",
+	                        value: function test(layers) {
+	                                return (this.mask & layers.mask) !== 0;
+	                        }
+	                }, {
+	                        key: "mask",
+	                        get: function get() {
 
-	    Bonnie3D.Layers = Layers;
+	                                return this._mask;
+	                        }
+	                }]);
+
+	                return Layers;
+	        }(Bonnie3D.Object);
+
+	        Bonnie3D.Layers = Layers;
 	})(undefined);
 
 /***/ }),
@@ -2882,6 +2921,31 @@
 	                                                return this._position;
 	                                    }
 	                        }, {
+	                                    key: "visible",
+	                                    get: function get() {
+	                                                return this._visible;
+	                                    }
+	                        }, {
+	                                    key: "frustumCulled",
+	                                    get: function get() {
+	                                                return this._frustumCulled;
+	                                    }
+	                        }, {
+	                                    key: "layers",
+	                                    get: function get() {
+	                                                return this._layers;
+	                                    }
+	                        }, {
+	                                    key: "children",
+	                                    get: function get() {
+	                                                return this._children;
+	                                    }
+	                        }, {
+	                                    key: "normalMatrix",
+	                                    get: function get() {
+	                                                return this._normalMatrix;
+	                                    }
+	                        }, {
 	                                    key: "matrixWorld",
 	                                    get: function get() {
 	                                                return this._matrixWorld;
@@ -2915,24 +2979,26 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	(function ($) {
-	    var BasicCamera = function (_Bonnie3D$Component) {
-	        _inherits(BasicCamera, _Bonnie3D$Component);
+	            var BasicCamera = function (_Bonnie3D$Component) {
+	                        _inherits(BasicCamera, _Bonnie3D$Component);
 
-	        function BasicCamera() {
-	            _classCallCheck(this, BasicCamera);
+	                        function BasicCamera() {
+	                                    _classCallCheck(this, BasicCamera);
 
-	            var _this = _possibleConstructorReturn(this, (BasicCamera.__proto__ || Object.getPrototypeOf(BasicCamera)).call(this));
+	                                    var _this = _possibleConstructorReturn(this, (BasicCamera.__proto__ || Object.getPrototypeOf(BasicCamera)).call(this));
 
-	            _this.matrixWorldInverse = new Bonnie3D.Matrix4();
-	            _this.projectionMatrix = new Bonnie3D.Matrix4();
+	                                    _this.bounds = new Bonnie3D.Vector4(0.0, 0.0, 1.0, 1.0);
 
-	            return _this;
-	        }
+	                                    _this.matrixWorldInverse = new Bonnie3D.Matrix4();
+	                                    _this.projectionMatrix = new Bonnie3D.Matrix4();
 
-	        return BasicCamera;
-	    }(Bonnie3D.Component);
+	                                    return _this;
+	                        }
 
-	    Bonnie3D.BasicCamera = BasicCamera;
+	                        return BasicCamera;
+	            }(Bonnie3D.Component);
+
+	            Bonnie3D.BasicCamera = BasicCamera;
 	})(undefined);
 
 /***/ }),
@@ -3120,23 +3186,65 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	(function ($) {
-	    var ArrayCamera = function (_Bonnie3D$Camera) {
-	        _inherits(ArrayCamera, _Bonnie3D$Camera);
+	    var OrthographicCamera = function (_Bonnie3D$BasicCamera) {
+	        _inherits(OrthographicCamera, _Bonnie3D$BasicCamera);
 
-	        function ArrayCamera() {
-	            _classCallCheck(this, ArrayCamera);
+	        function OrthographicCamera() {
+	            _classCallCheck(this, OrthographicCamera);
 
-	            return _possibleConstructorReturn(this, (ArrayCamera.__proto__ || Object.getPrototypeOf(ArrayCamera)).call(this));
+	            return _possibleConstructorReturn(this, (OrthographicCamera.__proto__ || Object.getPrototypeOf(OrthographicCamera)).call(this));
 	        }
 
-	        return ArrayCamera;
-	    }(Bonnie3D.Camera);
+	        return OrthographicCamera;
+	    }(Bonnie3D.BasicCamera);
 
-	    Bonnie3D.ArrayCamera = ArrayCamera;
+	    OrthographicCamera.ArrayCamera = OrthographicCamera;
 	})(undefined);
 
 /***/ }),
 /* 26 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
+	        var ArrayCamera = function (_Bonnie3D$Camera) {
+	                _inherits(ArrayCamera, _Bonnie3D$Camera);
+
+	                function ArrayCamera(array) {
+	                        _classCallCheck(this, ArrayCamera);
+
+	                        var _this = _possibleConstructorReturn(this, (ArrayCamera.__proto__ || Object.getPrototypeOf(ArrayCamera)).call(this));
+
+	                        _this._cameras = array || [];
+
+	                        return _this;
+	                }
+
+	                _createClass(ArrayCamera, [{
+	                        key: "cameras",
+	                        get: function get() {
+
+	                                return this._cameras;
+	                        }
+	                }]);
+
+	                return ArrayCamera;
+	        }(Bonnie3D.Camera);
+
+	        Bonnie3D.ArrayCamera = ArrayCamera;
+	})(undefined);
+
+/***/ }),
+/* 27 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -3243,7 +3351,7 @@
 	})(undefined);
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -3271,7 +3379,7 @@
 	})(undefined);
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -3415,6 +3523,17 @@
 	                                    key: 'computeBoundingSphere',
 	                                    value: function computeBoundingSphere() {}
 	                        }, {
+	                                    key: 'updateFromObject',
+	                                    value: function updateFromObject(object) {
+	                                                return this;
+	                                    }
+	                        }, {
+	                                    key: 'drawRange',
+	                                    get: function get() {
+
+	                                                return this._drawRange;
+	                                    }
+	                        }, {
 	                                    key: 'index',
 	                                    get: function get() {
 
@@ -3447,7 +3566,7 @@
 	})(undefined);
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -3613,7 +3732,7 @@
 	})(undefined);
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -3641,7 +3760,35 @@
 	})(undefined);
 
 /***/ }),
-/* 31 */
+/* 32 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
+	    var Light = function (_Bonnie3D$Component) {
+	        _inherits(Light, _Bonnie3D$Component);
+
+	        function Light(color, intensity) {
+	            _classCallCheck(this, Light);
+
+	            return _possibleConstructorReturn(this, (Light.__proto__ || Object.getPrototypeOf(Light)).call(this));
+	        }
+
+	        return Light;
+	    }(Bonnie3D.Component);
+
+	    Bonnie3D.Light = Light;
+	})(undefined);
+
+/***/ }),
+/* 33 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -3700,7 +3847,7 @@
 	})(undefined);
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -3778,7 +3925,7 @@
 	})(undefined);
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -3868,7 +4015,7 @@
 	})(undefined);
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -3915,7 +4062,7 @@
 	})(undefined);
 
 /***/ }),
-/* 35 */
+/* 37 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -4038,10 +4185,12 @@
 	})(undefined);
 
 /***/ }),
-/* 36 */
+/* 38 */
 /***/ (function(module, exports) {
 
 	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -4092,6 +4241,14 @@
 	                                    return _this;
 	                        }
 
+	                        _createClass(MeshBasicMaterial, [{
+	                                    key: 'wireframe',
+	                                    get: function get() {
+
+	                                                return this._wireframe;
+	                                    }
+	                        }]);
+
 	                        return MeshBasicMaterial;
 	            }(Bonnie3D.Material);
 
@@ -4099,7 +4256,7 @@
 	})(undefined);
 
 /***/ }),
-/* 37 */
+/* 39 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -4115,7 +4272,147 @@
 	})(undefined);
 
 /***/ }),
-/* 38 */
+/* 40 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
+	    var ImmediateRenderObject = function (_Bonnie3D$Component) {
+	        _inherits(ImmediateRenderObject, _Bonnie3D$Component);
+
+	        function ImmediateRenderObject(material) {
+	            _classCallCheck(this, ImmediateRenderObject);
+
+	            return _possibleConstructorReturn(this, (ImmediateRenderObject.__proto__ || Object.getPrototypeOf(ImmediateRenderObject)).call(this));
+	        }
+
+	        return ImmediateRenderObject;
+	    }(Bonnie3D.Component);
+
+	    Bonnie3D.ImmediateRenderObject = ImmediateRenderObject;
+	})(undefined);
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
+	    var LensFlare = function (_Bonnie3D$Component) {
+	        _inherits(LensFlare, _Bonnie3D$Component);
+
+	        function LensFlare(texture, size, distance, blending, color) {
+	            _classCallCheck(this, LensFlare);
+
+	            return _possibleConstructorReturn(this, (LensFlare.__proto__ || Object.getPrototypeOf(LensFlare)).call(this));
+	        }
+
+	        return LensFlare;
+	    }(Bonnie3D.Component);
+
+	    Bonnie3D.LensFlare = LensFlare;
+	})(undefined);
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
+	    var Line = function (_Bonnie3D$Component) {
+	        _inherits(Line, _Bonnie3D$Component);
+
+	        function Line(geometry, material, mode) {
+	            _classCallCheck(this, Line);
+
+	            return _possibleConstructorReturn(this, (Line.__proto__ || Object.getPrototypeOf(Line)).call(this));
+	        }
+
+	        return Line;
+	    }(Bonnie3D.Component);
+
+	    Bonnie3D.Line = Line;
+	})(undefined);
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
+	    var LineLoop = function (_Bonnie3D$Line) {
+	        _inherits(LineLoop, _Bonnie3D$Line);
+
+	        function LineLoop(geometry, material) {
+	            _classCallCheck(this, LineLoop);
+
+	            return _possibleConstructorReturn(this, (LineLoop.__proto__ || Object.getPrototypeOf(LineLoop)).call(this));
+	        }
+
+	        return LineLoop;
+	    }(Bonnie3D.Line);
+
+	    Bonnie3D.LineLoop = LineLoop;
+	})(undefined);
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
+	    var LineSegments = function (_Bonnie3D$Line) {
+	        _inherits(LineSegments, _Bonnie3D$Line);
+
+	        function LineSegments(geometry, material) {
+	            _classCallCheck(this, LineSegments);
+
+	            return _possibleConstructorReturn(this, (LineSegments.__proto__ || Object.getPrototypeOf(LineSegments)).call(this));
+	        }
+
+	        return LineSegments;
+	    }(Bonnie3D.Line);
+
+	    Bonnie3D.LineSegments = LineSegments;
+	})(undefined);
+
+/***/ }),
+/* 45 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -4151,6 +4448,11 @@
 	                        key: "updateMorphTargets",
 	                        value: function updateMorphTargets() {}
 	                }, {
+	                        key: "drawMode",
+	                        get: function get() {
+	                                return this._drawMode;
+	                        }
+	                }, {
 	                        key: "geometry",
 	                        get: function get() {
 	                                return this._geometry;
@@ -4169,7 +4471,95 @@
 	})(undefined);
 
 /***/ }),
-/* 39 */
+/* 46 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
+	    var Points = function (_Bonnie3D$Component) {
+	        _inherits(Points, _Bonnie3D$Component);
+
+	        function Points(geometry, material) {
+	            _classCallCheck(this, Points);
+
+	            return _possibleConstructorReturn(this, (Points.__proto__ || Object.getPrototypeOf(Points)).call(this));
+	        }
+
+	        return Points;
+	    }(Bonnie3D.Component);
+
+	    Bonnie3D.Points = Points;
+	})(undefined);
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
+	    var SkinnedMesh = function (_Bonnie3D$Mesh) {
+	        _inherits(SkinnedMesh, _Bonnie3D$Mesh);
+
+	        function SkinnedMesh(geometry, material) {
+	            _classCallCheck(this, SkinnedMesh);
+
+	            var _this = _possibleConstructorReturn(this, (SkinnedMesh.__proto__ || Object.getPrototypeOf(SkinnedMesh)).call(this));
+
+	            _this.skeleton = null;
+
+	            return _this;
+	        }
+
+	        return SkinnedMesh;
+	    }(Bonnie3D.Mesh);
+
+	    Bonnie3D.SkinnedMesh = SkinnedMesh;
+	})(undefined);
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(function ($) {
+	    var Sprite = function (_Bonnie3D$Component) {
+	        _inherits(Sprite, _Bonnie3D$Component);
+
+	        function Sprite(material) {
+	            _classCallCheck(this, Sprite);
+
+	            return _possibleConstructorReturn(this, (Sprite.__proto__ || Object.getPrototypeOf(Sprite)).call(this));
+	        }
+
+	        return Sprite;
+	    }(Bonnie3D.Component);
+
+	    Bonnie3D.Sprite = Sprite;
+	})(undefined);
+
+/***/ }),
+/* 49 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -4188,7 +4578,7 @@
 	})(undefined);
 
 /***/ }),
-/* 40 */
+/* 50 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -4215,7 +4605,7 @@
 	})(undefined);
 
 /***/ }),
-/* 41 */
+/* 51 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -4242,7 +4632,7 @@
 	})(undefined);
 
 /***/ }),
-/* 42 */
+/* 52 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -4269,7 +4659,7 @@
 	})(undefined);
 
 /***/ }),
-/* 43 */
+/* 53 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -4285,23 +4675,42 @@
 	})(undefined);
 
 /***/ }),
-/* 44 */
+/* 54 */
 /***/ (function(module, exports) {
 
 	"use strict";
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	(function ($) {
-	    var WebGLBufferRenderer = function WebGLBufferRenderer() {
-	        _classCallCheck(this, WebGLBufferRenderer);
-	    };
+	        var WebGLBufferRenderer = function () {
+	                function WebGLBufferRenderer(gl, extensions, infoRender) {
+	                        _classCallCheck(this, WebGLBufferRenderer);
 
-	    Bonnie3D.WebGLBufferRenderer = WebGLBufferRenderer;
+	                        this.mode = gl.TRIANGLES;
+	                }
+
+	                _createClass(WebGLBufferRenderer, [{
+	                        key: "setMode",
+	                        value: function setMode(value) {
+
+	                                this.mode = value;
+	                        }
+	                }, {
+	                        key: "setIndex",
+	                        value: function setIndex(index) {}
+	                }]);
+
+	                return WebGLBufferRenderer;
+	        }();
+
+	        Bonnie3D.WebGLBufferRenderer = WebGLBufferRenderer;
 	})(undefined);
 
 /***/ }),
-/* 45 */
+/* 55 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -4317,7 +4726,7 @@
 	})(undefined);
 
 /***/ }),
-/* 46 */
+/* 56 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -4350,7 +4759,7 @@
 	})(undefined);
 
 /***/ }),
-/* 47 */
+/* 57 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -4424,23 +4833,34 @@
 	})(undefined);
 
 /***/ }),
-/* 48 */
+/* 58 */
 /***/ (function(module, exports) {
 
 	"use strict";
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	(function ($) {
-	    var WebGLGeometries = function WebGLGeometries() {
-	        _classCallCheck(this, WebGLGeometries);
-	    };
+	        var WebGLGeometries = function () {
+	                function WebGLGeometries() {
+	                        _classCallCheck(this, WebGLGeometries);
+	                }
 
-	    Bonnie3D.WebGLGeometries = WebGLGeometries;
+	                _createClass(WebGLGeometries, [{
+	                        key: "getWireframeAttribute",
+	                        value: function getWireframeAttribute(geometry) {}
+	                }]);
+
+	                return WebGLGeometries;
+	        }();
+
+	        Bonnie3D.WebGLGeometries = WebGLGeometries;
 	})(undefined);
 
 /***/ }),
-/* 49 */
+/* 59 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -4456,7 +4876,7 @@
 	})(undefined);
 
 /***/ }),
-/* 50 */
+/* 60 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -4472,39 +4892,94 @@
 	})(undefined);
 
 /***/ }),
-/* 51 */
+/* 61 */
 /***/ (function(module, exports) {
 
 	"use strict";
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	(function ($) {
-	    var WebGLObjects = function WebGLObjects() {
-	        _classCallCheck(this, WebGLObjects);
-	    };
+	            var WebGLObjects = function () {
+	                        function WebGLObjects(gl, geometries, infoRender) {
+	                                    _classCallCheck(this, WebGLObjects);
 
-	    Bonnie3D.WebGLObjects = WebGLObjects;
+	                                    this._gl = gl;
+	                                    this._igeometries = geometries;
+	                                    this._infoRender = infoRender;
+	                                    this.updateList = {};
+	                        }
+
+	                        _createClass(WebGLObjects, [{
+	                                    key: "update",
+	                                    value: function update(object) {
+
+	                                                var frame = this._infoRender.frame;
+
+	                                                var geometry = object.geometry;
+	                                                var buffergeometry = this._igeometries.get(object, geometry);
+
+	                                                // Update once per frame
+
+	                                                if (this.updateList[buffergeometry.id] !== frame) {
+
+	                                                            if (geometry instanceof Geometry) {
+
+	                                                                        buffergeometry.updateFromObject(object);
+	                                                            }
+
+	                                                            this._igeometries.update(buffergeometry);
+
+	                                                            this.updateList[buffergeometry.id] = frame;
+	                                                }
+
+	                                                return buffergeometry;
+	                                    }
+	                        }, {
+	                                    key: "clear",
+	                                    value: function clear() {
+
+	                                                this.updateList = {};
+	                                    }
+	                        }]);
+
+	                        return WebGLObjects;
+	            }();
+
+	            Bonnie3D.WebGLObjects = WebGLObjects;
 	})(undefined);
 
 /***/ }),
-/* 52 */
+/* 62 */
 /***/ (function(module, exports) {
 
 	"use strict";
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	(function ($) {
-	    var WebGLPrograms = function WebGLPrograms() {
-	        _classCallCheck(this, WebGLPrograms);
-	    };
+	        var WebGLPrograms = function () {
+	                function WebGLPrograms() {
+	                        _classCallCheck(this, WebGLPrograms);
+	                }
 
-	    Bonnie3D.WebGLPrograms = WebGLPrograms;
+	                _createClass(WebGLPrograms, [{
+	                        key: "getUniforms",
+	                        value: function getUniforms() {}
+	                }]);
+
+	                return WebGLPrograms;
+	        }();
+
+	        Bonnie3D.WebGLPrograms = WebGLPrograms;
 	})(undefined);
 
 /***/ }),
-/* 53 */
+/* 63 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -4520,7 +4995,7 @@
 	})(undefined);
 
 /***/ }),
-/* 54 */
+/* 64 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -4530,69 +5005,168 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	(function ($) {
-	        var WebGLRenderList = function () {
-	                function WebGLRenderList() {
-	                        _classCallCheck(this, WebGLRenderList);
+	            var WebGLRenderList = function () {
+	                        function WebGLRenderList() {
+	                                    _classCallCheck(this, WebGLRenderList);
 
-	                        this.opaque = [];
-	                        this.transparent = [];
-	                }
+	                                    this.opaque = [];
+	                                    this._opaqueLastIndex = -1;
 
-	                _createClass(WebGLRenderList, [{
-	                        key: 'init',
-	                        value: function init() {}
-	                }, {
-	                        key: 'finish',
-	                        value: function finish() {}
-	                }, {
-	                        key: 'sort',
-	                        value: function sort() {}
-	                }]);
-
-	                return WebGLRenderList;
-	        }();
-
-	        var WebGLRenderLists = function () {
-	                function WebGLRenderLists() {
-	                        _classCallCheck(this, WebGLRenderLists);
-
-	                        this.lists = {};
-	                }
-
-	                _createClass(WebGLRenderLists, [{
-	                        key: 'get',
-	                        value: function get(scene, camera) {
-
-	                                var hash = scene.id + ',' + camera.id;
-	                                var list = this.lists[hash];
-
-	                                if (list === undefined) {
-
-	                                        // console.log( 'THREE.WebGLRenderLists:', hash );
-
-	                                        list = new WebGLRenderList();
-	                                        this.lists[hash] = list;
-	                                }
-
-	                                return list;
+	                                    this.transparent = [];
+	                                    this._transparentLastIndex = -1;
 	                        }
-	                }, {
-	                        key: 'dispose',
-	                        value: function dispose() {
 
-	                                this.lists = {};
+	                        _createClass(WebGLRenderList, [{
+	                                    key: 'init',
+	                                    value: function init() {
+	                                                this._opaqueLastIndex = -1;
+	                                                this._transparentLastIndex = -1;
+	                                    }
+	                        }, {
+	                                    key: 'push',
+	                                    value: function push(object, geometry, material, z, group) {
+
+	                                                var array = void 0,
+	                                                    index = void 0;
+
+	                                                // allocate the next position in the appropriate array
+
+	                                                if (material.transparent) {
+
+	                                                            array = this.transparent;
+	                                                            index = ++this._transparentLastIndex;
+	                                                } else {
+
+	                                                            array = this.opaque;
+	                                                            index = ++this._opaqueLastIndex;
+	                                                }
+
+	                                                // recycle existing render item or grow the array
+
+	                                                var renderItem = array[index];
+
+	                                                if (renderItem) {
+
+	                                                            renderItem.id = object.id;
+	                                                            renderItem.object = object;
+	                                                            renderItem.geometry = geometry;
+	                                                            renderItem.material = material;
+	                                                            renderItem.program = material.program;
+	                                                            renderItem.renderOrder = object.renderOrder;
+	                                                            renderItem.z = z;
+	                                                            renderItem.group = group;
+	                                                } else {
+
+	                                                            renderItem = {
+	                                                                        id: object.id,
+	                                                                        object: object,
+	                                                                        geometry: geometry,
+	                                                                        material: material,
+	                                                                        program: material.program,
+	                                                                        renderOrder: object.renderOrder,
+	                                                                        z: z,
+	                                                                        group: group
+	                                                            };
+
+	                                                            // assert( index === array.length );
+	                                                            array.push(renderItem);
+	                                                }
+	                                    }
+	                        }, {
+	                                    key: 'finish',
+	                                    value: function finish() {
+	                                                this.opaque.length = this._opaqueLastIndex + 1;
+	                                                this.transparent.length = this._transparentLastIndex + 1;
+	                                    }
+	                        }, {
+	                                    key: 'sort',
+	                                    value: function sort() {
+
+	                                                this.opaque.sort(WebGLRenderList._painterSortStable);
+	                                                this.transparent.sort(WebGLRenderList._reversePainterSortStable);
+	                                    }
+	                        }], [{
+	                                    key: '_painterSortStable',
+	                                    value: function _painterSortStable(a, b) {
+
+	                                                if (a.renderOrder !== b.renderOrder) {
+
+	                                                            return a.renderOrder - b.renderOrder;
+	                                                } else if (a.program && b.program && a.program !== b.program) {
+
+	                                                            return a.program.id - b.program.id;
+	                                                } else if (a.material.id !== b.material.id) {
+
+	                                                            return a.material.id - b.material.id;
+	                                                } else if (a.z !== b.z) {
+
+	                                                            return a.z - b.z;
+	                                                } else {
+
+	                                                            return a.id - b.id;
+	                                                }
+	                                    }
+	                        }, {
+	                                    key: '_reversePainterSortStable',
+	                                    value: function _reversePainterSortStable(a, b) {
+
+	                                                if (a.renderOrder !== b.renderOrder) {
+
+	                                                            return a.renderOrder - b.renderOrder;
+	                                                }if (a.z !== b.z) {
+
+	                                                            return b.z - a.z;
+	                                                } else {
+
+	                                                            return a.id - b.id;
+	                                                }
+	                                    }
+	                        }]);
+
+	                        return WebGLRenderList;
+	            }();
+
+	            var WebGLRenderLists = function () {
+	                        function WebGLRenderLists() {
+	                                    _classCallCheck(this, WebGLRenderLists);
+
+	                                    this.lists = {};
 	                        }
-	                }]);
 
-	                return WebGLRenderLists;
-	        }();
+	                        _createClass(WebGLRenderLists, [{
+	                                    key: 'get',
+	                                    value: function get(scene, camera) {
 
-	        Bonnie3D.WebGLRenderList = WebGLRenderList;
-	        Bonnie3D.WebGLRenderLists = WebGLRenderLists;
+	                                                var hash = scene.id + ',' + camera.id;
+	                                                var list = this.lists[hash];
+
+	                                                if (list === undefined) {
+
+	                                                            // console.log( 'THREE.WebGLRenderLists:', hash );
+
+	                                                            list = new WebGLRenderList();
+	                                                            this.lists[hash] = list;
+	                                                }
+
+	                                                return list;
+	                                    }
+	                        }, {
+	                                    key: 'dispose',
+	                                    value: function dispose() {
+
+	                                                this.lists = {};
+	                                    }
+	                        }]);
+
+	                        return WebGLRenderLists;
+	            }();
+
+	            Bonnie3D.WebGLRenderList = WebGLRenderList;
+	            Bonnie3D.WebGLRenderLists = WebGLRenderLists;
 	})(undefined);
 
 /***/ }),
-/* 55 */
+/* 65 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -4619,7 +5193,7 @@
 	})(undefined);
 
 /***/ }),
-/* 56 */
+/* 66 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -4629,72 +5203,81 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	(function ($) {
-	    var ColorBuffer = function () {
-	        function ColorBuffer() {
-	            _classCallCheck(this, ColorBuffer);
-	        }
+	        var ColorBuffer = function () {
+	                function ColorBuffer() {
+	                        _classCallCheck(this, ColorBuffer);
+	                }
 
-	        _createClass(ColorBuffer, [{
-	            key: "setClear",
-	            value: function setClear(r, g, b, a, premultipliedAlpha) {}
-	        }]);
+	                _createClass(ColorBuffer, [{
+	                        key: "setClear",
+	                        value: function setClear(r, g, b, a, premultipliedAlpha) {}
+	                }]);
 
-	        return ColorBuffer;
-	    }();
+	                return ColorBuffer;
+	        }();
 
-	    var DepthBuffer = function () {
-	        function DepthBuffer() {
-	            _classCallCheck(this, DepthBuffer);
-	        }
+	        var DepthBuffer = function () {
+	                function DepthBuffer() {
+	                        _classCallCheck(this, DepthBuffer);
+	                }
 
-	        _createClass(DepthBuffer, [{
-	            key: "setClear",
-	            value: function setClear(depth) {}
-	        }]);
+	                _createClass(DepthBuffer, [{
+	                        key: "setClear",
+	                        value: function setClear(depth) {}
+	                }]);
 
-	        return DepthBuffer;
-	    }();
+	                return DepthBuffer;
+	        }();
 
-	    var StencilBuffer = function () {
-	        function StencilBuffer() {
-	            _classCallCheck(this, StencilBuffer);
-	        }
+	        var StencilBuffer = function () {
+	                function StencilBuffer() {
+	                        _classCallCheck(this, StencilBuffer);
+	                }
 
-	        _createClass(StencilBuffer, [{
-	            key: "setClear",
-	            value: function setClear(stencil) {}
-	        }]);
+	                _createClass(StencilBuffer, [{
+	                        key: "setClear",
+	                        value: function setClear(stencil) {}
+	                }]);
 
-	        return StencilBuffer;
-	    }();
+	                return StencilBuffer;
+	        }();
 
-	    var WebGLState = function () {
-	        function WebGLState(gl, extensions, paramToGL) {
-	            _classCallCheck(this, WebGLState);
+	        var WebGLState = function () {
+	                function WebGLState(gl, extensions, paramToGL) {
+	                        _classCallCheck(this, WebGLState);
 
-	            this.buffers = {
-	                color: new ColorBuffer(),
-	                depth: new DepthBuffer(),
-	                stencil: new StencilBuffer()
-	            };
-	        }
+	                        this.buffers = {
+	                                color: new ColorBuffer(),
+	                                depth: new DepthBuffer(),
+	                                stencil: new StencilBuffer()
+	                        };
+	                }
 
-	        _createClass(WebGLState, [{
-	            key: "viewport",
-	            value: function viewport(_viewport) {}
-	        }]);
+	                _createClass(WebGLState, [{
+	                        key: "viewport",
+	                        value: function viewport(_viewport) {}
+	                }, {
+	                        key: "scissor",
+	                        value: function scissor(_scissor) {}
+	                }, {
+	                        key: "setMaterial",
+	                        value: function setMaterial(material) {}
+	                }, {
+	                        key: "setLineWidth",
+	                        value: function setLineWidth() {}
+	                }]);
 
-	        return WebGLState;
-	    }();
+	                return WebGLState;
+	        }();
 
-	    Bonnie3D.WebGLState = WebGLState;
-	    Bonnie3D.WebGLState.ColorBuffer = ColorBuffer;
-	    Bonnie3D.WebGLState.DepthBuffer = DepthBuffer;
-	    Bonnie3D.WebGLState.StencilBuffer = StencilBuffer;
+	        Bonnie3D.WebGLState = WebGLState;
+	        Bonnie3D.WebGLState.ColorBuffer = ColorBuffer;
+	        Bonnie3D.WebGLState.DepthBuffer = DepthBuffer;
+	        Bonnie3D.WebGLState.StencilBuffer = StencilBuffer;
 	})(undefined);
 
 /***/ }),
-/* 57 */
+/* 67 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -4721,7 +5304,7 @@
 	})(undefined);
 
 /***/ }),
-/* 58 */
+/* 68 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -4896,7 +5479,7 @@
 	})(undefined);
 
 /***/ }),
-/* 59 */
+/* 69 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -5183,6 +5766,12 @@
 	                                                this._gl.clear(bits);
 	                                    }
 	                        }, {
+	                                    key: 'getTargetPixelRatio',
+	                                    value: function getTargetPixelRatio() {
+
+	                                                return this._currentRenderTarget === null ? this._pixelRatio : 1;
+	                                    }
+	                        }, {
 	                                    key: 'setPixelRatio',
 	                                    value: function setPixelRatio(value) {
 
@@ -5216,6 +5805,13 @@
 
 	                                                this._viewport.set(x, this._height - y - height, width, height);
 	                                                this.state.viewport(this._currentViewport.copy(this._viewport).multiplyScalar(this._pixelRatio));
+	                                    }
+	                        }, {
+	                                    key: 'setScissor',
+	                                    value: function setScissor(x, y, width, height) {
+
+	                                                this._scissor.set(x, this._height - y - height, width, height);
+	                                                this.state.scissor(this._currentScissor.copy(this._scissor).multiplyScalar(this._pixelRatio));
 	                                    }
 	                        }, {
 	                                    key: 'render',
@@ -5409,14 +6005,352 @@
 	                                    key: 'setScissorTest',
 	                                    value: function setScissorTest(boolean) {}
 	                        }, {
+	                                    key: 'projectObject',
+	                                    value: function projectObject(object, camera, sortObjects) {
+
+	                                                if (!object.visible) return;
+
+	                                                var visible = object.layers.test(camera.node.layers);
+
+	                                                if (visible) {
+
+	                                                            if (object instanceof Bonnie3D.Light) {
+
+	                                                                        this.lights.push(object);
+	                                                            } else if (object instanceof Bonnie3D.Sprite) {
+
+	                                                                        // if ( ! object.frustumCulled || this._frustum.intersectsSprite( object ) ) {
+	                                                                        //
+	                                                                        //     this.sprites.push( object );
+	                                                                        //
+	                                                                        // }
+
+	                                                            } else if (object instanceof Bonnie3D.LensFlare) {
+
+	                                                                        // this.lensFlares.push( object );
+
+	                                                            } else if (object instanceof Bonnie3D.ImmediateRenderObject) {
+
+	                                                                        // if ( this.sortObjects ) {
+	                                                                        //
+	                                                                        //     this._vector3.setFromMatrixPosition( object.matrixWorld )
+	                                                                        //         .applyMatrix4( this._projScreenMatrix );
+	                                                                        //
+	                                                                        // }
+	                                                                        //
+	                                                                        // this.currentRenderList.push( object, null, object.material, this._vector3.z, null );
+
+	                                                            } else if (object instanceof Bonnie3D.Mesh || object instanceof Bonnie3D.Line || object instanceof Bonnie3D.Points) {
+
+	                                                                        if (object instanceof Bonnie3D.SkinnedMesh) {
+
+	                                                                                    object.skeleton.update();
+	                                                                        }
+
+	                                                                        if (!object.frustumCulled || this._frustum.intersectsObject(object)) {
+
+	                                                                                    if (this.sortObjects) {
+
+	                                                                                                this._vector3.setFromMatrixPosition(object.matrixWorld).applyMatrix4(this._projScreenMatrix);
+	                                                                                    }
+
+	                                                                                    var geometry = this.objects.update(object);
+	                                                                                    var material = object.material;
+
+	                                                                                    if (Array.isArray(material)) {
+
+	                                                                                                var groups = geometry.groups;
+
+	                                                                                                for (var i = 0, l = groups.length; i < l; i++) {
+
+	                                                                                                            var group = groups[i];
+	                                                                                                            var groupMaterial = material[group.materialIndex];
+
+	                                                                                                            if (groupMaterial && groupMaterial.visible) {
+
+	                                                                                                                        this.currentRenderList.push(object, geometry, groupMaterial, this._vector3.z, group);
+	                                                                                                            }
+	                                                                                                }
+	                                                                                    } else if (material.visible) {
+
+	                                                                                                this.currentRenderList.push(object, geometry, material, this._vector3.z, null);
+	                                                                                    }
+	                                                                        }
+	                                                            }
+	                                                }
+
+	                                                var children = object.children;
+
+	                                                for (var _i = 0, _l = children.length; _i < _l; _i++) {
+
+	                                                            this.projectObject(children[_i], camera, sortObjects);
+	                                                }
+	                                    }
+	                        }, {
 	                                    key: 'renderObjects',
-	                                    value: function renderObjects(renderList, scene, camera, overrideMaterial) {}
+	                                    value: function renderObjects(renderList, scene, camera, overrideMaterial) {
+
+	                                                for (var i = 0, l = renderList.length; i < l; i++) {
+
+	                                                            var renderItem = renderList[i];
+
+	                                                            var object = renderItem.object;
+	                                                            var geometry = renderItem.geometry;
+	                                                            var material = overrideMaterial === undefined ? renderItem.material : overrideMaterial;
+	                                                            var group = renderItem.group;
+
+	                                                            object.onBeforeRender(this, scene, camera, geometry, material, group);
+
+	                                                            if (camera instanceof Bonnie3D.ArrayCamera) {
+
+	                                                                        var cameras = camera.cameras;
+
+	                                                                        for (var j = 0, jl = cameras.length; j < jl; j++) {
+
+	                                                                                    var camera2 = cameras[j];
+	                                                                                    var bounds = camera2.bounds;
+
+	                                                                                    var x = bounds.x * this._width;
+	                                                                                    var y = bounds.y * this._height;
+	                                                                                    var width = bounds.z * this._width;
+	                                                                                    var height = bounds.w * this._height;
+
+	                                                                                    this.setViewport(x, y, width, height);
+	                                                                                    this.setScissor(x, y, width, height);
+	                                                                                    this.setScissorTest(true);
+
+	                                                                                    this.renderObject(object, scene, camera2, geometry, material, group);
+	                                                                        }
+	                                                            } else {
+
+	                                                                        this.renderObject(object, scene, camera, geometry, material, group);
+	                                                            }
+
+	                                                            object.onAfterRender(this, scene, camera, geometry, material, group);
+	                                                }
+	                                    }
+	                        }, {
+	                                    key: 'renderObject',
+	                                    value: function renderObject(object, scene, camera, geometry, material, group) {
+
+	                                                object.modelViewMatrix.multiplyMatrices(camera.matrixWorldInverse, object.matrixWorld);
+	                                                object.normalMatrix.getNormalMatrix(object.modelViewMatrix);
+
+	                                                if (object instanceof Bonnie3D.ImmediateRenderObject) {
+
+	                                                            // this.state.setMaterial( material );
+	                                                            //
+	                                                            // let program = this.setProgram( camera, scene.fog, material, object );
+	                                                            //
+	                                                            // this._currentGeometryProgram = '';
+	                                                            //
+	                                                            // this.renderObjectImmediate( object, program, material );
+
+	                                                } else {
+
+	                                                            this.renderBufferDirect(camera, scene.fog, geometry, material, object, group);
+	                                                }
+	                                    }
 	                        }, {
 	                                    key: 'renderBufferDirect',
-	                                    value: function renderBufferDirect(camera, fog, geometry, material, object, group) {}
+	                                    value: function renderBufferDirect(camera, fog, geometry, material, object, group) {
+
+	                                                this.state.setMaterial(material);
+
+	                                                var program = this.setProgram(camera, fog, material, object);
+	                                                var geometryProgram = geometry.id + '_' + program.id + '_' + (material.wireframe === true);
+
+	                                                var updateBuffers = false;
+
+	                                                if (geometryProgram !== _currentGeometryProgram) {
+
+	                                                            this._currentGeometryProgram = geometryProgram;
+	                                                            updateBuffers = true;
+	                                                }
+
+	                                                // morph targets
+
+	                                                var morphTargetInfluences = object.morphTargetInfluences;
+
+	                                                if (morphTargetInfluences !== undefined) {
+
+	                                                            // TODO Remove allocations
+
+	                                                            var activeInfluences = [];
+
+	                                                            for (var i = 0, l = morphTargetInfluences.length; i < l; i++) {
+
+	                                                                        var influence = morphTargetInfluences[i];
+	                                                                        activeInfluences.push([influence, i]);
+	                                                            }
+
+	                                                            activeInfluences.sort(this.absNumericalSort);
+
+	                                                            if (activeInfluences.length > 8) {
+
+	                                                                        activeInfluences.length = 8;
+	                                                            }
+
+	                                                            var morphAttributes = geometry.morphAttributes;
+
+	                                                            for (var _i2 = 0, _l2 = activeInfluences.length; _i2 < _l2; _i2++) {
+
+	                                                                        var _influence = activeInfluences[_i2];
+	                                                                        this.morphInfluences[_i2] = _influence[0];
+
+	                                                                        if (_influence[0] !== 0) {
+
+	                                                                                    var _index = _influence[1];
+
+	                                                                                    if (material.morphTargets === true && morphAttributes.position) geometry.addAttribute('morphTarget' + _i2, morphAttributes.position[_index]);
+	                                                                                    if (material.morphNormals === true && morphAttributes.normal) geometry.addAttribute('morphNormal' + _i2, morphAttributes.normal[_index]);
+	                                                                        } else {
+
+	                                                                                    if (material.morphTargets === true) geometry.removeAttribute('morphTarget' + _i2);
+	                                                                                    if (material.morphNormals === true) geometry.removeAttribute('morphNormal' + _i2);
+	                                                                        }
+	                                                            }
+
+	                                                            for (var _i3 = activeInfluences.length, il = this.morphInfluences.length; _i3 < il; _i3++) {
+
+	                                                                        this.morphInfluences[_i3] = 0.0;
+	                                                            }
+
+	                                                            program.getUniforms().setValue(this._gl, 'morphTargetInfluences', this.morphInfluences);
+
+	                                                            updateBuffers = true;
+	                                                }
+
+	                                                //
+
+	                                                var index = geometry.index;
+	                                                var position = geometry.attributes.position;
+	                                                var rangeFactor = 1;
+
+	                                                if (material.wireframe === true) {
+
+	                                                            index = this.geometries.getWireframeAttribute(geometry);
+	                                                            rangeFactor = 2;
+	                                                }
+
+	                                                var attribute = void 0;
+	                                                var renderer = this.bufferRenderer;
+
+	                                                if (index !== null) {
+
+	                                                            attribute = this.attributes.get(index);
+
+	                                                            renderer = this.indexedBufferRenderer;
+	                                                            renderer.setIndex(attribute);
+	                                                }
+
+	                                                if (updateBuffers) {
+
+	                                                            this.setupVertexAttributes(material, program, geometry);
+
+	                                                            if (index !== null) {
+
+	                                                                        this._gl.bindBuffer(this._gl.ELEMENT_ARRAY_BUFFER, attribute.buffer);
+	                                                            }
+	                                                }
+
+	                                                //
+
+	                                                var dataCount = 0;
+
+	                                                if (index !== null) {
+
+	                                                            dataCount = index.count;
+	                                                } else if (position !== undefined) {
+
+	                                                            dataCount = position.count;
+	                                                }
+
+	                                                var rangeStart = geometry.drawRange.start * rangeFactor;
+	                                                var rangeCount = geometry.drawRange.count * rangeFactor;
+
+	                                                var groupStart = group !== null ? group.start * rangeFactor : 0;
+	                                                var groupCount = group !== null ? group.count * rangeFactor : Infinity;
+
+	                                                var drawStart = Math.max(rangeStart, groupStart);
+	                                                var drawEnd = Math.min(dataCount, rangeStart + rangeCount, groupStart + groupCount) - 1;
+
+	                                                var drawCount = Math.max(0, drawEnd - drawStart + 1);
+
+	                                                if (drawCount === 0) return;
+
+	                                                //
+
+	                                                if (object instanceof Bonnie3D.Mesh) {
+
+	                                                            if (material.wireframe === true) {
+
+	                                                                        // this.state.setLineWidth( material.wireframeLinewidth * this.getTargetPixelRatio() );
+	                                                                        // renderer.setMode( _gl.LINES );
+
+	                                                            } else {
+
+	                                                                        switch (object.drawMode) {
+
+	                                                                                    case Bonnie3D.TrianglesDrawMode:
+	                                                                                                renderer.setMode(this._gl.TRIANGLES);
+	                                                                                                break;
+
+	                                                                                    case Bonnie3D.TriangleStripDrawMode:
+	                                                                                                renderer.setMode(this._gl.TRIANGLE_STRIP);
+	                                                                                                break;
+
+	                                                                                    case Bonnie3D.TriangleFanDrawMode:
+	                                                                                                renderer.setMode(this._gl.TRIANGLE_FAN);
+	                                                                                                break;
+
+	                                                                        }
+	                                                            }
+	                                                } else if (object instanceof Bonnie3D.Line) {
+
+	                                                            var lineWidth = material.linewidth;
+
+	                                                            if (lineWidth === undefined) lineWidth = 1; // Not using Line*Material
+
+	                                                            this.state.setLineWidth(lineWidth * this.getTargetPixelRatio());
+
+	                                                            if (object instanceof Bonnie3D.LineSegments) {
+
+	                                                                        renderer.setMode(this._gl.LINES);
+	                                                            } else if (object instanceof Bonnie3D.LineLoop) {
+
+	                                                                        renderer.setMode(this._gl.LINE_LOOP);
+	                                                            } else {
+
+	                                                                        renderer.setMode(this._gl.LINE_STRIP);
+	                                                            }
+	                                                } else if (object instanceof Bonnie3D.Points) {
+
+	                                                            renderer.setMode(this._gl.POINTS);
+	                                                }
+
+	                                                // if ( geometry && geometry.isInstancedBufferGeometry ) {
+	                                                //
+	                                                //     if ( geometry.maxInstancedCount > 0 ) {
+	                                                //
+	                                                //         renderer.renderInstances( geometry, drawStart, drawCount );
+	                                                //
+	                                                //     }
+	                                                //
+	                                                // } else {
+	                                                //
+	                                                //     renderer.render( drawStart, drawCount );
+	                                                //
+	                                                // }
+
+	                                                renderer.render(drawStart, drawCount);
+	                                    }
 	                        }, {
-	                                    key: 'projectObject',
-	                                    value: function projectObject(object, camera, sortObjects) {}
+	                                    key: 'setupVertexAttributes',
+	                                    value: function setupVertexAttributes(material, program, geometry, startIndex) {}
+	                        }, {
+	                                    key: 'setProgram',
+	                                    value: function setProgram(camera, fog, material, object) {}
 	                        }, {
 	                                    key: 'setupShadows',
 	                                    value: function setupShadows(lights) {}
@@ -5567,6 +6501,12 @@
 	                                                }
 	                                                return WebGLRenderer._instance;
 	                                    }
+	                        }, {
+	                                    key: 'absNumericalSort',
+	                                    value: function absNumericalSort(a, b) {
+
+	                                                return Math.abs(b[0]) - Math.abs(a[0]);
+	                                    }
 	                        }]);
 
 	                        return WebGLRenderer;
@@ -5576,7 +6516,7 @@
 	})(undefined);
 
 /***/ }),
-/* 60 */
+/* 70 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -5659,7 +6599,7 @@
 	})(undefined);
 
 /***/ }),
-/* 61 */
+/* 71 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -5728,7 +6668,7 @@
 	})(undefined);
 
 /***/ }),
-/* 62 */
+/* 72 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -5807,7 +6747,7 @@
 	})(undefined);
 
 /***/ }),
-/* 63 */
+/* 73 */
 /***/ (function(module, exports) {
 
 	"use strict";

@@ -5,6 +5,10 @@
         constructor() {
         }
 
+        getUniforms() {
+
+        }
+
     }
 
     Bonnie3D.WebGLPrograms = WebGLPrograms;

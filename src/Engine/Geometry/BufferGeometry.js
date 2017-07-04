@@ -19,6 +19,12 @@
             this._drawRange = { start: 0, count: Infinity };
         }
 
+        get drawRange() {
+
+            return this._drawRange;
+
+        }
+
         get index() {
 
             return this._index;
@@ -157,6 +163,10 @@
 
         computeBoundingSphere() {
 
+        }
+
+        updateFromObject ( object ) {
+            return this;
         }
 
     }

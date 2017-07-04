@@ -65,6 +65,26 @@
             return this._position;
         }
 
+        get visible() {
+            return this._visible;
+        }
+
+        get frustumCulled() {
+            return this._frustumCulled;
+        }
+
+        get layers() {
+            return this._layers;
+        }
+
+        get children() {
+            return this._children;
+        }
+
+        get normalMatrix() {
+            return this._normalMatrix;
+        }
+
         get matrixWorld() {
             return this._matrixWorld;
         }

@@ -2,9 +2,17 @@
 
     class ArrayCamera extends Bonnie3D.Camera {
 
-        constructor() {
+        constructor(array) {
 
             super();
+
+            this._cameras = array || [];
+
+        }
+
+        get cameras() {
+
+            return this._cameras;
 
         }
 

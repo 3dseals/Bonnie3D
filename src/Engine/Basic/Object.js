@@ -5,13 +5,14 @@
         constructor() {
 
             this._uuid = Bonnie3D.Math.generateUUID();
+            this._id = Bonnie3D.Object.objectId++;
             this._name = "";
 
         }
 
         get id() {
 
-            return this._uuid;
+            return this._id;
 
         }
 
@@ -70,6 +71,8 @@
         }
 
     }
+
+    Object.objectId = 0;
 
     Bonnie3D.Object = Object;
 

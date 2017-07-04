@@ -10,6 +10,16 @@
 
         }
 
+        get mask() {
+
+            return this._mask;
+
+        }
+
+        test(layers) {
+            return ( this.mask & layers.mask ) !== 0;
+        }
+
     }
 
     Bonnie3D.Layers = Layers;
