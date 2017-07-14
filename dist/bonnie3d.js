@@ -2941,6 +2941,11 @@
 	                                                return this._children;
 	                                    }
 	                        }, {
+	                                    key: "components",
+	                                    get: function get() {
+	                                                return this._components;
+	                                    }
+	                        }, {
 	                                    key: "normalMatrix",
 	                                    get: function get() {
 	                                                return this._normalMatrix;
@@ -3525,6 +3530,11 @@
 	                        }, {
 	                                    key: 'updateFromObject',
 	                                    value: function updateFromObject(object) {
+	                                                return this;
+	                                    }
+	                        }, {
+	                                    key: 'setFromObject',
+	                                    value: function setFromObject(object) {
 	                                                return this;
 	                                    }
 	                        }, {
@@ -4664,14 +4674,25 @@
 
 	"use strict";
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	(function ($) {
-	    var WebGLAttributes = function WebGLAttributes() {
-	        _classCallCheck(this, WebGLAttributes);
-	    };
+	        var WebGLAttributes = function () {
+	                function WebGLAttributes() {
+	                        _classCallCheck(this, WebGLAttributes);
+	                }
 
-	    Bonnie3D.WebGLAttributes = WebGLAttributes;
+	                _createClass(WebGLAttributes, [{
+	                        key: "update",
+	                        value: function update() {}
+	                }]);
+
+	                return WebGLAttributes;
+	        }();
+
+	        Bonnie3D.WebGLAttributes = WebGLAttributes;
 	})(undefined);
 
 /***/ }),
@@ -4843,20 +4864,177 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	(function ($) {
-	        var WebGLGeometries = function () {
-	                function WebGLGeometries() {
-	                        _classCallCheck(this, WebGLGeometries);
-	                }
+	            var WebGLGeometries = function () {
+	                        function WebGLGeometries(gl, attributes, infoMemory) {
+	                                    _classCallCheck(this, WebGLGeometries);
 
-	                _createClass(WebGLGeometries, [{
-	                        key: "getWireframeAttribute",
-	                        value: function getWireframeAttribute(geometry) {}
-	                }]);
+	                                    this.geometries = {};
+	                                    this.wireframeAttributes = {};
+	                                    this.gl = gl;
+	                                    this.attributes = attributes;
+	                                    this.infoMemory = infoMemory;
+	                        }
 
-	                return WebGLGeometries;
-	        }();
+	                        _createClass(WebGLGeometries, [{
+	                                    key: "onGeometryDispose",
+	                                    value: function onGeometryDispose(event) {
 
-	        Bonnie3D.WebGLGeometries = WebGLGeometries;
+	                                                var geometry = event.target;
+	                                                var buffergeometry = this.geometries[geometry.id];
+
+	                                                if (buffergeometry.index !== null) {
+
+	                                                            this.attributes.remove(buffergeometry.index);
+	                                                }
+
+	                                                for (var name in buffergeometry.attributes) {
+
+	                                                            this.attributes.remove(buffergeometry.attributes[name]);
+	                                                }
+
+	                                                //geometry.removeEventListener( 'dispose', this.onGeometryDispose );
+
+	                                                delete this.geometries[geometry.id];
+
+	                                                // TODO Remove duplicate code
+
+	                                                var attribute = this.wireframeAttributes[geometry.id];
+
+	                                                if (attribute) {
+
+	                                                            this.attributes.remove(attribute);
+	                                                            delete this.wireframeAttributes[geometry.id];
+	                                                }
+
+	                                                attribute = this.wireframeAttributes[buffergeometry.id];
+
+	                                                if (attribute) {
+
+	                                                            this.attributes.remove(attribute);
+	                                                            delete this.wireframeAttributes[buffergeometry.id];
+	                                                }
+
+	                                                //
+
+	                                                this.infoMemory.geometries--;
+	                                    }
+	                        }, {
+	                                    key: "get",
+	                                    value: function get(object, geometry) {
+
+	                                                var buffergeometry = this.geometries[geometry.id];
+
+	                                                if (buffergeometry) return buffergeometry;
+
+	                                                //geometry.addEventListener( 'dispose', this.onGeometryDispose );
+
+	                                                if (geometry instanceof Bonnie3D.BufferGeometry) {
+
+	                                                            buffergeometry = geometry;
+	                                                } else if (geometry instanceof Bonnie3D.Geometry) {
+
+	                                                            if (geometry._bufferGeometry === undefined) {
+
+	                                                                        geometry._bufferGeometry = new Bonnie3D.BufferGeometry().setFromObject(object);
+	                                                            }
+
+	                                                            buffergeometry = geometry._bufferGeometry;
+	                                                }
+
+	                                                this.geometries[geometry.id] = buffergeometry;
+
+	                                                this.infoMemory.geometries++;
+
+	                                                return buffergeometry;
+	                                    }
+	                        }, {
+	                                    key: "update",
+	                                    value: function update(geometry) {
+
+	                                                var index = geometry.index;
+	                                                var geometryAttributes = geometry.attributes;
+
+	                                                if (index !== null) {
+
+	                                                            this.attributes.update(index, this.gl.ELEMENT_ARRAY_BUFFER);
+	                                                }
+
+	                                                for (var name in geometryAttributes) {
+
+	                                                            this.attributes.update(geometryAttributes[name], this.gl.ARRAY_BUFFER);
+	                                                }
+
+	                                                // morph targets
+
+	                                                var morphAttributes = geometry.morphAttributes;
+
+	                                                for (var _name in morphAttributes) {
+
+	                                                            var array = morphAttributes[_name];
+
+	                                                            for (var i = 0, l = array.length; i < l; i++) {
+
+	                                                                        this.attributes.update(array[i], this.gl.ARRAY_BUFFER);
+	                                                            }
+	                                                }
+	                                    }
+	                        }, {
+	                                    key: "getWireframeAttribute",
+	                                    value: function getWireframeAttribute(geometry) {
+
+	                                                var attribute = this.wireframeAttributes[geometry.id];
+
+	                                                if (attribute) return attribute;
+
+	                                                var indices = [];
+
+	                                                var geometryIndex = geometry.index;
+	                                                var geometryAttributes = geometry.attributes;
+
+	                                                // console.time( 'wireframe' );
+
+	                                                if (geometryIndex !== null) {
+
+	                                                            var array = geometryIndex.array;
+
+	                                                            for (var i = 0, l = array.length; i < l; i += 3) {
+
+	                                                                        var a = array[i + 0];
+	                                                                        var b = array[i + 1];
+	                                                                        var c = array[i + 2];
+
+	                                                                        indices.push(a, b, b, c, c, a);
+	                                                            }
+	                                                } else {
+
+	                                                            var _array = geometryAttributes.position.array;
+
+	                                                            for (var _i = 0, _l = _array.length / 3 - 1; _i < _l; _i += 3) {
+
+	                                                                        var _a = _i + 0;
+	                                                                        var _b = _i + 1;
+	                                                                        var _c = _i + 2;
+
+	                                                                        indices.push(_a, _b, _b, _c, _c, _a);
+	                                                            }
+	                                                }
+
+	                                                // console.timeEnd( 'wireframe' );
+
+	                                                attribute = new Bonnie3D.BufferAttribute(indices, 1, false, Bonnie3D.arrayMax(indices) > 65535 ? Uint32Array : Uint16Array);
+
+	                                                this.attributes.update(attribute, this.gl.ELEMENT_ARRAY_BUFFER);
+
+	                                                this.wireframeAttributes[geometry.id] = attribute;
+
+	                                                return attribute;
+	                                    }
+	                        }]);
+
+	                        return WebGLGeometries;
+	            }();
+
+	            Bonnie3D.WebGLGeometries = WebGLGeometries;
 	})(undefined);
 
 /***/ }),
@@ -4925,7 +5103,7 @@
 
 	                                                if (this.updateList[buffergeometry.id] !== frame) {
 
-	                                                            if (geometry instanceof Geometry) {
+	                                                            if (geometry instanceof Bonnie3D.Geometry) {
 
 	                                                                        buffergeometry.updateFromObject(object);
 	                                                            }
@@ -6014,66 +6192,71 @@
 
 	                                                if (visible) {
 
-	                                                            if (object instanceof Bonnie3D.Light) {
+	                                                            for (var index in object.components) {
 
-	                                                                        this.lights.push(object);
-	                                                            } else if (object instanceof Bonnie3D.Sprite) {
+	                                                                        var component = object.components[index];
 
-	                                                                        // if ( ! object.frustumCulled || this._frustum.intersectsSprite( object ) ) {
-	                                                                        //
-	                                                                        //     this.sprites.push( object );
-	                                                                        //
-	                                                                        // }
+	                                                                        if (component instanceof Bonnie3D.Light) {
 
-	                                                            } else if (object instanceof Bonnie3D.LensFlare) {
+	                                                                                    this.lights.push(component);
+	                                                                        } else if (component instanceof Bonnie3D.Sprite) {
 
-	                                                                        // this.lensFlares.push( object );
+	                                                                                    // if ( ! object.frustumCulled || this._frustum.intersectsSprite( component ) ) {
+	                                                                                    //
+	                                                                                    //     this.sprites.push( component );
+	                                                                                    //
+	                                                                                    // }
 
-	                                                            } else if (object instanceof Bonnie3D.ImmediateRenderObject) {
+	                                                                        } else if (component instanceof Bonnie3D.LensFlare) {
 
-	                                                                        // if ( this.sortObjects ) {
-	                                                                        //
-	                                                                        //     this._vector3.setFromMatrixPosition( object.matrixWorld )
-	                                                                        //         .applyMatrix4( this._projScreenMatrix );
-	                                                                        //
-	                                                                        // }
-	                                                                        //
-	                                                                        // this.currentRenderList.push( object, null, object.material, this._vector3.z, null );
+	                                                                                    // this.lensFlares.push( component );
 
-	                                                            } else if (object instanceof Bonnie3D.Mesh || object instanceof Bonnie3D.Line || object instanceof Bonnie3D.Points) {
+	                                                                        } else if (component instanceof Bonnie3D.ImmediateRenderObject) {
 
-	                                                                        if (object instanceof Bonnie3D.SkinnedMesh) {
+	                                                                                    // if ( this.sortObjects ) {
+	                                                                                    //
+	                                                                                    //     this._vector3.setFromMatrixPosition( object.matrixWorld )
+	                                                                                    //         .applyMatrix4( this._projScreenMatrix );
+	                                                                                    //
+	                                                                                    // }
+	                                                                                    //
+	                                                                                    // this.currentRenderList.push( component, null, component.material, this._vector3.z, null );
 
-	                                                                                    object.skeleton.update();
-	                                                                        }
+	                                                                        } else if (component instanceof Bonnie3D.Mesh || component instanceof Bonnie3D.Line || component instanceof Bonnie3D.Points) {
 
-	                                                                        if (!object.frustumCulled || this._frustum.intersectsObject(object)) {
+	                                                                                    if (component instanceof Bonnie3D.SkinnedMesh) {
 
-	                                                                                    if (this.sortObjects) {
-
-	                                                                                                this._vector3.setFromMatrixPosition(object.matrixWorld).applyMatrix4(this._projScreenMatrix);
+	                                                                                                component.skeleton.update();
 	                                                                                    }
 
-	                                                                                    var geometry = this.objects.update(object);
-	                                                                                    var material = object.material;
+	                                                                                    if (!component.frustumCulled || this._frustum.intersectsObject(component)) {
 
-	                                                                                    if (Array.isArray(material)) {
+	                                                                                                if (this.sortObjects) {
 
-	                                                                                                var groups = geometry.groups;
-
-	                                                                                                for (var i = 0, l = groups.length; i < l; i++) {
-
-	                                                                                                            var group = groups[i];
-	                                                                                                            var groupMaterial = material[group.materialIndex];
-
-	                                                                                                            if (groupMaterial && groupMaterial.visible) {
-
-	                                                                                                                        this.currentRenderList.push(object, geometry, groupMaterial, this._vector3.z, group);
-	                                                                                                            }
+	                                                                                                            this._vector3.setFromMatrixPosition(object.matrixWorld).applyMatrix4(this._projScreenMatrix);
 	                                                                                                }
-	                                                                                    } else if (material.visible) {
 
-	                                                                                                this.currentRenderList.push(object, geometry, material, this._vector3.z, null);
+	                                                                                                var geometry = this.objects.update(component);
+	                                                                                                var material = component.material;
+
+	                                                                                                if (Array.isArray(material)) {
+
+	                                                                                                            var groups = geometry.groups;
+
+	                                                                                                            for (var i = 0, l = groups.length; i < l; i++) {
+
+	                                                                                                                        var group = groups[i];
+	                                                                                                                        var groupMaterial = material[group.materialIndex];
+
+	                                                                                                                        if (groupMaterial && groupMaterial.visible) {
+
+	                                                                                                                                    this.currentRenderList.push(component, geometry, groupMaterial, this._vector3.z, group);
+	                                                                                                                        }
+	                                                                                                            }
+	                                                                                                } else if (material.visible) {
+
+	                                                                                                            this.currentRenderList.push(component, geometry, material, this._vector3.z, null);
+	                                                                                                }
 	                                                                                    }
 	                                                                        }
 	                                                            }

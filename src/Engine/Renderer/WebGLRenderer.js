@@ -562,73 +562,79 @@
 
             if ( visible ) {
 
-                if ( object instanceof Bonnie3D.Light) {
+                for(let index in object.components) {
 
-                    this.lights.push( object );
+                    let component = object.components[index];
 
-                } else if ( object instanceof Bonnie3D.Sprite) {
+                    if ( component instanceof Bonnie3D.Light) {
 
-                    // if ( ! object.frustumCulled || this._frustum.intersectsSprite( object ) ) {
-                    //
-                    //     this.sprites.push( object );
-                    //
-                    // }
+                        this.lights.push( component );
 
-                } else if ( object instanceof Bonnie3D.LensFlare ) {
+                    } else if ( component instanceof Bonnie3D.Sprite) {
 
-                    // this.lensFlares.push( object );
+                        // if ( ! object.frustumCulled || this._frustum.intersectsSprite( component ) ) {
+                        //
+                        //     this.sprites.push( component );
+                        //
+                        // }
 
-                } else if ( object instanceof Bonnie3D.ImmediateRenderObject ) {
+                    } else if ( component instanceof Bonnie3D.LensFlare ) {
 
-                    // if ( this.sortObjects ) {
-                    //
-                    //     this._vector3.setFromMatrixPosition( object.matrixWorld )
-                    //         .applyMatrix4( this._projScreenMatrix );
-                    //
-                    // }
-                    //
-                    // this.currentRenderList.push( object, null, object.material, this._vector3.z, null );
+                        // this.lensFlares.push( component );
 
-                } else if ( object instanceof Bonnie3D.Mesh || object instanceof Bonnie3D.Line || object instanceof Bonnie3D.Points ) {
+                    } else if ( component instanceof Bonnie3D.ImmediateRenderObject ) {
 
-                    if ( object instanceof Bonnie3D.SkinnedMesh ) {
+                        // if ( this.sortObjects ) {
+                        //
+                        //     this._vector3.setFromMatrixPosition( object.matrixWorld )
+                        //         .applyMatrix4( this._projScreenMatrix );
+                        //
+                        // }
+                        //
+                        // this.currentRenderList.push( component, null, component.material, this._vector3.z, null );
 
-                        object.skeleton.update();
+                    } else if ( component instanceof Bonnie3D.Mesh || component instanceof Bonnie3D.Line || component instanceof Bonnie3D.Points ) {
 
-                    }
+                        if ( component instanceof Bonnie3D.SkinnedMesh ) {
 
-                    if ( ! object.frustumCulled || this._frustum.intersectsObject( object ) ) {
-
-                        if ( this.sortObjects ) {
-
-                            this._vector3.setFromMatrixPosition( object.matrixWorld )
-                                .applyMatrix4( this._projScreenMatrix );
+                            component.skeleton.update();
 
                         }
 
-                        let geometry = this.objects.update( object );
-                        let material = object.material;
+                        if ( ! component.frustumCulled || this._frustum.intersectsObject( component ) ) {
 
-                        if ( Array.isArray( material ) ) {
+                            if ( this.sortObjects ) {
 
-                            let groups = geometry.groups;
-
-                            for ( let i = 0, l = groups.length; i < l; i ++ ) {
-
-                                let group = groups[ i ];
-                                let groupMaterial = material[ group.materialIndex ];
-
-                                if ( groupMaterial && groupMaterial.visible ) {
-
-                                    this.currentRenderList.push( object, geometry, groupMaterial, this._vector3.z, group );
-
-                                }
+                                this._vector3.setFromMatrixPosition( object.matrixWorld )
+                                    .applyMatrix4( this._projScreenMatrix );
 
                             }
 
-                        } else if ( material.visible ) {
+                            let geometry = this.objects.update( component );
+                            let material = component.material;
 
-                            this.currentRenderList.push( object, geometry, material, this._vector3.z, null );
+                            if ( Array.isArray( material ) ) {
+
+                                let groups = geometry.groups;
+
+                                for ( let i = 0, l = groups.length; i < l; i ++ ) {
+
+                                    let group = groups[ i ];
+                                    let groupMaterial = material[ group.materialIndex ];
+
+                                    if ( groupMaterial && groupMaterial.visible ) {
+
+                                        this.currentRenderList.push( component, geometry, groupMaterial, this._vector3.z, group );
+
+                                    }
+
+                                }
+
+                            } else if ( material.visible ) {
+
+                                this.currentRenderList.push( component, geometry, material, this._vector3.z, null );
+
+                            }
 
                         }
 

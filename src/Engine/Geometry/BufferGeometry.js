@@ -169,6 +169,10 @@
             return this;
         }
 
+        setFromObject ( object) {
+            return this;
+        }
+
     }
 
     BufferGeometry.MaxIndex = 65535;

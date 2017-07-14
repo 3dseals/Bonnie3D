@@ -22,7 +22,7 @@
 
             if ( this.updateList[ buffergeometry.id ] !== frame ) {
 
-                if ( geometry instanceof Geometry ) {
+                if ( geometry instanceof Bonnie3D.Geometry ) {
 
                     buffergeometry.updateFromObject( object );
 

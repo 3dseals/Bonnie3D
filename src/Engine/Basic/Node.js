@@ -81,6 +81,10 @@
             return this._children;
         }
 
+        get components() {
+            return this._components;
+        }
+
         get normalMatrix() {
             return this._normalMatrix;
         }
