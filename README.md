@@ -37,4 +37,4 @@ the process or properly reporting an issue.
 We welcome participation! [Here is a concise tutorial](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Forked-Public-Project) to help you get acquainted with the relevant Git commands for this project type.
 
 ### License
-Bonnie3D is licensed under the [MIT](LICENSE.md) License. 
+Bonnie3D is licensed under the [MIT](LICENSES) License. 
