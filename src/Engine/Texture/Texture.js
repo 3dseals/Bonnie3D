@@ -31,7 +31,7 @@
             this._flipY = true;
             this._unpackAlignment = 4;	// valid values: 1, 2, 4, 8 (see http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml)
 
-            // Values of encoding !== THREE.LinearEncoding only supported on map, envMap and emissiveMap.
+            // Values of encoding !== B3D.LinearEncoding only supported on map, envMap and emissiveMap.
             //
             // Also changing the encoding after already used by a Material will not automatically make the Material
             // update.  You need to explicitly call Material.needsUpdate to trigger it to recompile.

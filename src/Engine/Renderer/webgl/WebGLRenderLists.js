@@ -143,7 +143,7 @@
 
             if ( list === undefined ) {
 
-                // console.log( 'THREE.WebGLRenderLists:', hash );
+                // console.log( 'B3D.WebGLRenderLists:', hash );
 
                 list = new WebGLRenderList();
                 this.lists[ hash ] = list;

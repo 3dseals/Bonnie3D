@@ -48,7 +48,7 @@
 
             if ( extension === null ) {
 
-                Bonnie3D.Log.warning( 'THREE.WebGLRenderer: ' + name + ' extension not supported.' );
+                Bonnie3D.Log.warning( 'B3D.WebGLRenderer: ' + name + ' extension not supported.' );
 
             }
 
