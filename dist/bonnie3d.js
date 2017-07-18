@@ -5253,7 +5253,7 @@
 
 		extractRotation: function extractRotation(m) {
 
-			var v1 = Vector3.Unit;
+			var v1 = B3D.Vector3.Unit;
 
 			var te = this.elements;
 			var me = m.elements;
@@ -5469,9 +5469,9 @@
 
 		lookAt: function lookAt(eye, target, up) {
 
-			var x = new Vector3();
-			var y = new Vector3();
-			var z = new Vector3();
+			var x = new B3D.Vector3();
+			var y = new B3D.Vector3();
+			var z = new B3D.Vector3();
 
 			var te = this.elements;
 
@@ -5598,7 +5598,7 @@
 
 		applyToBufferAttribute: function applyToBufferAttribute(attribute) {
 
-			var v1 = Vector3.Unit;
+			var v1 = B3D.Vector3.Unit;
 
 			for (var i = 0, l = attribute.count; i < l; i++) {
 
@@ -5842,7 +5842,7 @@
 
 		decompose: function decompose(position, quaternion, scale) {
 
-			var vector = Vector3.Unit;
+			var vector = B3D.Vector3.Unit;
 			var matrix = Matrix4.Unit;
 
 			var te = this.elements;
@@ -13895,7 +13895,7 @@
 
 		setFromUnitVectors: function setFromUnitVectors(vFrom, vTo) {
 
-			var v1 = Vector3.Unit;
+			var v1 = B3D.Vector3.Unit;
 			var r;
 
 			var EPS = 0.000001;

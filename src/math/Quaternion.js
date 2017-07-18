@@ -349,7 +349,7 @@ Object.assign( Quaternion.prototype, {
 
 	setFromUnitVectors: function ( vFrom, vTo ) {
 
-            var v1 = Vector3.Unit;
+            var v1 = B3D.Vector3.Unit;
             var r;
 
             var EPS = 0.000001;

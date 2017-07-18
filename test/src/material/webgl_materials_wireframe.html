@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Bonnie3D webgl - materials - wireframe</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				margin: 0px;
+				background-color: #000000;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+
+		<script src="../../../dist/bonnie3d.js"></script>
+
+		<script>
+
+			var vertexShader = String('\n\
+				attribute vec3 center;\n\
+				varying vec3 vCenter;\n\
+				\n\
+				void main() {\n\
+				\n\
+					vCenter = center;\n\
+					gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n\
+				\n\
+				}\n\
+			').replace( /[ \t]*\/\/.*\n/g, '' ).replace( /[ \t]*\/\*[\s\S]*?\*\//g, '' ).replace( /\n{2,}/g, '\n' );
+
+			var fragmentShader = String('\n\
+				varying vec3 vCenter;\n\
+				\n\
+				float edgeFactorTri() {\n\
+				\n\
+					vec3 d = fwidth( vCenter.xyz );\n\
+					vec3 a3 = smoothstep( vec3( 0.0 ), d * 1.5, vCenter.xyz );\n\
+					return min( min( a3.x, a3.y ), a3.z );\n\
+				\n\
+				}\n\
+				\n\
+				void main() {\n\
+				\n\
+					gl_FragColor.rgb = mix( vec3( 1.0 ), vec3( 0.2 ), edgeFactorTri() );\n\
+					gl_FragColor.a = 1.0;\n\
+				}\n\
+			').replace( /[ \t]*\/\/.*\n/g, '' ).replace( /[ \t]*\/\*[\s\S]*?\*\//g, '' ).replace( /\n{2,}/g, '\n' );
+
+			var camera, scene, renderer;
+			var cube, sphere
+
+            var mouseX = 0, mouseY = 0;
+            var mouseXOnMouseDown = 0, mouseYOnMouseDown = 0;
+
+            var windowHalfX = window.innerWidth / 2;
+            var windowHalfY = window.innerHeight / 2;
+
+
+            init();
+			animate();
+
+			function init() {
+
+				var geometry, material;
+
+				var size = 150;
+
+				camera = new B3D.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 2000 );
+				camera.position.z = 800;
+
+				scene = new B3D.Scene();
+
+				//
+
+				geometry = new B3D.BoxGeometry( size, size, size );
+				material = new B3D.MeshBasicMaterial( { wireframe: true } );
+
+                cube = new B3D.Mesh( geometry, material );
+				scene.add( cube );
+
+				//
+
+				geometry = new B3D.BufferGeometry().fromGeometry( new B3D.SphereGeometry( size / 2, 32, 16 ) );
+
+				setupAttributes( geometry );
+
+				material = new B3D.ShaderMaterial( {
+					uniforms: {},
+					vertexShader: vertexShader,
+					fragmentShader: fragmentShader
+				} );
+
+				material.extensions.derivatives = true;
+
+                sphere = new B3D.Mesh( geometry, material );
+				scene.add( sphere );
+
+				// renderer
+
+				renderer = new B3D.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				document.body.appendChild( renderer.domElement );
+
+				// events
+
+
+                document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+                document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+                document.addEventListener( 'touchmove', onDocumentTouchMove, false );
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+			}
+
+            function setupAttributes( geometry ) {
+
+                // TODO: Bring back quads
+
+                var vectors = [
+                    new B3D.Vector3( 1, 0, 0 ),
+                    new B3D.Vector3( 0, 1, 0 ),
+                    new B3D.Vector3( 0, 0, 1 )
+                ];
+
+                var position = geometry.attributes.position;
+                var centers = new Float32Array( position.count * 3 );
+
+                for ( var i = 0, l = position.count; i < l; i ++ ) {
+
+                    vectors[ i % 3 ].toArray( centers, i * 3 );
+
+                }
+
+                geometry.addAttribute( 'center', new B3D.BufferAttribute( centers, 3 ) );
+
+            }
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+            function onDocumentMouseDown( event ) {
+
+
+                event.preventDefault();
+
+                document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+                document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+                document.addEventListener( 'mouseout', onDocumentMouseOut, false );
+
+                mouseXOnMouseDown = ( event.clientX - windowHalfX );
+                mouseYOnMouseDown = ( event.clientY - windowHalfY );
+
+            }
+
+            function onDocumentMouseMove( event ) {
+
+                mouseX = ( event.clientX - windowHalfX );
+                mouseY = ( event.clientY - windowHalfY );
+
+            }
+
+            function onDocumentMouseUp( event ) {
+
+                document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
+                document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
+                document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
+
+            }
+
+            function onDocumentMouseOut( event ) {
+
+                document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
+                document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
+                document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
+
+            }
+
+            function onDocumentTouchStart( event ) {
+
+                if ( event.touches.length === 1 ) {
+
+                    event.preventDefault();
+
+                    mouseXOnMouseDown = event.touches[ 0 ].pageX - windowHalfX;
+                    mouseYOnMouseDown = event.touches[ 0 ].pageY - windowHalfY;
+
+                }
+
+            }
+
+            function onDocumentTouchMove( event ) {
+
+                if ( event.touches.length === 1 ) {
+
+                    event.preventDefault();
+
+                    mouseX = event.touches[ 0 ].pageX - windowHalfX;
+                    mouseY = event.touches[ 0 ].pageY - windowHalfY;
+
+                }
+
+            }
+
+			function animate() {
+
+                setTimeout(function () {
+                    requestAnimationFrame( animate );
+                }, 1000/60);
+
+                cube.rotation.x += 0.005;
+                cube.rotation.y += 0.01;
+                sphere.rotation.x += 0.005;
+                sphere.rotation.y += 0.01;
+
+                camera.position.x += ( mouseX - camera.position.x ) * 0.08;
+                camera.position.y += ( - mouseY - camera.position.y ) * 0.08;
+                camera.lookAt( scene.position );
+
+				renderer.render( scene, camera );
+
+			}
+
+		</script>
+
+	</body>
+</html>

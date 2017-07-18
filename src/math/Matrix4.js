@@ -121,7 +121,7 @@ Object.assign( Matrix4.prototype, {
 
 	extractRotation: function ( m ) {
 
-		var v1 = Vector3.Unit;
+		var v1 = B3D.Vector3.Unit;
 
 		var te = this.elements;
 		var me = m.elements;
@@ -313,9 +313,9 @@ Object.assign( Matrix4.prototype, {
 
 	lookAt: function ( eye, target, up ) {
 
-		var x = new Vector3();
-		var y = new Vector3();
-		var z = new Vector3();
+		var x = new B3D.Vector3();
+		var y = new B3D.Vector3();
+		var z = new B3D.Vector3();
 
 		var te = this.elements;
 
@@ -426,7 +426,7 @@ Object.assign( Matrix4.prototype, {
 
 	applyToBufferAttribute: function ( attribute ) {
 
-		var v1 = Vector3.Unit;
+		var v1 = B3D.Vector3.Unit;
 
 		for ( var i = 0, l = attribute.count; i < l; i ++ ) {
 
@@ -742,7 +742,7 @@ Object.assign( Matrix4.prototype, {
 
 	decompose: function ( position, quaternion, scale ) {
 
-		var vector = Vector3.Unit;
+		var vector = B3D.Vector3.Unit;
 		var matrix = Matrix4.Unit;
 
 		var te = this.elements;

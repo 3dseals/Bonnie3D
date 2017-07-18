@@ -1,85 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Bonnie3D webgl - geometries</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <style>
-        body {
-            font-family: Monospace;
-            background-color: #000;
-            margin: 0px;
-            overflow: hidden;
-        }
-    </style>
-</head>
-<body>
+    <head>
+        <title>Bonnie3D webgl - geometries</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <style>
+            body {
+                font-family: Monospace;
+                background-color: #000;
+                margin: 0px;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
 
-<script src="../../../dist/bonnie3d.js"></script>
-<script>
+        <script src="../../../dist/bonnie3d.js"></script>
+        <script>
 
-    var camera, scene, renderer;
-    var mesh;
+            var camera, scene, renderer;
+            var mesh;
 
-    init();
-    animate();
+            init();
+            animate();
 
-    function init() {
+            function init() {
 
-        var THREE = B3D;
-        camera = new B3D.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
-        camera.position.z = 400;
+                camera = new B3D.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
+                camera.position.z = 400;
 
-        scene = new B3D.Scene();
+                scene = new B3D.Scene();
 
-        var texture = new B3D.TextureLoader().load( '../../res/textures/crate.gif' );
+                var texture = new B3D.TextureLoader().load( '../../res/textures/crate.gif' );
 
-        var geometry = new B3D.BoxBufferGeometry( 200, 200, 200 );
-        var material = new B3D.MeshBasicMaterial( { map: texture } );
+                var geometry = new B3D.BoxBufferGeometry( 200, 200, 200 );
+                var material = new B3D.MeshBasicMaterial( { map: texture } );
 
-        mesh = new B3D.Mesh( geometry, material );
-        scene.add( mesh );
+                mesh = new B3D.Mesh( geometry, material );
+                scene.add( mesh );
 
-        renderer = new B3D.WebGLRenderer();
-        renderer.setPixelRatio( window.devicePixelRatio );
-        renderer.setSize( window.innerWidth, window.innerHeight );
-        document.body.appendChild( renderer.domElement );
+                renderer = new B3D.WebGLRenderer();
+                renderer.setPixelRatio( window.devicePixelRatio );
+                renderer.setSize( window.innerWidth, window.innerHeight );
+                document.body.appendChild( renderer.domElement );
 
-        //
+                //
 
-        window.addEventListener( 'resize', onWindowResize, false );
+                window.addEventListener( 'resize', onWindowResize, false );
 
-    }
+            }
 
-    function onWindowResize() {
+            function onWindowResize() {
 
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
 
-        renderer.setSize( window.innerWidth, window.innerHeight );
+                renderer.setSize( window.innerWidth, window.innerHeight );
 
-    }
+            }
 
-    function animate() {
+            function animate() {
 
-        setTimeout(function () {
-            requestAnimationFrame( animate );
-        }, 1000/60);
+                setTimeout(function () {
+                    requestAnimationFrame( animate );
+                }, 1000/60);
 
-        mesh.rotation.x += 0.005;
-        mesh.rotation.y += 0.01;
+                mesh.rotation.x += 0.005;
+                mesh.rotation.y += 0.01;
 
-        renderer.render( scene, camera );
+                renderer.render( scene, camera );
 
-    }
+            }
 
-</script>
+        </script>
 
-<script id="__bs_script__">
-    //<![CDATA[
-    document.write("<script async src='http://HOST:8080/browser-sync/browser-sync-client.js?v=2.18.12'><\/script>".replace("HOST", location.hostname));
-    //]]>
-</script>
+        <script id="__bs_script__">
+            //<![CDATA[
+            document.write("<script async src='http://HOST:8080/browser-sync/browser-sync-client.js?v=2.18.12'><\/script>".replace("HOST", location.hostname));
+            //]]>
+        </script>
 
-</body>
+    </body>
 </html>
